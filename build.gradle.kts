@@ -2,14 +2,14 @@ import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.7.3"
-  id("xyz.jpenilla.run-paper") version "2.3.1" // Adds runServer and runMojangMappedServer tasks for testing
-  id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.2.0" // Generates plugin.yml based on the Gradle config
+  id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
+  id("xyz.jpenilla.run-paper") version "3.0.0" // Adds runServer and runMojangMappedServer tasks for testing
+  id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.3.0" // Generates plugin.yml based on the Gradle config
 }
 
 group = "org.jufyer.plugin"
 version = "1.0.0-SNAPSHOT"
-description = "Aquatic Minecraft Plugin by Jufyer"
+description = "Test plugin for paperweight-userdev"
 
 java {
   // Configure the java toolchain. This allows gradle to auto-provision JDK 21 on systems that only have JDK 11 installed for example.
@@ -17,10 +17,11 @@ java {
 }
 
 dependencies {
-  //paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.21.5-R0.1-SNAPSHOT")
-  paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.21.4-R0.1-20241215.095037-18")
+  paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
+  // paperweight.foliaDevBundle("1.21.8-R0.1-SNAPSHOT")
+  // paperweight.devBundle("com.example.paperfork", "1.21.8-R0.1-SNAPSHOT")
 
-//  compileOnly("com.comphenix.protocol:ProtocolLib:5.1.0")
+  implementation("org.jsoup:jsoup:1.17.2")
 }
 
 //repositories {
@@ -31,25 +32,32 @@ dependencies {
 
 tasks {
   compileJava {
+    // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
+    // See https://openjdk.java.net/jeps/247 for more information.
     options.release = 21
   }
   javadoc {
     options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
   }
+
+  // Only relevant for 1.20.4 or below, or when you care about supporting Spigot on >=1.20.5:
+  /*
+  reobfJar {
+    // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
+    // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
+    outputJar = layout.buildDirectory.file("libs/PaperweightTestPlugin-${project.version}.jar")
+  }
+   */
 }
 
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = "org.jufyer.plugin.aquatic.Main"
+  main = "org.jufyer.plugin.stock.Main"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Jufyer")
-  apiVersion = "1.21.4"
+  apiVersion = "1.21.8"
   commands {
-    register("spawnShark")
-    register("spawnNibbler")
-    register("spawnGoldfish")
-    register("spawnWhale")
-    register("spawnOyster")
+
   }
 }
