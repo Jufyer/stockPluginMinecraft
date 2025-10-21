@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: me.lucko:spark-paper:1.10.133-20250413.112336-1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="me.lucko" artifactId="spark-paper" version="1.10.133-20250413.112336-1" baseVersion="1.10.133-20250413.112336-1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.lucko/spark-paper/1.10.133-20250413.112336-1/d7055fd50a1d8905b8e01aa3c1f9ad822e172a46/spark-paper-1.10.133-20250413.112336-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

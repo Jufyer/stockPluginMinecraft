@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Minecraft Coding.jufyer-preset-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Minecraft Coding.jufyer-preset-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Minecraft Coding.jufyer-preset-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Minecraft Coding.jufyer-preset-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jufyer-preset-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jufyer-preset-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jufyer-preset-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/jufyer-preset-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jufyer-stock-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/jufyer-stock-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jufyer-stock-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jufyer-stock-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jufyer-stock-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/jufyer-stock-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-preset-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-preset-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-preset-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-preset-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/paperweight-test-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/paperweight-test-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/paperweight-test-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/paperweight-test-plugin.test.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: org.jufyer.plugin.stock.Main
+paperweight-mappings-namespace: mojang
+

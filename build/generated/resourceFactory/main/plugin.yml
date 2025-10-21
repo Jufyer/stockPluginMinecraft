@@ -1,0 +1,10 @@
+api-version: 1.21.8
+name: jufyer-stock-plugin
+version: 1.0.0-SNAPSHOT
+main: org.jufyer.plugin.stock.Main
+description: Test plugin for paperweight-userdev
+load: STARTUP
+authors:
+- Jufyer
+commands:
+    stocks: {}

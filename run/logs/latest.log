@@ -1,0 +1,50 @@
+[20:13:54] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188; Oracle Corporation null) on Windows 11 10.0 (amd64)
+[20:13:54] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) for Minecraft 1.21.8
+[20:13:54] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[20:13:54] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[20:13:55] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
+[20:13:55] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (1):
+ - jufyer-stock-plugin (1.0.0-SNAPSHOT)
+[20:13:59] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[20:14:00] [ServerMain/INFO]: Loaded 1407 recipes
+[20:14:00] [ServerMain/INFO]: Loaded 1520 advancements
+[20:14:00] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[20:14:00] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 251,4ms
+[20:14:00] [Server thread/INFO]: Starting minecraft server version 1.21.8
+[20:14:00] [Server thread/INFO]: Loading properties
+[20:14:00] [Server thread/INFO]: This server is running Paper version 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) (Implementing API version 1.21.8-R0.1-SNAPSHOT)
+[20:14:01] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[20:14:01] [Server thread/INFO]: Using 4 threads for Netty based IO
+[20:14:01] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[20:14:01] [Server thread/INFO]: [MoonriseCommon] Paper is using 4 worker threads, 1 I/O threads
+[20:14:01] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
+[20:14:01] [Server thread/INFO]: Default game type: SURVIVAL
+[20:14:01] [Server thread/INFO]: Generating keypair
+[20:14:01] [Server thread/INFO]: Starting Minecraft server on *:25565
+[20:14:01] [Server thread/INFO]: Using default channel type
+[20:14:01] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[20:14:01] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[20:14:01] [Server thread/INFO]: [jufyer-stock-plugin] Loading server plugin jufyer-stock-plugin v1.0.0-SNAPSHOT
+[20:14:01] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[20:14:01] [Server thread/INFO]: [jufyer-stock-plugin] Enabling jufyer-stock-plugin v1.0.0-SNAPSHOT
+[20:14:03] [Server thread/INFO]: [jufyer-stock-plugin] Wheat Price is: 500.0166
+[20:14:03] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetching updates from the remote repository...
+[20:14:03] [Server thread/WARN]: Nag author(s): '[Jufyer]' of 'jufyer-stock-plugin v1.0.0-SNAPSHOT' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
+[20:14:04] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetch complete. Resetting to latest commit...
+[20:14:04] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Repository updated to latest remote state.
+[20:14:04] [Server thread/INFO]: Preparing level "world"
+[20:14:04] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[20:14:05] [Server thread/INFO]: Preparing spawn area: 0%
+[20:14:05] [Server thread/INFO]: Preparing spawn area: 0%
+[20:14:05] [Server thread/INFO]: Time elapsed: 658 ms
+[20:14:05] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[20:14:05] [Server thread/INFO]: Preparing spawn area: 0%
+[20:14:05] [Server thread/INFO]: Time elapsed: 139 ms
+[20:14:05] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[20:14:05] [Server thread/INFO]: Preparing spawn area: 0%
+[20:14:05] [Server thread/INFO]: Time elapsed: 32 ms
+[20:14:05] [Server thread/INFO]: [spark] Starting background profiler...
+[20:14:05] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[20:14:05] [Server thread/INFO]: Done preparing level "world" (1.401s)
+[20:14:05] [Server thread/INFO]: Running delayed init tasks
+[20:14:05] [Server thread/INFO]: Done (12.297s)! For help, type "help"

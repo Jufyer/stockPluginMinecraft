@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.htmlunit:htmlunit-websocket-client:4.17.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.htmlunit" artifactId="htmlunit-websocket-client" version="4.17.0" baseVersion="4.17.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.htmlunit/htmlunit-websocket-client/4.17.0/8765b21c6eb0a9a55c1a25c1d18c4c28c9af5f28/htmlunit-websocket-client-4.17.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
