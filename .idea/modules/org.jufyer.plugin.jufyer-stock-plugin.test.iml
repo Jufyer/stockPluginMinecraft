@@ -39,6 +39,8 @@
     <orderEntry type="library" name="Gradle: org.json:json:20231013" level="project" />
     <orderEntry type="library" name="Gradle: org.htmlunit:htmlunit:4.17.0" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r" level="project" />
+    <orderEntry type="library" name="Gradle: javax.json:javax.json-api:1.1.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.glassfish:javax.json:1.1.4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpmime:4.5.14" level="project" />
     <orderEntry type="library" name="Gradle: org.htmlunit:htmlunit-core-js:4.17.0" level="project" />
     <orderEntry type="library" name="Gradle: org.htmlunit:neko-htmlunit:4.17.0" level="project" />

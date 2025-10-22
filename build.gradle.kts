@@ -24,6 +24,8 @@ dependencies {
   implementation("org.json:json:20231013")
   implementation("org.htmlunit:htmlunit:4.17.0")
   implementation("org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r")
+  implementation("javax.json:javax.json-api:1.1.4") // API
+  implementation("org.glassfish:javax.json:1.1.4")
   paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 }
 
@@ -60,5 +62,6 @@ bukkitPluginYaml {
   apiVersion = "1.21.8"
   commands {
     register("stocks")
+    register("showPrices")
   }
 }

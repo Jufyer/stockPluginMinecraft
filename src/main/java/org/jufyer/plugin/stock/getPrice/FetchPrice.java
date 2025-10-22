@@ -7,13 +7,17 @@ import org.jsoup.select.Elements;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FetchPrice {
-  public static double wheat() {
+
+  public static double getPrice(String symbol) {
     try {
-      Document doc = Jsoup.connect("https://tradingeconomics.com/commodity/wheat")
-        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-        .timeout(10000)
-        .get();
+      Document doc = Jsoup.connect("https://tradingeconomics.com/commodity/" + symbol)
+              .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+              .timeout(10000)
+              .get();
 
       Elements scripts = doc.select("script");
 
@@ -21,7 +25,6 @@ public class FetchPrice {
         String scriptContent = script.html();
 
         if (scriptContent.contains("TEChartsMeta")) {
-          // Extrahiere JSON (zwischen [ und ];)
           int startIdx = scriptContent.indexOf("TEChartsMeta = [");
           if (startIdx != -1) {
             startIdx += "TEChartsMeta = ".length();
@@ -29,14 +32,10 @@ public class FetchPrice {
 
             String jsonStr = scriptContent.substring(startIdx, endIdx);
 
-            // Parse JSON
             JSONArray jsonArray = new JSONArray(jsonStr);
             JSONObject data = jsonArray.getJSONObject(0);
 
-            double price = data.getDouble("value");
-            String name = data.getString("name");
-
-            return price;
+            return data.getDouble("value");
           }
         }
       }
@@ -47,5 +46,32 @@ public class FetchPrice {
     }
 
     return 0;
+  }
+
+  public static String getUnit(String symbol) {
+    try {
+      Document doc = Jsoup.connect("https://tradingeconomics.com/commodity/" + symbol)
+              .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+              .timeout(10000)
+              .get();
+
+      Element metaDesc = doc.selectFirst("meta[name=description]");
+      if (metaDesc != null) {
+        String content = metaDesc.attr("content");
+
+        Pattern pattern = Pattern.compile("\\d{1,3}(?:[,\\.]\\d{3})*(?:\\.\\d+)?\\s+([A-Za-z/\\.]+)");
+        Matcher matcher = pattern.matcher(content);
+
+        if (matcher.find()) {
+          return matcher.group(1).trim();
+        }
+      }
+
+    } catch (Exception e) {
+      System.out.println("ERROR: " + e.getMessage());
+      e.printStackTrace();
+    }
+
+    return "";
   }
 }

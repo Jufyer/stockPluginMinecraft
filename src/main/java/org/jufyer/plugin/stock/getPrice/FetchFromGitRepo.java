@@ -2,14 +2,13 @@ package org.jufyer.plugin.stock.getPrice;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.jufyer.plugin.stock.Main;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class UpdateGitRepo {
+public class FetchFromGitRepo {
     public static void update() {
         String repoDir = String.valueOf(Main.getInstance().getDataPath()) +  "\\data";
 

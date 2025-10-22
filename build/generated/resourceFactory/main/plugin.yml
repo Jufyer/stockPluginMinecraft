@@ -7,4 +7,5 @@ load: STARTUP
 authors:
 - Jufyer
 commands:
+    showPrices: {}
     stocks: {}

@@ -1,6 +1,5 @@
 package org.jufyer.plugin.stock.gui;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -14,8 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
 
-import java.awt.*;
-
 public class MainApp implements Listener, CommandExecutor{
     public static Inventory MainApp = Bukkit.createInventory(null, 54, "§r\uF001Stocks");
 
@@ -23,7 +20,7 @@ public class MainApp implements Listener, CommandExecutor{
         ItemStack wheatIcon = new ItemStack(Material.HAY_BLOCK);
 
         ItemMeta meta = wheatIcon.getItemMeta();
-        meta.setDisplayName("§rPrice: " + String.valueOf(FetchPrice.wheat()));
+        meta.setDisplayName("§rPrice: " + String.valueOf(FetchPrice.getPrice("wheat")) + String.valueOf(FetchPrice.getUnit("wheat")));
 
         wheatIcon.setItemMeta(meta);
 
