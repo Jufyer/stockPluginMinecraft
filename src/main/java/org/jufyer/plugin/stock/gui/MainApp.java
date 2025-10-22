@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
+import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 
 public class MainApp implements Listener, CommandExecutor{
     public static Inventory MainApp = Bukkit.createInventory(null, 54, "§r\uF001Stocks");
@@ -20,7 +21,7 @@ public class MainApp implements Listener, CommandExecutor{
         ItemStack wheatIcon = new ItemStack(Material.HAY_BLOCK);
 
         ItemMeta meta = wheatIcon.getItemMeta();
-        meta.setDisplayName("§rPrice: " + String.valueOf(FetchPrice.getPrice("wheat")) + String.valueOf(FetchPrice.getUnit("wheat")));
+        meta.setDisplayName("§rPrice: " + String.valueOf(FetchPrice.getPrice(TradeCommodity.WHEAT)) + String.valueOf(FetchPrice.getUnit(TradeCommodity.WHEAT)));
 
         wheatIcon.setItemMeta(meta);
 

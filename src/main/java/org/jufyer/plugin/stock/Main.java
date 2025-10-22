@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jufyer.plugin.stock.chatImplementation.commands.showPrices;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.FetchFromGitRepo;
+import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.gui.MainApp;
 import org.jufyer.plugin.stock.listeners.InventoryListeners;
 
@@ -18,9 +19,9 @@ public final class Main extends JavaPlugin{
   public void onEnable() {
     instance = this;
 
-    if (FetchPrice.getPrice("wheat") != 0) {
-      double wheatPrice = FetchPrice.getPrice("wheat");
-      String wheatUnit = FetchPrice.getUnit("wheat");
+    if (FetchPrice.getPrice(TradeCommodity.WHEAT) != 0) {
+      double wheatPrice = FetchPrice.getPrice(TradeCommodity.WHEAT);
+      String wheatUnit = FetchPrice.getUnit(TradeCommodity.WHEAT);
 
       getLogger().info("Wheat Price is: " + wheatPrice + " " + wheatUnit);
     }

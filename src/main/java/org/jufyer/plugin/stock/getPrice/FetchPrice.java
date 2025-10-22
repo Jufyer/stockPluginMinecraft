@@ -1,5 +1,6 @@
 package org.jufyer.plugin.stock.getPrice;
 
+import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,11 +13,12 @@ import java.util.regex.Pattern;
 
 public class FetchPrice {
 
-  public static double getPrice(String symbol) {
+  public static double getPrice(TradeCommodity commodity) {
+    String symbol = commodity.getCommodityName();
     try {
       Document doc = Jsoup.connect("https://tradingeconomics.com/commodity/" + symbol)
               .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-              .timeout(10000)
+              .timeout(1000)
               .get();
 
       Elements scripts = doc.select("script");
@@ -48,7 +50,8 @@ public class FetchPrice {
     return 0;
   }
 
-  public static String getUnit(String symbol) {
+  public static String getUnit(TradeCommodity commodity) {
+    String symbol = commodity.getCommodityName();
     try {
       Document doc = Jsoup.connect("https://tradingeconomics.com/commodity/" + symbol)
               .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")

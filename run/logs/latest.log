@@ -1,55 +1,62 @@
-[17:13:22] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188; Oracle Corporation null) on Windows 11 10.0 (amd64)
-[17:13:22] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) for Minecraft 1.21.8
-[17:13:23] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
-[17:13:23] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
-[17:13:24] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
-[17:13:24] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (1):
+[20:35:56] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188; Oracle Corporation null) on Windows 11 10.0 (amd64)
+[20:35:56] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) for Minecraft 1.21.8
+[20:35:56] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[20:35:56] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[20:35:57] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
+[20:35:57] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (1):
  - jufyer-stock-plugin (1.0.0-SNAPSHOT)
-[17:13:27] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[17:13:29] [ServerMain/INFO]: Loaded 1407 recipes
-[17:13:29] [ServerMain/INFO]: Loaded 1520 advancements
-[17:13:29] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
-[17:13:29] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 250,4ms
-[17:13:29] [Server thread/INFO]: Starting minecraft server version 1.21.8
-[17:13:29] [Server thread/INFO]: Loading properties
-[17:13:29] [Server thread/INFO]: This server is running Paper version 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) (Implementing API version 1.21.8-R0.1-SNAPSHOT)
-[17:13:29] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
-[17:13:29] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[17:13:29] [Server thread/INFO]: Using 4 threads for Netty based IO
-[17:13:30] [Server thread/INFO]: [MoonriseCommon] Paper is using 4 worker threads, 1 I/O threads
-[17:13:30] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
-[17:13:30] [Server thread/INFO]: Default game type: SURVIVAL
-[17:13:30] [Server thread/INFO]: Generating keypair
-[17:13:30] [Server thread/INFO]: Starting Minecraft server on *:25565
-[17:13:30] [Server thread/INFO]: Using default channel type
-[17:13:30] [Server thread/INFO]: Paper: Using Java compression from Velocity.
-[17:13:30] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
-[17:13:30] [Server thread/INFO]: [jufyer-stock-plugin] Loading server plugin jufyer-stock-plugin v1.0.0-SNAPSHOT
-[17:13:30] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[17:13:30] [Server thread/INFO]: [jufyer-stock-plugin] Enabling jufyer-stock-plugin v1.0.0-SNAPSHOT
-[17:13:32] [Server thread/INFO]: [jufyer-stock-plugin] Wheat Price is: 503.9458 USd/Bu
-[17:13:32] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetching updates from the remote repository...
-[17:13:32] [Server thread/WARN]: Nag author(s): '[Jufyer]' of 'jufyer-stock-plugin v1.0.0-SNAPSHOT' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
-[17:13:33] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetch complete. Resetting to latest commit...
-[17:13:33] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Repository updated to latest remote state.
-[17:13:33] [Server thread/INFO]: Preparing level "world"
-[17:13:34] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[17:13:34] [Server thread/INFO]: Preparing spawn area: 0%
-[17:13:34] [Server thread/INFO]: Preparing spawn area: 0%
-[17:13:35] [Server thread/INFO]: Time elapsed: 710 ms
-[17:13:35] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[17:13:35] [Server thread/INFO]: Preparing spawn area: 0%
-[17:13:35] [Server thread/INFO]: Time elapsed: 136 ms
-[17:13:35] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[17:13:35] [Server thread/INFO]: Preparing spawn area: 0%
-[17:13:35] [Server thread/INFO]: Time elapsed: 43 ms
-[17:13:35] [Server thread/INFO]: [spark] Starting background profiler...
-[17:13:35] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
-[17:13:35] [Server thread/INFO]: Done preparing level "world" (1.486s)
-[17:13:35] [Server thread/INFO]: Running delayed init tasks
-[17:13:35] [Server thread/INFO]: Done (13.032s)! For help, type "help"
-[17:13:36] [User Authenticator #0/INFO]: UUID of player Jufyer is 4fc4ff2d-caa9-4ebc-b929-7e768144edcb
-[17:13:36] [Server thread/INFO]: Jufyer joined the game
-[17:13:36] [Server thread/INFO]: Jufyer[/127.0.0.1:60294] logged in with entity id 109 at ([world]8.595055423904752, 69.875, 10.801190275619708)
-[17:13:39] [Server thread/INFO]: Jufyer issued server command: /showprices Sulfur
-[17:13:46] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 6198ms or 123 ticks behind
+[20:36:00] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[20:36:02] [ServerMain/INFO]: Loaded 1407 recipes
+[20:36:02] [ServerMain/INFO]: Loaded 1520 advancements
+[20:36:02] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[20:36:02] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 305,8ms
+[20:36:02] [Server thread/INFO]: Starting minecraft server version 1.21.8
+[20:36:02] [Server thread/INFO]: Loading properties
+[20:36:03] [Server thread/INFO]: This server is running Paper version 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) (Implementing API version 1.21.8-R0.1-SNAPSHOT)
+[20:36:03] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[20:36:03] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[20:36:03] [Server thread/INFO]: Using 4 threads for Netty based IO
+[20:36:03] [Server thread/INFO]: [MoonriseCommon] Paper is using 4 worker threads, 1 I/O threads
+[20:36:03] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
+[20:36:03] [Server thread/INFO]: Default game type: SURVIVAL
+[20:36:03] [Server thread/INFO]: Generating keypair
+[20:36:03] [Server thread/INFO]: Starting Minecraft server on *:25565
+[20:36:03] [Server thread/INFO]: Using default channel type
+[20:36:04] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[20:36:04] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[20:36:04] [Server thread/INFO]: [jufyer-stock-plugin] Loading server plugin jufyer-stock-plugin v1.0.0-SNAPSHOT
+[20:36:04] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[20:36:04] [Server thread/INFO]: [jufyer-stock-plugin] Enabling jufyer-stock-plugin v1.0.0-SNAPSHOT
+[20:36:05] [Server thread/INFO]: [jufyer-stock-plugin] Wheat Price is: 503.75 USd/Bu
+[20:36:05] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetching updates from the remote repository...
+[20:36:05] [Server thread/WARN]: Nag author(s): '[Jufyer]' of 'jufyer-stock-plugin v1.0.0-SNAPSHOT' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
+[20:36:06] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetch complete. Resetting to latest commit...
+[20:36:06] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Repository updated to latest remote state.
+[20:36:06] [Server thread/INFO]: Preparing level "world"
+[20:36:07] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[20:36:07] [Server thread/INFO]: Preparing spawn area: 0%
+[20:36:07] [Server thread/INFO]: Preparing spawn area: 2%
+[20:36:07] [Server thread/INFO]: Time elapsed: 807 ms
+[20:36:07] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[20:36:07] [Server thread/INFO]: Preparing spawn area: 0%
+[20:36:08] [Server thread/INFO]: Time elapsed: 148 ms
+[20:36:08] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[20:36:08] [Server thread/INFO]: Preparing spawn area: 0%
+[20:36:08] [Server thread/INFO]: Time elapsed: 49 ms
+[20:36:08] [Server thread/INFO]: [spark] Starting background profiler...
+[20:36:08] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[20:36:08] [Server thread/INFO]: Done preparing level "world" (1.681s)
+[20:36:08] [Server thread/INFO]: Running delayed init tasks
+[20:36:08] [Server thread/INFO]: Done (12.947s)! For help, type "help"
+[20:36:10] [User Authenticator #0/INFO]: UUID of player Jufyer is 4fc4ff2d-caa9-4ebc-b929-7e768144edcb
+[20:36:11] [Server thread/INFO]: Jufyer joined the game
+[20:36:11] [Server thread/INFO]: Jufyer[/127.0.0.1:61086] logged in with entity id 119 at ([world]8.760735717370787, 70.0, 11.002294879130073)
+[20:36:11] [Server thread/WARN]: [ca.spottedleaf.moonrise.patches.chunk_system.level.entity.EntityLookup] Entity uuid already exists: 162cb555-efad-4a17-bf29-288c312c2512, mapped to Bat['Bat'/24, uuid='162cb555-efad-4a17-bf29-288c312c2512', l='ServerLevel[world]', x=46.25, y=-29.40, z=-5.25, cpos=[2, -1], tl=0, v=true], can't add Bat['Bat'/139, uuid='162cb555-efad-4a17-bf29-288c312c2512', l='ServerLevel[world]', x=65.25, y=-36.00, z=-12.55, cpos=[4, -1], tl=0, v=false]
+[20:36:12] [Server thread/INFO]: Jufyer issued server command: /showprices orange_juice
+[20:36:15] [Server thread/INFO]: Jufyer issued server command: /showprices list
+[20:36:21] [Server thread/INFO]: Jufyer issued server command: /showprices list
+[20:36:23] [Server thread/INFO]: Jufyer issued server command: /showprices
+[20:36:25] [Server thread/INFO]: Jufyer issued server command: /showprices coffee
+[20:36:32] [Server thread/INFO]: Jufyer issued server command: /showprices orange_juice
+[20:36:41] [Server thread/INFO]: Jufyer issued server command: /showprices orange_juice
+[20:37:11] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 15862ms or 317 ticks behind
