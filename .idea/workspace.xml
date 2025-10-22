@@ -7,101 +7,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f77f675-0b67-47c1-b2d7-f78bde3635af" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchFromDataFolder.java" afterDir="false" />
+    <list default="true" id="5f77f675-0b67-47c1-b2d7-f78bde3635af" name="Changes" comment="developing...">
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/expanded/expanded.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/expanded/expanded.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/44khgklqfu7ixv0hj7t0f6107/candidates.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/44khgklqfu7ixv0hj7t0f6107/candidates.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/.globals.work.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/.strings.work.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/_.work.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/buildfingerprint.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/classloaderscopes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/entry.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/projectfingerprint.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5e60b116-700b-41d2-a921-9ac11ad7370f/work.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/configuration-cache.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/configuration-cache.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/UpdateGitRepo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/generated/resourceFactory/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/resourceFactory/main/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchPrice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/data/wheat.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/data/wheat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Main.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UpdateGitRepo.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FetchPrice.class.uniqueId1" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FetchPrice.class.uniqueId1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/libraries/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/mappings/reversed/1C1C48C2F6E8E7AB9B8CA0BC4E4644A76A1FE48EC57629E2BBD57F8EB38760F1.tiny" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/remap-classpath/1C1C48C2F6E8E7AB9B8CA0BC4E4644A76A1FE48EC57629E2BBD57F8EB38760F1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/unknown-origin/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/bStats/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/jufyer-stock-plugin/data" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/spark/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/spark/tmp-client/about.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/server.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/raids.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/data/random_sequences.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/random_sequences.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat_old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/session.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/level.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/level.dat_old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_nether/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/session.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/level.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/level.dat_old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world_the_end/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/session.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchPrice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/UpdateGitRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchFromGitRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/data/wheat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/wheat.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -346,12 +285,21 @@
       <option name="project" value="LOCAL" />
       <updated>1761070649423</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="developing...">
+      <option name="closed" value="true" />
+      <created>1761145323904</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761145323904</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="developing..." />
+    <option name="LAST_COMMIT_MESSAGE" value="developing..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
