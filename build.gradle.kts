@@ -26,6 +26,9 @@ dependencies {
   implementation("org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r")
   implementation("javax.json:javax.json-api:1.1.4") // API
   implementation("org.glassfish:javax.json:1.1.4")
+  implementation("com.google.code.gson:gson:2.10.1")
+  implementation("org.jfree:jfreechart:1.5.4")
+
   paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 }
 

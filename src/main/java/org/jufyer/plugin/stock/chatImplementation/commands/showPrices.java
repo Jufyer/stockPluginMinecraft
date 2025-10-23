@@ -1,13 +1,19 @@
 package org.jufyer.plugin.stock.chatImplementation.commands;
 
 import net.md_5.bungee.api.chat.*;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jufyer.plugin.stock.chatImplementation.stockLoader;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
+import org.jufyer.plugin.stock.util.PriceHistoryChart;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class showPrices implements CommandExecutor {
     @Override
@@ -184,6 +190,13 @@ public class showPrices implements CommandExecutor {
                         player.sendMessage("The price of " + commodity.getCommodityName().replace("-", "_") + " at the moment is: " + price + " " + unit
                                 + " and the Minecraft Item is: " + commodity.getMaterial());
 
+                        PriceHistoryChart chart = new PriceHistoryChart();
+
+                        // Einfache Version
+                        chart.showChart(player, commodity, 20, PriceHistoryChart.ChartStyle.SPARKLINE);
+                        chart.showChart(player, commodity, 20, PriceHistoryChart.ChartStyle.BAR);
+                        chart.showChart(player, commodity, 20, PriceHistoryChart.ChartStyle.TREND);
+
 
                     } catch (IllegalArgumentException e) {
                         player.sendMessage("The name you provided does not exist!");
@@ -198,5 +211,16 @@ public class showPrices implements CommandExecutor {
             commandSender.sendMessage("You need to be a player to send this command!");
         }
         return false;
+    }
+
+    public static List<Double> getHistory(TradeCommodity commodity, int n) throws Exception {
+        List<stockLoader.PricePoint> points = stockLoader.loadHistory(commodity.getCommodityName());
+        // Nur die letzten n Werte, in der richtigen Reihenfolge
+        List<Double> values = points.stream()
+                .map(p -> Double.parseDouble(p.value))
+                .collect(Collectors.toList());
+        int size = values.size();
+        if (size <= n) return values;
+        else return values.subList(size - n, size);
     }
 }

@@ -55,7 +55,7 @@ public class FetchPrice {
     try {
       Document doc = Jsoup.connect("https://tradingeconomics.com/commodity/" + symbol)
               .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-              .timeout(10000)
+              .timeout(1000)
               .get();
 
       Element metaDesc = doc.selectFirst("meta[name=description]");
