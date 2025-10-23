@@ -1,125 +1,61 @@
-[20:49:04] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188; Oracle Corporation null) on Windows 11 10.0 (amd64)
-[20:49:04] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) for Minecraft 1.21.8
-[20:49:04] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
-[20:49:05] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
-[20:49:05] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
-[20:49:05] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (1):
+[21:00:37] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188; Oracle Corporation null) on Windows 11 10.0 (amd64)
+[21:00:37] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) for Minecraft 1.21.8
+[21:00:37] [ServerMain/WARN]: [oshi.driver.windows.perfmon.PerfmonDisabled] Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[21:00:38] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[21:00:38] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
+[21:00:38] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (1):
  - jufyer-stock-plugin (1.0.0-SNAPSHOT)
-[20:49:09] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[20:49:11] [ServerMain/INFO]: Loaded 1407 recipes
-[20:49:11] [ServerMain/INFO]: Loaded 1520 advancements
-[20:49:11] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
-[20:49:11] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 285,4ms
-[20:49:11] [Server thread/INFO]: Starting minecraft server version 1.21.8
-[20:49:11] [Server thread/INFO]: Loading properties
-[20:49:11] [Server thread/INFO]: This server is running Paper version 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) (Implementing API version 1.21.8-R0.1-SNAPSHOT)
-[20:49:11] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
-[20:49:11] [Server thread/INFO]: Using 4 threads for Netty based IO
-[20:49:11] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[20:49:12] [Server thread/INFO]: [MoonriseCommon] Paper is using 4 worker threads, 1 I/O threads
-[20:49:12] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
-[20:49:12] [Server thread/INFO]: Default game type: SURVIVAL
-[20:49:12] [Server thread/INFO]: Generating keypair
-[20:49:12] [Server thread/INFO]: Starting Minecraft server on *:25565
-[20:49:12] [Server thread/INFO]: Using default channel type
-[20:49:12] [Server thread/INFO]: Paper: Using Java compression from Velocity.
-[20:49:12] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
-[20:49:12] [Server thread/INFO]: [jufyer-stock-plugin] Loading server plugin jufyer-stock-plugin v1.0.0-SNAPSHOT
-[20:49:12] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[20:49:12] [Server thread/INFO]: [jufyer-stock-plugin] Enabling jufyer-stock-plugin v1.0.0-SNAPSHOT
-[20:49:14] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] ERROR: Underlying input stream returned zero bytes
-[20:49:14] [Server thread/WARN]: Nag author(s): '[Jufyer]' of 'jufyer-stock-plugin v1.0.0-SNAPSHOT' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
-[20:49:14] [Server thread/WARN]: java.io.IOException: Underlying input stream returned zero bytes
-[20:49:14] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:354)
-[20:49:14] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:393)
-[20:49:14] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.lockedRead(StreamDecoder.java:217)
-[20:49:14] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:171)
-[20:49:14] [Server thread/WARN]: 	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:188)
-[20:49:14] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.fill(BufferedReader.java:160)
-[20:49:14] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.read1(BufferedReader.java:225)
-[20:49:14] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.implRead(BufferedReader.java:317)
-[20:49:14] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.read(BufferedReader.java:296)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.CharacterReader.bufferUp(CharacterReader.java:87)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.CharacterReader.current(CharacterReader.java:251)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TokeniserState.readRawData(TokeniserState.java:1687)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TokeniserState.access$200(TokeniserState.java:8)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TokeniserState$6.read(TokeniserState.java:76)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.Tokeniser.read(Tokeniser.java:64)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:86)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:61)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.Parser.parseInput(Parser.java:57)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.helper.DataUtil.parseInputStream(DataUtil.java:218)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.helper.HttpConnection$Response.parse(HttpConnection.java:959)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.helper.HttpConnection.get(HttpConnection.java:333)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jufyer.plugin.stock.getPrice.FetchPrice.getPrice(FetchPrice.java:22)
-[20:49:14] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jufyer.plugin.stock.Main.onEnable(Main.java:23)
-[20:49:14] [Server thread/WARN]: 	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:280)
-[20:49:14] [Server thread/WARN]: 	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202)
-[20:49:14] [Server thread/WARN]: 	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109)
-[20:49:14] [Server thread/WARN]: 	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520)
-[20:49:14] [Server thread/WARN]: 	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:652)
-[20:49:14] [Server thread/WARN]: 	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:608)
-[20:49:14] [Server thread/WARN]: 	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:236)
-[20:49:14] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1164)
-[20:49:14] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:310)
-[20:49:14] [Server thread/WARN]: 	at java.base/java.lang.Thread.run(Thread.java:1583)
-[20:49:14] [Server thread/INFO]: [jufyer-stock-plugin] Wheat Price is: 0.0 USd/Bu
-[20:49:15] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetching updates from the remote repository...
-[20:49:15] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetch complete. Resetting to latest commit...
-[20:49:15] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Repository updated to latest remote state.
-[20:49:16] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] ERROR: Underlying input stream returned zero bytes
-[20:49:16] [Server thread/WARN]: java.io.IOException: Underlying input stream returned zero bytes
-[20:49:16] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:354)
-[20:49:16] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:393)
-[20:49:16] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.lockedRead(StreamDecoder.java:217)
-[20:49:16] [Server thread/WARN]: 	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:171)
-[20:49:16] [Server thread/WARN]: 	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:188)
-[20:49:16] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.fill(BufferedReader.java:160)
-[20:49:16] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.read1(BufferedReader.java:225)
-[20:49:16] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.implRead(BufferedReader.java:317)
-[20:49:16] [Server thread/WARN]: 	at java.base/java.io.BufferedReader.read(BufferedReader.java:296)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.CharacterReader.bufferUp(CharacterReader.java:87)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.CharacterReader.current(CharacterReader.java:251)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TokeniserState.readRawData(TokeniserState.java:1687)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TokeniserState.access$200(TokeniserState.java:8)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TokeniserState$6.read(TokeniserState.java:76)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.Tokeniser.read(Tokeniser.java:64)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:86)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:61)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.parser.Parser.parseInput(Parser.java:57)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.helper.DataUtil.parseInputStream(DataUtil.java:218)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.helper.HttpConnection$Response.parse(HttpConnection.java:959)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jsoup.helper.HttpConnection.get(HttpConnection.java:333)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jufyer.plugin.stock.getPrice.FetchPrice.getUnit(FetchPrice.java:59)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jufyer.plugin.stock.gui.MainApp.invSetup(MainApp.java:24)
-[20:49:16] [Server thread/WARN]: 	at jufyer-stock-plugin-1.0.0-SNAPSHOT.jar//org.jufyer.plugin.stock.Main.onEnable(Main.java:31)
-[20:49:16] [Server thread/WARN]: 	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:280)
-[20:49:16] [Server thread/WARN]: 	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202)
-[20:49:16] [Server thread/WARN]: 	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109)
-[20:49:16] [Server thread/WARN]: 	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520)
-[20:49:16] [Server thread/WARN]: 	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:652)
-[20:49:16] [Server thread/WARN]: 	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:608)
-[20:49:16] [Server thread/WARN]: 	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:236)
-[20:49:16] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1164)
-[20:49:16] [Server thread/WARN]: 	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:310)
-[20:49:16] [Server thread/WARN]: 	at java.base/java.lang.Thread.run(Thread.java:1583)
-[20:49:16] [Server thread/INFO]: Preparing level "world"
-[20:49:17] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[20:49:17] [Server thread/INFO]: Preparing spawn area: 0%
-[20:49:17] [Server thread/INFO]: Preparing spawn area: 0%
-[20:49:17] [Server thread/INFO]: Time elapsed: 807 ms
-[20:49:17] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[20:49:17] [Server thread/INFO]: Preparing spawn area: 0%
-[20:49:18] [Server thread/INFO]: Time elapsed: 150 ms
-[20:49:18] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[20:49:18] [Server thread/INFO]: Preparing spawn area: 0%
-[20:49:18] [Server thread/INFO]: Time elapsed: 63 ms
-[20:49:18] [Server thread/INFO]: [spark] Starting background profiler...
-[20:49:18] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
-[20:49:18] [Server thread/INFO]: Done preparing level "world" (1.677s)
-[20:49:18] [Server thread/INFO]: Running delayed init tasks
-[20:49:18] [Server thread/INFO]: Done (14.518s)! For help, type "help"
-[20:49:18] [User Authenticator #0/INFO]: UUID of player Jufyer is 4fc4ff2d-caa9-4ebc-b929-7e768144edcb
-[20:49:19] [Server thread/INFO]: Jufyer joined the game
-[20:49:19] [Server thread/INFO]: Jufyer[/127.0.0.1:63770] logged in with entity id 132 at ([world]8.760735717370787, 70.0, 11.002294879130073)
-[20:49:20] [Server thread/INFO]: Jufyer issued server command: /showprices gold
+[21:00:42] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[21:00:44] [ServerMain/INFO]: Loaded 1407 recipes
+[21:00:44] [ServerMain/INFO]: Loaded 1520 advancements
+[21:00:44] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[21:00:44] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 283,1ms
+[21:00:44] [Server thread/INFO]: Starting minecraft server version 1.21.8
+[21:00:44] [Server thread/INFO]: Loading properties
+[21:00:44] [Server thread/INFO]: This server is running Paper version 1.21.8-60-main@29c8822 (2025-09-06T21:49:13Z) (Implementing API version 1.21.8-R0.1-SNAPSHOT)
+[21:00:44] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[21:00:44] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[21:00:44] [Server thread/INFO]: Using 4 threads for Netty based IO
+[21:00:45] [Server thread/INFO]: [MoonriseCommon] Paper is using 4 worker threads, 1 I/O threads
+[21:00:45] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
+[21:00:45] [Server thread/INFO]: Default game type: SURVIVAL
+[21:00:45] [Server thread/INFO]: Generating keypair
+[21:00:45] [Server thread/INFO]: Starting Minecraft server on *:25565
+[21:00:45] [Server thread/INFO]: Using default channel type
+[21:00:45] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[21:00:45] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[21:00:45] [Server thread/INFO]: [jufyer-stock-plugin] Loading server plugin jufyer-stock-plugin v1.0.0-SNAPSHOT
+[21:00:45] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[21:00:45] [Server thread/INFO]: [jufyer-stock-plugin] Enabling jufyer-stock-plugin v1.0.0-SNAPSHOT
+[21:00:47] [Server thread/INFO]: [jufyer-stock-plugin] Wheat Price is: 513.0 USd/Bu
+[21:00:47] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetching updates from the remote repository...
+[21:00:47] [Server thread/WARN]: Nag author(s): '[Jufyer]' of 'jufyer-stock-plugin v1.0.0-SNAPSHOT' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
+[21:00:47] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Fetch complete. Resetting to latest commit...
+[21:00:47] [Server thread/INFO]: [jufyer-stock-plugin] [STDOUT] Repository updated to latest remote state.
+[21:00:48] [Server thread/INFO]: Preparing level "world"
+[21:00:48] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[21:00:48] [Server thread/INFO]: Preparing spawn area: 0%
+[21:00:49] [Server thread/INFO]: Preparing spawn area: 0%
+[21:00:49] [Server thread/INFO]: Time elapsed: 842 ms
+[21:00:49] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[21:00:49] [Server thread/INFO]: Preparing spawn area: 0%
+[21:00:49] [Server thread/INFO]: Time elapsed: 182 ms
+[21:00:49] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[21:00:49] [Server thread/INFO]: Preparing spawn area: 0%
+[21:00:49] [Server thread/INFO]: Time elapsed: 39 ms
+[21:00:49] [Server thread/INFO]: [spark] Starting background profiler...
+[21:00:49] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[21:00:50] [Server thread/INFO]: Done preparing level "world" (1.707s)
+[21:00:50] [Server thread/INFO]: Running delayed init tasks
+[21:00:50] [Server thread/INFO]: Done (13.037s)! For help, type "help"
+[21:00:50] [User Authenticator #0/INFO]: UUID of player Jufyer is 4fc4ff2d-caa9-4ebc-b929-7e768144edcb
+[21:00:50] [Server thread/INFO]: Jufyer joined the game
+[21:00:50] [Server thread/INFO]: Jufyer[/127.0.0.1:50974] logged in with entity id 132 at ([world]8.760735717370787, 70.0, 11.002294879130073)
+[21:00:53] [Server thread/INFO]: Jufyer issued server command: /showprices gold
+[21:01:58] [Server thread/INFO]: Jufyer issued server command: /showprices
+[21:02:00] [Server thread/INFO]: Jufyer issued server command: /showprices iron_ore
+[21:02:10] [Server thread/INFO]: Jufyer issued server command: /showprices indium
+[21:02:15] [Server thread/INFO]: Jufyer issued server command: /showprices
+[21:02:19] [Server thread/INFO]: Jufyer issued server command: /showprices natural_gas
+[21:02:36] [Server thread/INFO]: Jufyer lost connection: Disconnected
+[21:02:36] [Server thread/INFO]: Jufyer left the game

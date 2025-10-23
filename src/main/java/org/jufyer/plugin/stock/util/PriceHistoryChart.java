@@ -1,10 +1,12 @@
 package org.jufyer.plugin.stock.util;
 
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 import org.jufyer.plugin.stock.chatImplementation.stockLoader;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,31 +21,25 @@ public class PriceHistoryChart {
      */
     public void showChart(Player player, TradeCommodity commodity, int dataPoints, ChartStyle style) {
         try {
-            List<Double> prices = getHistory(commodity, dataPoints);
+            List<PriceData> priceData = getHistoryWithDates(commodity, dataPoints);
 
-            if (prices == null || prices.isEmpty()) {
+            if (priceData == null || priceData.isEmpty()) {
                 player.sendMessage("§cNo historical data available for " + commodity.getCommodityName());
                 return;
             }
 
             switch (style) {
-                case LINE:
-                    sendLineChart(player, commodity, prices);
-                    break;
                 case BAR:
-                    sendBarChart(player, commodity, prices);
+                    sendBarChart(player, commodity, priceData);
                     break;
                 case SPARKLINE:
-                    sendSparkline(player, commodity, prices);
-                    break;
-                case BOX:
-                    sendBoxChart(player, commodity, prices);
+                    sendSparkline(player, commodity, priceData);
                     break;
                 case TREND:
-                    sendTrendChart(player, commodity, prices);
+                    sendTrendChart(player, commodity, priceData);
                     break;
                 default:
-                    sendBarChart(player, commodity, prices);
+                    sendBarChart(player, commodity, priceData);
             }
         } catch (Exception e) {
             player.sendMessage("§cError loading price history: " + e.getMessage());
@@ -52,100 +48,59 @@ public class PriceHistoryChart {
     }
 
     /**
-     * Lädt die Preishistorie
+     * Lädt die Preishistorie mit Datum
      */
-    private List<Double> getHistory(TradeCommodity commodity, int n) throws Exception {
+    private List<PriceData> getHistoryWithDates(TradeCommodity commodity, int n) throws Exception {
         List<stockLoader.PricePoint> points = stockLoader.loadHistory(commodity.getCommodityName());
-        // Nur die letzten n Werte, in der richtigen Reihenfolge
-        List<Double> values = points.stream()
-                .map(p -> Double.parseDouble(p.value))
+
+        // Nur die letzten n Werte
+        int size = points.size();
+        List<stockLoader.PricePoint> relevantPoints;
+        if (size <= n) {
+            relevantPoints = points;
+        } else {
+            relevantPoints = points.subList(size - n, size);
+        }
+
+        // Zu PriceData konvertieren
+        return relevantPoints.stream()
+                .map(p -> new PriceData(
+                        Double.parseDouble(p.value),
+                        formatDate(p.date)
+                ))
                 .collect(Collectors.toList());
-        int size = values.size();
-        if (size <= n) return values;
-        else return values.subList(size - n, size);
     }
 
     /**
-     * STIL 1: Linien-Diagramm mit Box-Drawing Characters
+     * Formatiert das Datum von "2025-10-23 18:30:02 UTC" zu "23.10 18:30"
      */
-    private void sendLineChart(Player player, TradeCommodity commodity, List<Double> prices) {
-        int height = 10;
-        int width = prices.size();
+    private String formatDate(String dateStr) {
+        try {
+            // Format: "2025-10-23 18:30:02 UTC"
+            String[] parts = dateStr.split(" ");
+            String datePart = parts[0]; // "2025-10-23"
+            String timePart = parts[1]; // "18:30:02"
 
-        double min = prices.stream().mapToDouble(Double::doubleValue).min().orElse(0);
-        double max = prices.stream().mapToDouble(Double::doubleValue).max().orElse(100);
-        double range = max - min;
-        if (range == 0) range = 1;
+            String[] dateSplit = datePart.split("-");
+            String day = dateSplit[2];
+            String month = dateSplit[1];
 
-        List<Integer> normalized = new ArrayList<>();
-        for (double price : prices) {
-            int y = (int) Math.round(((price - min) / range) * (height - 1));
-            normalized.add(y);
+            String[] timeSplit = timePart.split(":");
+            String hour = timeSplit[0];
+            String minute = timeSplit[1];
+
+            return day + "." + month + " " + hour + ":" + minute;
+        } catch (Exception e) {
+            return dateStr; // Fallback bei Fehler
         }
-
-        player.sendMessage("§b§l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        player.sendMessage("§6Price History: §f" + commodity.getCommodityName());
-        player.sendMessage("");
-
-        for (int row = height - 1; row >= 0; row--) {
-            double yValue = min + (range * row / (height - 1));
-            String line = String.format("§7%7.2f §8│", yValue);
-
-            for (int col = 0; col < width; col++) {
-                int currentY = normalized.get(col);
-                int prevY = col > 0 ? normalized.get(col - 1) : currentY;
-                int nextY = col < width - 1 ? normalized.get(col + 1) : currentY;
-
-                if (currentY == row) {
-                    if (prevY < row && nextY < row) {
-                        line += "§a╮";
-                    } else if (prevY > row && nextY > row) {
-                        line += "§a╰";
-                    } else if (prevY < row && nextY > row) {
-                        line += "§a╯";
-                    } else if (prevY > row && nextY < row) {
-                        line += "§a╭";
-                    } else if (prevY == row || nextY == row) {
-                        line += "§a─";
-                    } else {
-                        line += "§a●";
-                    }
-                } else if ((prevY <= row && currentY >= row) || (prevY >= row && currentY <= row)) {
-                    line += "§a│";
-                } else {
-                    line += " ";
-                }
-            }
-
-            player.sendMessage(line);
-        }
-
-        String xAxis = "§8         └";
-        for (int i = 0; i < width - 1; i++) {
-            xAxis += "─";
-        }
-        player.sendMessage(xAxis);
-
-        String labels = "§7          ";
-        for (int i = 0; i < width; i++) {
-            if ((i + 1) % 5 == 0 || i == 0) {
-                labels += "§f" + (i + 1);
-                if (i + 1 < 10) labels += " ";
-            } else {
-                labels += "§8· ";
-            }
-        }
-        player.sendMessage(labels);
-
-        player.sendMessage("");
-        player.sendMessage(String.format("§7Range: §f%.2f §7- §f%.2f", min, max));
-        player.sendMessage("§b§l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
     /**
-     * STIL 2: Balken-Diagramm (Horizontal) - EMPFOHLEN
+     * STIL 1: Balken-Diagramm (Horizontal) - EMPFOHLEN
      */
-    private void sendBarChart(Player player, TradeCommodity commodity, List<Double> prices) {
+    private void sendBarChart(Player player, TradeCommodity commodity, List<PriceData> priceData) {
+        List<Double> prices = priceData.stream().map(p -> p.value).collect(Collectors.toList());
+
         double min = prices.stream().mapToDouble(Double::doubleValue).min().orElse(0);
         double max = prices.stream().mapToDouble(Double::doubleValue).max().orElse(100);
         double range = max - min;
@@ -157,20 +112,26 @@ public class PriceHistoryChart {
         player.sendMessage("§6Price History: §f" + commodity.getCommodityName());
         player.sendMessage("");
 
-        for (int i = 0; i < prices.size(); i++) {
-            double price = prices.get(i);
+        for (int i = 0; i < priceData.size(); i++) {
+            PriceData data = priceData.get(i);
+            double price = data.value;
             int barLength = (int) Math.round(((price - min) / range) * maxBarLength);
 
             String color = "§a";
             String trend = "";
+            String trendText = "No change";
             if (i > 0) {
-                double diff = price - prices.get(i - 1);
+                double prev = priceData.get(i - 1).value;
+                double diff = price - prev;
+                double percentChange = (diff / prev) * 100;
                 if (diff > 0) {
                     color = "§a";
                     trend = " §a▲";
+                    trendText = String.format("Up +%.2f (%.2f%%)", diff, percentChange);
                 } else if (diff < 0) {
                     color = "§c";
                     trend = " §c▼";
+                    trendText = String.format("Down %.2f (%.2f%%)", diff, percentChange);
                 } else {
                     color = "§e";
                     trend = " §e■";
@@ -181,7 +142,24 @@ public class PriceHistoryChart {
             String label = String.format("§7#%-2d §8│ ", (i + 1));
             String value = String.format("§f%.2f%s", price, trend);
 
-            player.sendMessage(label + bar + " §7" + value);
+            // TextComponent für Hover erstellen
+            TextComponent message = new TextComponent(label);
+
+            TextComponent barComponent = new TextComponent(bar);
+            barComponent.setHoverEvent(new HoverEvent(
+                    HoverEvent.Action.SHOW_TEXT,
+                    new ComponentBuilder("§6Data Point #" + (i + 1) +
+                            "\n§7Date: §f" + data.date +
+                            "\n§7Value: §f" + String.format("%.2f", price) +
+                            "\n§7" + trendText).create()
+            ));
+
+            TextComponent valueComponent = new TextComponent(" §7" + value);
+
+            message.addExtra(barComponent);
+            message.addExtra(valueComponent);
+
+            player.spigot().sendMessage(message);
         }
 
         double avg = prices.stream().mapToDouble(Double::doubleValue).average().orElse(0);
@@ -197,20 +175,51 @@ public class PriceHistoryChart {
     }
 
     /**
-     * STIL 3: Sparkline (kompakt, einzeilig)
+     * STIL 2: Sparkline (kompakt, einzeilig)
      */
-    private void sendSparkline(Player player, TradeCommodity commodity, List<Double> prices) {
+    private void sendSparkline(Player player, TradeCommodity commodity, List<PriceData> priceData) {
         char[] sparks = {'▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'};
 
+        List<Double> prices = priceData.stream().map(p -> p.value).collect(Collectors.toList());
         double min = prices.stream().mapToDouble(Double::doubleValue).min().orElse(0);
         double max = prices.stream().mapToDouble(Double::doubleValue).max().orElse(100);
         double range = max - min;
         if (range == 0) range = 1;
 
-        StringBuilder sparkline = new StringBuilder("§a");
-        for (double price : prices) {
+        TextComponent message = new TextComponent("§8[§6" + commodity.getCommodityName() + "§8] ");
+
+        // Jeden Spark einzeln mit Hover
+        for (int i = 0; i < priceData.size(); i++) {
+            PriceData data = priceData.get(i);
+            double price = data.value;
             int index = (int) Math.round(((price - min) / range) * (sparks.length - 1));
-            sparkline.append(sparks[index]);
+
+            TextComponent spark = new TextComponent("§a" + sparks[index]);
+
+            // Trend berechnen
+            String trendInfo = "First data point";
+            if (i > 0) {
+                double prev = priceData.get(i - 1).value;
+                double diff = price - prev;
+                double percentChange = (diff / prev) * 100;
+                if (diff > 0) {
+                    trendInfo = String.format("§a▲ +%.2f (%.2f%%)", diff, percentChange);
+                } else if (diff < 0) {
+                    trendInfo = String.format("§c▼ %.2f (%.2f%%)", diff, percentChange);
+                } else {
+                    trendInfo = "§e■ No change";
+                }
+            }
+
+            spark.setHoverEvent(new HoverEvent(
+                    HoverEvent.Action.SHOW_TEXT,
+                    new ComponentBuilder("§6Point #" + (i + 1) +
+                            "\n§7Date: §f" + data.date +
+                            "\n§7Value: §f" + String.format("%.2f", price) +
+                            "\n" + trendInfo).create()
+            ));
+
+            message.addExtra(spark);
         }
 
         double current = prices.get(prices.size() - 1);
@@ -218,88 +227,72 @@ public class PriceHistoryChart {
         double change = ((current - first) / first) * 100;
         String trend = change > 0 ? "§a▲" : change < 0 ? "§c▼" : "§e■";
 
-        player.sendMessage("§8[§6" + commodity.getCommodityName() + "§8] " +
-                sparkline + " §7│ §f" + String.format("%.2f", current) +
-                " " + trend + String.format(" §7%.1f%%", Math.abs(change)));
+        message.addExtra(new TextComponent(" §7│ §f" + String.format("%.2f", current) +
+                " " + trend + String.format(" §7%.1f%%", Math.abs(change))));
+
+        player.spigot().sendMessage(message);
     }
 
     /**
-     * STIL 4: Box-Chart mit Rahmen
+     * STIL 3: Trend-Anzeige mit Pfeilen und Prozent
      */
-    private void sendBoxChart(Player player, org.jufyer.plugin.stock.getPrice.TradeCommodity commodity, List<Double> prices) {
-        int height = 8;
-        double min = prices.stream().mapToDouble(Double::doubleValue).min().orElse(0);
-        double max = prices.stream().mapToDouble(Double::doubleValue).max().orElse(100);
-        double range = max - min;
-        if (range == 0) range = 1;
-
-        String commodityName = commodity.getCommodityName();
-        int padding = Math.max(0, 25 - commodityName.length());
-
-        player.sendMessage("§b┌─────────────────────────────────────┐");
-        player.sendMessage("§b│ §6Price History: §f" + commodityName + " ".repeat(padding) + "§b│");
-        player.sendMessage("§b├─────────────────────────────────────┤");
-
-        for (int row = height - 1; row >= 0; row--) {
-            double yValue = min + (range * row / (height - 1));
-            String line = String.format("§b│ §7%7.2f §8┤ ", yValue);
-
-            for (int col = 0; col < prices.size(); col++) {
-                int normalizedY = (int) Math.round(((prices.get(col) - min) / range) * (height - 1));
-
-                if (normalizedY > row) {
-                    line += "§a█";
-                } else if (normalizedY == row) {
-                    line += "§e▀";
-                } else {
-                    line += "§8░";
-                }
-            }
-
-            // Padding am Ende
-            int remainingSpace = Math.max(0, 27 - prices.size());
-            line += " ".repeat(remainingSpace) + " §b│";
-            player.sendMessage(line);
-        }
-
-        double avg = prices.stream().mapToDouble(Double::doubleValue).average().orElse(0);
-        player.sendMessage("§b├─────────────────────────────────────┤");
-        player.sendMessage(String.format("§b│ §7Min: §f%6.2f §8│ §7Max: §f%6.2f §8│ §7Avg: §f%6.2f §b│",
-                min, max, avg));
-        player.sendMessage("§b└─────────────────────────────────────┘");
-    }
-
-    /**
-     * STIL 5: Trend-Anzeige mit Pfeilen und Prozent
-     */
-    private void sendTrendChart(Player player, org.jufyer.plugin.stock.getPrice.TradeCommodity commodity, List<Double> prices) {
+    private void sendTrendChart(Player player, TradeCommodity commodity, List<PriceData> priceData) {
         player.sendMessage("§b━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         player.sendMessage("§6Trend Analysis: §f" + commodity.getCommodityName());
         player.sendMessage("");
 
-        for (int i = 0; i < prices.size(); i++) {
-            double current = prices.get(i);
+        for (int i = 0; i < priceData.size(); i++) {
+            PriceData data = priceData.get(i);
+            double current = data.value;
             String arrow = "§e→";
             String colorCode = "§f";
+            String hoverText = "§6Data Point #" + (i + 1) +
+                    "\n§7Date: §f" + data.date +
+                    "\n§7Value: §f" + String.format("%.2f", current);
 
             if (i > 0) {
-                double prev = prices.get(i - 1);
+                PriceData prevData = priceData.get(i - 1);
+                double prev = prevData.value;
                 double diff = current - prev;
                 double percentChange = (diff / prev) * 100;
 
                 if (diff > 0) {
                     arrow = "§a↗";
                     colorCode = "§a";
+                    hoverText += "\n§aUp: +" + String.format("%.2f", diff) + String.format(" (+%.2f%%)", percentChange);
                 } else if (diff < 0) {
                     arrow = "§c↘";
                     colorCode = "§c";
+                    hoverText += "\n§cDown: " + String.format("%.2f", diff) + String.format(" (%.2f%%)", percentChange);
+                } else {
+                    hoverText += "\n§eNo change from previous";
                 }
 
-                player.sendMessage(String.format("§7[%2d] %s §f%7.2f %s§7(%s%+.2f%%§7)",
-                        i + 1, arrow, current, colorCode, colorCode, percentChange));
+                TextComponent message = new TextComponent(String.format("§7[%2d] ", i + 1));
+
+                TextComponent dataPoint = new TextComponent(String.format("%s §f%7.2f %s§7(%s%+.2f%%§7)",
+                        arrow, current, colorCode, colorCode, percentChange));
+
+                dataPoint.setHoverEvent(new HoverEvent(
+                        HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(hoverText + "\n§7Previous: §f" + String.format("%.2f", prev) + " §8(" + prevData.date + ")").create()
+                ));
+
+                message.addExtra(dataPoint);
+                player.spigot().sendMessage(message);
             } else {
-                player.sendMessage(String.format("§7[%2d] %s §f%7.2f §7(start)",
-                        i + 1, arrow, current));
+                hoverText += "\n§7Starting value";
+
+                TextComponent message = new TextComponent(String.format("§7[%2d] ", i + 1));
+                TextComponent dataPoint = new TextComponent(String.format("%s §f%7.2f §7(start)", arrow, current));
+
+                dataPoint.setHoverEvent(new HoverEvent(
+                        HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(hoverText).create()
+                ));
+
+                message.addExtra(dataPoint);
+                player.spigot().sendMessage(message);
             }
         }
 
@@ -308,13 +301,24 @@ public class PriceHistoryChart {
     }
 
     /**
+     * Datenklasse für Preis + Datum
+     */
+    private static class PriceData {
+        final double value;
+        final String date;
+
+        PriceData(double value, String date) {
+            this.value = value;
+            this.date = date;
+        }
+    }
+
+    /**
      * Chart-Stile
      */
     public enum ChartStyle {
-        LINE,       // Linien-Diagramm mit ╭╮╯╰
         BAR,        // Horizontale Balken (Standard)
         SPARKLINE,  // Kompakte einzeilige Darstellung
-        BOX,        // Mit Box-Rahmen
         TREND       // Mit Pfeilen und Prozent
     }
 }

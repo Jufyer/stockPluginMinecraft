@@ -11,7 +11,7 @@ import java.util.List;
 public class stockLoader {
     public static class PricePoint {
         String name;
-        String date;
+        public String date;
         String currency;
         public String value;
     }
