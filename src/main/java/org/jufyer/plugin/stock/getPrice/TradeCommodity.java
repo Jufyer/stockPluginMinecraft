@@ -51,4 +51,14 @@ public enum TradeCommodity {
         }
         return null;
     }
+
+    public static TradeCommodity fromCommodityName(String name) {
+        for (TradeCommodity c : values()) {
+            if (c.commodityName.equalsIgnoreCase(name)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
 }

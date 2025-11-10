@@ -15,33 +15,33 @@ public class FetchFromGitRepo {
         if (!(Files.exists(Path.of(repoDir)))) {
             String repoUrl = "https://github.com/Jufyer/stocksPluginDatabase";
             String cloneDirectoryPath = repoDir;
-
+            
             try {
-                System.out.println("Cloning repository from " + repoUrl + " to " + cloneDirectoryPath);
+                Main.getInstance().getLogger().info("Cloning repository from " + repoUrl + " to " + cloneDirectoryPath);
                 Git.cloneRepository()
                         .setURI(repoUrl)
                         .setDirectory(new File(cloneDirectoryPath))
                         .call();
-                System.out.println("Repository cloned successfully.");
+                Main.getInstance().getLogger().info("Repository cloned successfully.");
             } catch (GitAPIException e) {
                 e.printStackTrace();
             }
         }else {
             File repoDirGitFolder = new File(repoDir + "/.git");
             try (Git git = Git.open(repoDirGitFolder)) {
-                System.out.println("Fetching updates from the remote repository...");
+                Main.getInstance().getLogger().info("Fetching updates from the remote repository...");
                 git.fetch()
                         .setRemote("origin")
                         .call();
 
-                System.out.println("Fetch complete. Resetting to latest commit...");
+                Main.getInstance().getLogger().info("Fetch complete. Resetting to latest commit...");
 
                 git.reset()
                         .setMode(org.eclipse.jgit.api.ResetCommand.ResetType.HARD)
                         .setRef("origin/main")
                         .call();
 
-                System.out.println("Repository updated to latest remote state.");
+                Main.getInstance().getLogger().info("Repository updated to latest remote state.");
             } catch (Exception e) {
                 e.printStackTrace();
             }

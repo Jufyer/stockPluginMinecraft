@@ -8,26 +8,435 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f77f675-0b67-47c1-b2d7-f78bde3635af" name="Changes" comment="developing...">
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.-1.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.-2.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.-2.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.-2.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.-2.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.0.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.0.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.1.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.1.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.1.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/entities/r.1.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-1.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-1.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-1.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-1.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-2.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-2.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-2.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.-2.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.0.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.0.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.0.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.1.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.1.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.1.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/poi/r.1.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.-1.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.-1.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.-2.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.-2.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.-2.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.-2.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.0.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.0.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.1.-1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.1.-2.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.1.0.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/world/region/r.1.1.mca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/WorldManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/graphui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/BlockPlaceCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/BlockPlacer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/LockPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/blockDatas.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/expanded/expanded.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/expanded/expanded.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/12de7f5f-e9ad-4cdf-a064-a40558661fe7/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/1a1d22e3-8b56-4401-ad69-d62e6a860b05/classloaderscopes1739376679044619140.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/30c272c8-c42b-4369-8085-521e8f9a23d8/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/44khgklqfu7ixv0hj7t0f6107/candidates.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/44khgklqfu7ixv0hj7t0f6107/candidates.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/4xgunrw8sa1tea01hk3sxh90h/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/58f0f270-22fd-4652-9c77-ecac6c9952f0/classloaderscopes15024473883569141610.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5h272i0f9w4csgqvix3v0mhfg/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/5oz5gw7rzkv17ohvfrhlgjjvt/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6b0ce127-bca9-4e84-9d97-b674537097c5/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/7kxlocqzy6ojqq0hf40cwttih/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/922d2eb0-4b34-41ee-a013-18a6cd36c694/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/a3b58b71-87e3-462f-b66d-af6ea958ddb8/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/af196d29-5f3f-41b4-b0df-590021b6719a/classloaderscopes10374117970088002930.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/aufcwz81qkrimsv91zgmjna15/candidates.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/aufcwz81qkrimsv91zgmjna15/candidates.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/c9e07671-a09b-413d-81da-23210148996f/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/configuration-cache.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/configuration-cache.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_velocitypowered_velocity_native_3_4_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_velocitypowered_velocity_native_3_4_0_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/org.jufyer.plugin.jufyer-stock-plugin.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchFromGitRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchFromGitRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/TradeCommodity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/TradeCommodity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/listeners/InventoryListeners.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/listeners/InventoryListeners.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/AnimatedMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/ImageChar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/ImageMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/resourceFactory/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/resourceFactory/main/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/showPrices.class.uniqueId3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/server.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/banned-ips.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/banned-players.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/bukkit.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/cache/mojang_1.21.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/commands.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/paper-global.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/paper-world-defaults.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/eula.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/help.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/ca/spottedleaf/concurrentutil/0.0.3/concurrentutil-0.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/fasterxml/jackson/core/jackson-annotations/2.13.4/jackson-annotations-2.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/fasterxml/jackson/core/jackson-core/2.13.4/jackson-core-2.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/fasterxml/jackson/core/jackson-databind/2.13.4.2/jackson-databind-2.13.4.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/github/oshi/oshi-core/6.6.5/oshi-core-6.6.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/errorprone/error_prone_annotations/2.28.0/error_prone_annotations-2.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/google/protobuf/protobuf-java/4.29.0/protobuf-java-4.29.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/lmax/disruptor/3.4.4/disruptor-3.4.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/microsoft/azure/msal4j/1.17.2/msal4j-1.17.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/mojang/authlib/6.0.58/authlib-6.0.58.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/mojang/brigadier/1.3.10/brigadier-1.3.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/mojang/datafixerupper/8.0.16/datafixerupper-8.0.16.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/mojang/jtracy/1.0.29/jtracy-1.0.29.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/mojang/logging/1.5.10/logging-1.5.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/mysql/mysql-connector-j/9.2.0/mysql-connector-j-9.2.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/nimbusds/content-type/2.3/content-type-2.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/nimbusds/lang-tag/1.7/lang-tag-1.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/nimbusds/nimbus-jose-jwt/9.40/nimbus-jose-jwt-9.40.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/nimbusds/oauth2-oidc-sdk/11.18/oauth2-oidc-sdk-11.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/com/velocitypowered/velocity-native/3.4.0-SNAPSHOT/velocity-native-3.4.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/commons-codec/commons-codec/1.16.0/commons-codec-1.16.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/commons-io/commons-io/2.17.0/commons-io-2.17.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/leangen/geantyref/geantyref/1.3.16/geantyref-1.3.16.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-buffer/4.1.118.Final/netty-buffer-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-codec-haproxy/4.1.118.Final/netty-codec-haproxy-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-codec/4.1.118.Final/netty-codec-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-common/4.1.118.Final/netty-common-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-handler/4.1.118.Final/netty-handler-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-resolver/4.1.118.Final/netty-resolver-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-transport-classes-epoll/4.1.118.Final/netty-transport-classes-epoll-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-transport-native-epoll/4.1.118.Final/netty-transport-native-epoll-4.1.118.Final-linux-aarch_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-transport-native-epoll/4.1.118.Final/netty-transport-native-epoll-4.1.118.Final-linux-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-transport-native-unix-common/4.1.118.Final/netty-transport-native-unix-common-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/netty/netty-transport/4.1.118.Final/netty-transport-4.1.118.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/papermc/asm-utils/0.0.3/asm-utils-0.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/papermc/paper/paper-api/1.21.8-R0.1-SNAPSHOT/paper-api-1.21.8-R0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/papermc/reflection-rewriter-proxy-generator/0.0.3/reflection-rewriter-proxy-generator-0.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/papermc/reflection-rewriter-runtime/0.0.3/reflection-rewriter-runtime-0.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/io/papermc/reflection-rewriter/0.0.3/reflection-rewriter-0.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/it/unimi/dsi/fastutil/8.5.15/fastutil-8.5.15.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/javax/inject/javax.inject/1/javax.inject-1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/me/lucko/spark-api/0.1-20240720.200737-2/spark-api-0.1-20240720.200737-2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/me/lucko/spark-paper/1.10.133-20250413.112336-1/spark-paper-1.10.133-20250413.112336-1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/java/dev/jna/jna-platform/5.15.0/jna-platform-5.15.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/java/dev/jna/jna/5.15.0/jna-5.15.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-api/4.24.0/adventure-api-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-key/4.24.0/adventure-key-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-logger-slf4j/4.24.0/adventure-text-logger-slf4j-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-minimessage/4.24.0/adventure-text-minimessage-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-serializer-ansi/4.24.0/adventure-text-serializer-ansi-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-serializer-commons/4.24.0/adventure-text-serializer-commons-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-serializer-gson/4.24.0/adventure-text-serializer-gson-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-serializer-json/4.24.0/adventure-text-serializer-json-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-serializer-legacy/4.24.0/adventure-text-serializer-legacy-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/adventure-text-serializer-plain/4.24.0/adventure-text-serializer-plain-4.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/ansi/1.1.1/ansi-1.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/examination-api/1.3.0/examination-api-1.3.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/examination-string/1.3.0/examination-string-1.3.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/kyori/option/1.1.0/option-1.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/md-5/bungeecord-chat/1.21-R0.2-deprecated+build.21/bungeecord-chat-1.21-R0.2-deprecated+build.21.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/minecrell/terminalconsoleappender/1.3.0/terminalconsoleappender-1.3.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/minidev/accessors-smart/2.5.1/accessors-smart-2.5.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/minidev/json-smart/2.5.1/json-smart-2.5.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/neoforged/installertools/cli-utils/2.1.4/cli-utils-2.1.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/neoforged/javadoctor/gson-io/2.0.17/gson-io-2.0.17.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/neoforged/javadoctor/spec/2.0.17/spec-2.0.17.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/neoforged/srgutils/1.0.9/srgutils-1.0.9.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/net/sf/jopt-simple/jopt-simple/6.0-alpha-3/jopt-simple-6.0-alpha-3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/logging/log4j/log4j-api/2.24.1/log4j-api-2.24.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/logging/log4j/log4j-core/2.24.1/log4j-core-2.24.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/logging/log4j/log4j-iostreams/2.24.1/log4j-iostreams-2.24.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/logging/log4j/log4j-slf4j2-impl/2.24.1/log4j-slf4j2-impl-2.24.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/maven-artifact/3.9.6/maven-artifact-3.9.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/maven-builder-support/3.9.6/maven-builder-support-3.9.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/maven-model-builder/3.9.6/maven-model-builder-3.9.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/maven-model/3.9.6/maven-model-3.9.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/maven-repository-metadata/3.9.6/maven-repository-metadata-3.9.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/maven-resolver-provider/3.9.6/maven-resolver-provider-3.9.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-api/1.9.18/maven-resolver-api-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-connector-basic/1.9.18/maven-resolver-connector-basic-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-impl/1.9.18/maven-resolver-impl-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-named-locks/1.9.18/maven-resolver-named-locks-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-spi/1.9.18/maven-resolver-spi-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-transport-http/1.9.18/maven-resolver-transport-http-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/apache/maven/resolver/maven-resolver-util/1.9.18/maven-resolver-util-1.9.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/codehaus/plexus/plexus-interpolation/1.26/plexus-interpolation-1.26.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/codehaus/plexus/plexus-utils/3.5.1/plexus-utils-3.5.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/eclipse/sisu/org.eclipse.sisu.inject/0.9.0.M2/org.eclipse.sisu.inject-0.9.0.M2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/jline/jline-native/3.27.1/jline-native-3.27.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/jline/jline-reader/3.20.0/jline-reader-3.20.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/jline/jline-terminal-ffm/3.27.1/jline-terminal-ffm-3.27.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/jline/jline-terminal-jni/3.27.1/jline-terminal-jni-3.27.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/jline/jline-terminal/3.27.1/jline-terminal-3.27.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/joml/joml/1.10.8/joml-1.10.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/ow2/asm/asm-commons/9.8/asm-commons-9.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/ow2/asm/asm-tree/9.8/asm-tree-9.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/ow2/asm/asm/9.8/asm-9.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/slf4j/jcl-over-slf4j/1.7.36/jcl-over-slf4j-1.7.36.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/spongepowered/configurate-core/4.2.0/configurate-core-4.2.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/spongepowered/configurate-yaml/4.2.0/configurate-yaml-4.2.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/xerial/sqlite-jdbc/3.49.1.0/sqlite-jdbc-3.49.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/libraries/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-1.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-10.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-11.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-12.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-13.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-14.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-2.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-3.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-4.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-5.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-6.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-7.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-8.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-18-9.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-19-1.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-19-2.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-19-3.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-19-4.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-1.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-10.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-11.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-12.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-13.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-14.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-15.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-16.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-17.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-18.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-2.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-3.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-4.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-5.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-6.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-7.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-8.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-21-9.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-1.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-10.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-11.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-12.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-13.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-14.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-15.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-16.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-17.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-18.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-19.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-2.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-20.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-21.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-22.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-23.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-3.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-4.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-5.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-6.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-7.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-8.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-22-9.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-1.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-10.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-11.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-12.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-13.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-14.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-15.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-16.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-2.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-3.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-4.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-5.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-6.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-7.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-8.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/2025-10-23-9.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/ops.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/permissions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.-2.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/libraries/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/mappings/reversed/1C1C48C2F6E8E7AB9B8CA0BC4E4644A76A1FE48EC57629E2BBD57F8EB38760F1.tiny" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/remap-classpath/1C1C48C2F6E8E7AB9B8CA0BC4E4644A76A1FE48EC57629E2BBD57F8EB38760F1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/unknown-origin/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/bStats/config.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/spark/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/spark/tmp-client/about.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/server.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/spigot.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/version_history.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/versions/1.21.8/paper-1.21.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/whitelist.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/data/random_sequences.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/random_sequences.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/data/scoreboard.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/scoreboard.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/datapacks/bukkit/pack.mcmeta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/paper-world.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb-15189741109943550344.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/poi/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/poi/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca.-7982952507066026562.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca.5218501322612095050.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca.5251161387415264980.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca.1330631059409671129.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca.1966865376915607373.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca.9012243731802985033.backup" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/world/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/session.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/session.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/session.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/chatImplementation/stockLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/chatImplementation/stockLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/PriceHistoryChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/PriceHistoryChart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/uid.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/data/chunks.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat_old" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/paper-world.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/session.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/uid.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/data/chunks.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat_old" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/paper-world.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/session.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/uid.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchFromGitRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchFromGitRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/TradeCommodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/TradeCommodity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/listeners/InventoryListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/listeners/InventoryListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/AnimatedMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/ImageChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/ImageMessage.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,39 +509,54 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.ASCIIBarChart.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.stockLoader.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.FetchWheatPrice.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.UpdateGitRepo.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.fetchFromWebsite.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.AdvancedChartDownloader.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.SvgExtractor.main()].executor": "Run",
-    "Gradle.jufyer-stock-plugin [reobfJar].executor": "Run",
-    "Gradle.jufyer-stock-plugin [shadowJar].executor": "Run",
-    "Gradle.paperweight-test-plugin-master [jar].executor": "Run",
-    "Gradle.paperweight-test-plugin-master [runServer].executor": "Run",
-    "Gradle.paperweight-test-plugin-master [testClasses].executor": "Run",
-    "Notification.DisplayName-DoNotAsk-Plugins Suggestion": "Plugin suggestions available",
-    "Notification.DoNotAsk-Plugins Suggestion": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/CodeProjects/Minecraft Coding/Aquatic",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build jufyer-stock-plugin.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.ASCIIBarChart.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.stockLoader.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.FetchWheatPrice.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.UpdateGitRepo.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.fetchFromWebsite.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.AdvancedChartDownloader.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.SvgExtractor.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [cleanAllRunTaskCaches].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [cleanCache].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [cleanPaperCache].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [cleanPaperPluginsCache].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [reobfJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jufyer-stock-plugin [shadowJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paperweight-test-plugin-master [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paperweight-test-plugin-master [runServer].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paperweight-test-plugin-master [testClasses].executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Plugins Suggestion&quot;: &quot;Plugin suggestions available&quot;,
+    &quot;Notification.DoNotAsk-Plugins Suggestion&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CodeProjects/Minecraft Coding/Aquatic/jufyer-aquatic-plugin&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CodeProjects\Minecraft Coding\stockTradinPlugin\jufyer-stock-plugin\run\world" />
+      <recent name="D:\CodeProjects\Minecraft Coding\stockTradinPlugin\jufyer-stock-plugin\run\plugins" />
       <recent name="D:\CodeProjects\Minecraft Coding\stockTradinPlugin\jufyer-stock-plugin\gradle\wrapper" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CodeProjects\Minecraft Coding\stockTradinPlugin\jufyer-stock-plugin\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.paperweight-test-plugin-master [runServer]">
@@ -149,44 +573,71 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdvancedChartDownloader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.jufyer.plugin.stock.gui.AdvancedChartDownloader" />
-      <module name="org.jufyer.plugin.jufyer-stock-plugin.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jufyer.plugin.stock.gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="jufyer-stock-plugin [cleanAllRunTaskCaches]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanAllRunTaskCaches" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
     </configuration>
-    <configuration name="FetchFromGitRepo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.jufyer.plugin.stock.getPrice.FetchFromGitRepo" />
-      <module name="org.jufyer.plugin.jufyer-stock-plugin.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jufyer.plugin.stock.getPrice.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="jufyer-stock-plugin [cleanCache]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanCache" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
     </configuration>
-    <configuration name="stockLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.jufyer.plugin.stock.chatImplementation.stockLoader" />
-      <module name="org.jufyer.plugin.jufyer-stock-plugin.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jufyer.plugin.stock.chatImplementation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="jufyer-stock-plugin [cleanPaperCache]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanPaperCache" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
     </configuration>
     <configuration name="paperweight-test-plugin-master [runServer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -225,9 +676,9 @@
       <list>
         <item itemvalue="Gradle.paperweight-test-plugin-master [runServer]" />
         <item itemvalue="Application.ASCIIBarChart" />
-        <item itemvalue="Application.stockLoader" />
-        <item itemvalue="Application.FetchFromGitRepo" />
-        <item itemvalue="Application.AdvancedChartDownloader" />
+        <item itemvalue="Gradle.jufyer-stock-plugin [cleanAllRunTaskCaches]" />
+        <item itemvalue="Gradle.jufyer-stock-plugin [cleanCache]" />
+        <item itemvalue="Gradle.jufyer-stock-plugin [cleanPaperCache]" />
       </list>
     </recent_temporary>
   </component>
@@ -296,7 +747,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761245515021</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="developing...">
+      <option name="closed" value="true" />
+      <created>1761246175886</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761246175886</updated>
+    </task>
+    <task id="LOCAL-00009" summary="developing...">
+      <option name="closed" value="true" />
+      <created>1761246191944</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761246191944</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

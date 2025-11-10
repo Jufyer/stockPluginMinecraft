@@ -66,5 +66,9 @@ bukkitPluginYaml {
   commands {
     register("stocks")
     register("showPrices")
+    //register("graphui")
+    register("_internal_")
+    register("getBlockData")
+    register("placeblocks")
   }
 }

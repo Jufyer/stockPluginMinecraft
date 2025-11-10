@@ -12,13 +12,6 @@ import java.util.stream.Collectors;
 
 public class PriceHistoryChart {
 
-    /**
-     * Zeigt ein Chart für eine Commodity an
-     * @param player Der Spieler
-     * @param commodity Die Commodity
-     * @param dataPoints Anzahl der Datenpunkte (z.B. 10, 20, 30)
-     * @param style Der Chart-Stil
-     */
     public void showChart(Player player, TradeCommodity commodity, int dataPoints, ChartStyle style) {
         try {
             List<PriceData> priceData = getHistoryWithDates(commodity, dataPoints);
@@ -47,13 +40,9 @@ public class PriceHistoryChart {
         }
     }
 
-    /**
-     * Lädt die Preishistorie mit Datum
-     */
     private List<PriceData> getHistoryWithDates(TradeCommodity commodity, int n) throws Exception {
         List<stockLoader.PricePoint> points = stockLoader.loadHistory(commodity.getCommodityName());
 
-        // Nur die letzten n Werte
         int size = points.size();
         List<stockLoader.PricePoint> relevantPoints;
         if (size <= n) {
@@ -62,7 +51,6 @@ public class PriceHistoryChart {
             relevantPoints = points.subList(size - n, size);
         }
 
-        // Zu PriceData konvertieren
         return relevantPoints.stream()
                 .map(p -> new PriceData(
                         Double.parseDouble(p.value),
@@ -71,9 +59,6 @@ public class PriceHistoryChart {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Formatiert das Datum von "2025-10-23 18:30:02 UTC" zu "23.10 18:30"
-     */
     private String formatDate(String dateStr) {
         try {
             // Format: "2025-10-23 18:30:02 UTC"
@@ -95,9 +80,6 @@ public class PriceHistoryChart {
         }
     }
 
-    /**
-     * STIL 1: Balken-Diagramm (Horizontal) - EMPFOHLEN
-     */
     private void sendBarChart(Player player, TradeCommodity commodity, List<PriceData> priceData) {
         List<Double> prices = priceData.stream().map(p -> p.value).collect(Collectors.toList());
 
@@ -142,7 +124,6 @@ public class PriceHistoryChart {
             String label = String.format("§7#%-2d §8│ ", (i + 1));
             String value = String.format("§f%.2f%s", price, trend);
 
-            // TextComponent für Hover erstellen
             TextComponent message = new TextComponent(label);
 
             TextComponent barComponent = new TextComponent(bar);
@@ -174,9 +155,6 @@ public class PriceHistoryChart {
         player.sendMessage("§b§l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
-    /**
-     * STIL 2: Sparkline (kompakt, einzeilig)
-     */
     private void sendSparkline(Player player, TradeCommodity commodity, List<PriceData> priceData) {
         char[] sparks = {'▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'};
 
@@ -188,7 +166,6 @@ public class PriceHistoryChart {
 
         TextComponent message = new TextComponent("§8[§6" + commodity.getCommodityName() + "§8] ");
 
-        // Jeden Spark einzeln mit Hover
         for (int i = 0; i < priceData.size(); i++) {
             PriceData data = priceData.get(i);
             double price = data.value;
@@ -196,7 +173,6 @@ public class PriceHistoryChart {
 
             TextComponent spark = new TextComponent("§a" + sparks[index]);
 
-            // Trend berechnen
             String trendInfo = "First data point";
             if (i > 0) {
                 double prev = priceData.get(i - 1).value;
@@ -233,9 +209,6 @@ public class PriceHistoryChart {
         player.spigot().sendMessage(message);
     }
 
-    /**
-     * STIL 3: Trend-Anzeige mit Pfeilen und Prozent
-     */
     private void sendTrendChart(Player player, TradeCommodity commodity, List<PriceData> priceData) {
         player.sendMessage("§b━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         player.sendMessage("§6Trend Analysis: §f" + commodity.getCommodityName());
@@ -300,9 +273,6 @@ public class PriceHistoryChart {
         player.sendMessage("§b━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
-    /**
-     * Datenklasse für Preis + Datum
-     */
     private static class PriceData {
         final double value;
         final String date;
@@ -313,12 +283,9 @@ public class PriceHistoryChart {
         }
     }
 
-    /**
-     * Chart-Stile
-     */
     public enum ChartStyle {
-        BAR,        // Horizontale Balken (Standard)
-        SPARKLINE,  // Kompakte einzeilige Darstellung
-        TREND       // Mit Pfeilen und Prozent
+        BAR,
+        SPARKLINE,
+        TREND
     }
 }

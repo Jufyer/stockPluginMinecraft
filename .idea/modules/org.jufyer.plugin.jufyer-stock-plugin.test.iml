@@ -18,7 +18,9 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_21">
     <output-test url="file://$MODULE_DIR$/../../build/classes/java/test" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../build/generated/resourceFactory/test" />
+    <content url="file://$MODULE_DIR$/../../build/generated/resourceFactory/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../build/generated/resourceFactory/test" type="java-test-resource" />
+    </content>
     <content url="file://$MODULE_DIR$/../../src/test" />
     <orderEntry type="jdk" jdkName="21" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
