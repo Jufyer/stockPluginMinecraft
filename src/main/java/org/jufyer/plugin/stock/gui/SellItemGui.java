@@ -16,10 +16,13 @@ import org.bukkit.inventory.meta.*;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
+import org.jufyer.plugin.stock.moneySystem.Money;
+import org.jufyer.plugin.stock.util.UnitConverter;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.jufyer.plugin.stock.Main.wallet;
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
 
 public class SellItemGui implements CommandExecutor, Listener {
@@ -247,7 +250,11 @@ public class SellItemGui implements CommandExecutor, Listener {
             }
 
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.LIME_DYE) {
-                int count = 0;
+                Material sellingMaterial = event.getInventory().getItem(0).getType();
+
+                int itemCount = 0;
+                int shulkerCount = 0;
+                int bundleCount = 0;
                 for (int i = 0; i <= 53; i++) {
                     boolean isBlocked = false;
                     for (int b : blocked) {
@@ -261,8 +268,9 @@ public class SellItemGui implements CommandExecutor, Listener {
                     ItemStack currentItem = SellItemInventory.getItem(i);
                     if (currentItem != null) {
                         if (currentItem.getType().equals(event.getInventory().getItem(0).getType())) {
-                            count += currentItem.getAmount();
+                            itemCount += currentItem.getAmount();
                         }else if (currentItem.getType() == Material.SHULKER_BOX) {
+                            shulkerCount += 1;
                             if (!(currentItem.getItemMeta() instanceof BlockStateMeta meta)) {
                                 event.setCancelled(true);
                                 return;
@@ -277,7 +285,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                                 for (ItemStack shulkerBoxItemStack : box.getInventory().getContents()) {
                                     if (shulkerBoxItemStack != null) {
                                         if (shulkerBoxItemStack.getType().equals(event.getInventory().getItem(0).getType())) {
-                                            count += shulkerBoxItemStack.getAmount();
+                                            itemCount += shulkerBoxItemStack.getAmount();
                                         }
                                     }
                                 }
@@ -285,20 +293,31 @@ public class SellItemGui implements CommandExecutor, Listener {
                                 event.setCancelled(true);
                             }
                         } else if (currentItem.getType() == Material.BUNDLE) {
+                            bundleCount += 1;
                             BundleMeta meta = (BundleMeta) currentItem.getItemMeta();
 
                             Material slot0Item = event.getInventory().getItem(0).getType();
                             for (ItemStack bundleItemStack : meta.getItems()) {
                                 if (bundleItemStack != null && bundleItemStack.getType() == slot0Item) {
-                                    count += bundleItemStack.getAmount();
+                                    itemCount += bundleItemStack.getAmount();
                                 }
                             }
                         }
                     }
                 }
-                count = count -1;
+                itemCount = itemCount -1;
 
-                player.sendMessage(String.valueOf(count));
+                player.sendMessage("Items: " + String.valueOf(itemCount));
+                player.sendMessage("Shulker: " + String.valueOf(shulkerCount));
+                player.sendMessage("Bundle: " + String.valueOf(bundleCount));
+
+                SellItemInventory.clear();
+                SellItemInventory.close();
+
+                double pricePerUnit = UnitConverter.toUSD(FetchFromDataFolder.getPrice(TradeCommodity.fromMaterial(sellingMaterial)), FetchFromDataFolder.getUnit(TradeCommodity.fromMaterial(sellingMaterial)), UnitConverter.OutputUnit.T);
+                double wholePrice = pricePerUnit * itemCount;
+                Money.add(player, wholePrice);
+                player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: %.2f USD!", wholePrice, Money.get(player)));
 
                 event.setCancelled(true);
             }
