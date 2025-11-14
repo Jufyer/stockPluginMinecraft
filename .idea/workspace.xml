@@ -7,7 +7,159 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f77f675-0b67-47c1-b2d7-f78bde3635af" name="Changes" comment="developing..." />
+    <list default="true" id="5f77f675-0b67-47c1-b2d7-f78bde3635af" name="Changes" comment="developing...">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/chatImplementation/commands/BuyStock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/SellItemGui.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/moneySystem/Money.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/moneySystem/PortfolioManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/CreateCustomHeads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/expanded/expanded.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/expanded/expanded.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/1t4puptmktfl493r55qyhkj4o/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/44khgklqfu7ixv0hj7t0f6107/candidates.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/44khgklqfu7ixv0hj7t0f6107/candidates.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/612074c7-3aaf-4e74-acd7-f253b57615dd/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/65fb362b-9f42-472f-9217-271e886290e1/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/6ko7bn8bi0xbe6sxbolqmvz6k/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/acc3cd1d-c0fd-4989-9e0c-a927c07a52a3/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/ahq1ibmtzqbqb5j4gaql4fa7a/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/aufcwz81qkrimsv91zgmjna15/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/configuration-cache.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/configuration-cache/configuration-cache.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/d7fb4bca-7f04-49c5-9569-994802525e12/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/de4cf3f3-09d8-420e-9457-6f44b474ffb0/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/.globals.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/.strings.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/_.work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/buildfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/classloaderscopes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/entry.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/projectfingerprint.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/e3cb1814-0bfe-41c6-8d0f-8ef455ebf16a/work.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/ei98dqk09uib594oniblh15wi/candidates.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchFromDataFolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchFromDataFolder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/getPrice/FetchPrice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/Wheat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui$StockDataPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui$StockDataPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui$StockGraphRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui$StockGraphRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/listeners/InventoryListeners.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/BlockPlacer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/BlockPlacer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/PriceHistoryChart$ChartStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/PriceHistoryChart$ChartStyle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/PriceHistoryChart$PriceData.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/PriceHistoryChart$PriceData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/PriceHistoryChart.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/PriceHistoryChart.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/resourceFactory/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/resourceFactory/main/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/InventoryListeners.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Main.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Main.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/data/idcounts.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/idcounts.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/session.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_nether/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/session.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/world_the_end/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/session.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/chatImplementation/commands/showPrices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchFromDataFolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchFromDataFolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/getPrice/FetchPrice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/listeners/InventoryListeners.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -349,7 +501,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762803415361</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="developing...">
+      <option name="closed" value="true" />
+      <created>1762803480603</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1762803480603</updated>
+    </task>
+    <task id="LOCAL-00013" summary="developing...">
+      <option name="closed" value="true" />
+      <created>1762803531387</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1762803531387</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

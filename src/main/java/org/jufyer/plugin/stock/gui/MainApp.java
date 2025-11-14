@@ -6,11 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 
@@ -54,8 +61,8 @@ public class MainApp implements Listener, CommandExecutor{
             ItemMeta meta = icon.getItemMeta();
 
             TradeCommodity commodity = TradeCommodity.fromCommodityName(stockName);
-            double price = FetchPrice.getPrice(commodity);
-            String unit = FetchPrice.getUnit(commodity);
+            double price = FetchFromDataFolder.getPrice(commodity);
+            String unit = FetchFromDataFolder.getUnit(commodity);
 
             meta.setDisplayName("§r" + capitalize(stockName.replace("-", " ")) +
                     "\n§7Price: §f" + price + " " + unit);
@@ -73,6 +80,67 @@ public class MainApp implements Listener, CommandExecutor{
         player.openInventory(MainApp);
 
         return false;
+    }
+
+    @EventHandler
+    public void onInventoryDrag(InventoryDragEvent event) {
+        if (event.getInventory().equals(MainApp)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onInventoryMoveItem(InventoryMoveItemEvent event) {
+        if (event.getSource().equals(MainApp)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (event.getInventory().equals(MainApp)) {
+            event.setCancelled(true);
+
+            Player player = (Player) event.getWhoClicked();
+
+            ItemStack item = event.getCurrentItem();
+            String name = decapitalize(item.getItemMeta().getDisplayName());
+            event.getWhoClicked().sendMessage(name);
+
+            event.getInventory().close();
+
+            //player.setRotation(0,0);
+            player.setVelocity(new Vector(0,0,0));
+
+//            new BukkitRunnable() {
+//                @Override
+//                public void run() {
+//                    graphui.executeStuff((Player) event.getWhoClicked(), name);
+//                }
+//            }.runTaskLater(Main.getInstance(), 10);
+
+            if (WorldManager.activeTraders.containsKey(player.getUniqueId())) {
+                graphui.executeStuff(player, name);
+            }else {
+                WorldManager.setupWorld(player, name);
+            }
+
+        }
+    }
+
+    @EventHandler
+    public void onInventoryInteract(InventoryInteractEvent event) {
+        if (event.getInventory().equals(MainApp)) {
+            event.setCancelled(true);
+        }
+    }
+
+    private static String decapitalize(String text) {
+        if (text == null || text.isEmpty()) return text;
+
+        text = text.replace(" ", "-");
+
+        return text.toLowerCase();
     }
 
     private static String capitalize(String text) {
@@ -93,6 +161,4 @@ public class MainApp implements Listener, CommandExecutor{
 
         return result.toString().trim();
     }
-
-
 }

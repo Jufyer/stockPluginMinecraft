@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.chatImplementation.stockLoader;
+import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.util.PriceHistoryChart;
@@ -184,8 +185,8 @@ public class showPrices implements CommandExecutor {
                 }else {
                     try {
                         TradeCommodity commodity = TradeCommodity.valueOf(args[0].toUpperCase());
-                        double price = FetchPrice.getPrice(commodity);
-                        String unit = FetchPrice.getUnit(commodity);
+                        double price = FetchFromDataFolder.getPrice(commodity);
+                        String unit = FetchFromDataFolder.getUnit(commodity);
 
                         player.sendMessage("The price of " + commodity.getCommodityName().replace("-", "_") + " at the moment is: " + price + " " + unit
                                 + " and the Minecraft Item is: " + commodity.getMaterial());

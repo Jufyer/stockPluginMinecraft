@@ -8,7 +8,9 @@ authors:
 - Jufyer
 commands:
     _internal_: {}
+    buy: {}
     getBlockData: {}
     placeblocks: {}
+    sellItems: {}
     showPrices: {}
     stocks: {}

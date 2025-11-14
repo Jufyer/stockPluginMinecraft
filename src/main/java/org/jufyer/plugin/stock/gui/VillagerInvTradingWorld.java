@@ -10,12 +10,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 import org.jufyer.plugin.stock.Main;
 
 public class VillagerInvTradingWorld implements Listener {
     public static Inventory VillagerInvTradingWorld = Bukkit.createInventory(null, 9*6, "Trading menu");
-    public static final NamespacedKey BUY_ITEM_KEY = new NamespacedKey(Main.getInstance(), "BUY_ITEM");
+    //public static final NamespacedKey BUY_ITEM_KEY = new NamespacedKey(Main.getInstance(), "BUY_ITEM");
 
     public static void setVillagerInvTradingWorld() {
         ItemStack exitItem = new ItemStack(Material.BARRIER);
@@ -24,24 +23,26 @@ public class VillagerInvTradingWorld implements Listener {
         exitItem.setItemMeta(exitItemMeta);
         VillagerInvTradingWorld.setItem(8, exitItem);
 
-        ItemStack buyItem = new ItemStack(Material.GOLD_INGOT);
-        ItemMeta buyItemMeta = buyItem.getItemMeta();
-        buyItemMeta.setDisplayName("§rBuy menu");
-        buyItem.setItemMeta(buyItemMeta);
-        VillagerInvTradingWorld.setItem(10, buyItem);
+        ItemStack selectStockItem = new ItemStack(Material.GOLD_INGOT);
+        ItemMeta selectStockItemMeta = selectStockItem.getItemMeta();
+        selectStockItemMeta.setDisplayName("§rSelect Stock");
+        selectStockItem.setItemMeta(selectStockItemMeta);
+        VillagerInvTradingWorld.setItem(10, selectStockItem);
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getCurrentItem() == null) return;
-        if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-        if (event.getCurrentItem().getItemMeta() == null) return;
-        if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("§cGo back home")) {
-            event.getInventory().close();
-            WorldManager.endTrade((Player) event.getWhoClicked());
-        } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Buy menu")) {
-            player.openInventory(MainApp.MainApp);
+        if (event.getInventory().equals(VillagerInvTradingWorld)) {
+            if (event.getCurrentItem() == null) return;
+            if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
+            if (event.getCurrentItem().getItemMeta() == null) return;
+            if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("§cGo back home")) {
+                event.getInventory().close();
+                WorldManager.endTrade((Player) event.getWhoClicked());
+            } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Select Stock")) {
+                player.openInventory(MainApp.MainApp);
+            }
         }
     }
 }

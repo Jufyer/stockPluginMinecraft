@@ -70,5 +70,7 @@ bukkitPluginYaml {
     register("_internal_")
     register("getBlockData")
     register("placeblocks")
+    register("buy")
+    register("sellItems")
   }
 }

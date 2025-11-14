@@ -10,22 +10,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jufyer.plugin.stock.chatImplementation.commands.BuyStock;
 import org.jufyer.plugin.stock.chatImplementation.commands.showPrices;
-import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.FetchFromGitRepo;
-import org.jufyer.plugin.stock.getPrice.TradeCommodity;
-import org.jufyer.plugin.stock.gui.MainApp;
-import org.jufyer.plugin.stock.gui.VillagerInvTradingWorld;
-import org.jufyer.plugin.stock.gui.WorldManager;
-import org.jufyer.plugin.stock.gui.graphui;
-import org.jufyer.plugin.stock.listeners.InventoryListeners;
+import org.jufyer.plugin.stock.gui.*;
 import org.jufyer.plugin.stock.util.BlockPlaceCommand;
-import org.jufyer.plugin.stock.util.BlockPlacer;
 import org.jufyer.plugin.stock.util.LockPlayer;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public final class Main extends JavaPlugin implements CommandExecutor {
   private static Main instance;
@@ -33,7 +28,8 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     return instance;
   }
 
-  private BlockPlacer blockPlacer;
+  public static Map<UUID, Double> wallet = new HashMap<>();
+  public static Map<UUID, Map<String, Integer>> portfolio = new HashMap<>();
 
   @Override
   public void onEnable() {
@@ -50,17 +46,22 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
     MainApp.invSetup();
     getCommand("stocks").setExecutor(new MainApp());
+    Bukkit.getPluginManager().registerEvents(new MainApp(), this);
 
     getCommand("showPrices").setExecutor(new showPrices());
     //getCommand("graphui").setExecutor(new graphui());
 
-    Bukkit.getPluginManager().registerEvents(new InventoryListeners(), this);
     Bukkit.getPluginManager().registerEvents(new LockPlayer(), this);
     Bukkit.getPluginManager().registerEvents(new graphui(), this);
 
     getCommand("getBlockData").setExecutor(this);
 
     getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
+    getCommand("buy").setExecutor(new BuyStock());
+
+    SellItemGui.setSellItemMenuInventory();
+    getCommand("sellItems").setExecutor(new SellItemGui());
+    Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
 
     VillagerInvTradingWorld.setVillagerInvTradingWorld();
     Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
