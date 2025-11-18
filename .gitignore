@@ -1,19 +1,8 @@
-# IntelliJ
 .idea/
 *.iml
-
-# Gradle
 .gradle/
 build/
-
-# Minecraft server run folder
 run/
-
-# Logging
 logs/
-
-# Class files
 *.class
-
-# Crash reports
 *.log
