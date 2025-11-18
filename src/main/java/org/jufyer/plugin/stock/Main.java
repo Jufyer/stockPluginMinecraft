@@ -48,20 +48,24 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     getCommand("stocks").setExecutor(new MainApp());
     Bukkit.getPluginManager().registerEvents(new MainApp(), this);
 
-    getCommand("showPrices").setExecutor(new showPrices());
+    //getCommand("showPrices").setExecutor(new showPrices());
     //getCommand("graphui").setExecutor(new graphui());
 
     Bukkit.getPluginManager().registerEvents(new LockPlayer(), this);
     Bukkit.getPluginManager().registerEvents(new graphui(), this);
 
-    getCommand("getBlockData").setExecutor(this);
+    //getCommand("getBlockData").setExecutor(this);
 
-    getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
-    getCommand("buy").setExecutor(new BuyStock());
+    //getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
+    //getCommand("buy").setExecutor(new BuyStock());
 
     SellItemGui.setSellItemMenuInventory();
-    getCommand("sellItems").setExecutor(new SellItemGui());
+    //getCommand("sellItems").setExecutor(new SellItemGui());
     Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
+
+    BuyItemGui.setBuyItemMenuInventory();
+    getCommand("buy").setExecutor(new BuyItemGui());
+    Bukkit.getPluginManager().registerEvents(new BuyItemGui(), this);
 
     VillagerInvTradingWorld.setVillagerInvTradingWorld();
     Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);

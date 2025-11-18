@@ -62,7 +62,7 @@ public class BlockPlacer {
                 }
             }
 
-            player.sendMessage("§a" + blocksPlaced + " blocks were placed!" + (errors > 0 ? " §c(" + errors + " Error)" : ""));
+            //player.sendMessage("§a" + blocksPlaced + " blocks were placed!" + (errors > 0 ? " §c(" + errors + " Error)" : ""));
 
         } catch (Exception e) {
             player.sendMessage("§cError reading block-datas: " + e.getMessage());

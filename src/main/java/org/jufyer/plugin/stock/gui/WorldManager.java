@@ -75,7 +75,7 @@ public class WorldManager implements Listener {
 
         BlockPlacer.placeBlocksFromFile(player);
 
-        player.sendMessage(String.valueOf(player.getLocation().getWorld()));
+        //player.sendMessage(String.valueOf(player.getLocation().getWorld()));
 
         new BukkitRunnable() {
             @Override
@@ -106,7 +106,7 @@ public class WorldManager implements Listener {
         Location base = activeTraders.remove(player.getUniqueId());
         if (base == null) return;
 
-        for (Entity e : base.getWorld().getNearbyEntities(base, 10, 10, 10)) {
+        for (Entity e : base.getNearbyEntities(10, 10, 10)) {
             if (e instanceof ItemFrame) {
                 e.remove();
             } else if (e instanceof Villager) {

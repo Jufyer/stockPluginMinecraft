@@ -64,13 +64,25 @@ public class MainApp implements Listener, CommandExecutor{
             double price = FetchFromDataFolder.getPrice(commodity);
             String unit = FetchFromDataFolder.getUnit(commodity);
 
-            meta.setDisplayName("§r" + capitalize(stockName.replace("-", " ")) +
-                    "\n§7Price: §f" + price + " " + unit);
+            meta.setDisplayName("§r" + capitalize(stockName.replace("-", " ")));
+            meta.setLore(Arrays.asList("§7Price: §f" + price + "$" + " " + unit));
             icon.setItemMeta(meta);
 
             MainApp.setItem(innerSlots[i], icon);
             i++;
         }
+
+        ItemStack exitItem = new ItemStack(Material.BARRIER);
+        ItemMeta exitItemMeta = exitItem.getItemMeta();
+        exitItemMeta.setDisplayName("§cClose menu");
+        exitItem.setItemMeta(exitItemMeta);
+        MainApp.setItem(8, exitItem);
+
+        ItemStack backItem = new ItemStack(Material.ARROW);
+        ItemMeta backItemMeta = backItem.getItemMeta();
+        backItemMeta.setDisplayName("§7Back to overview");
+        backItem.setItemMeta(backItemMeta);
+        MainApp.setItem(0, backItem);
 
     }
 
@@ -101,11 +113,31 @@ public class MainApp implements Listener, CommandExecutor{
         if (event.getInventory().equals(MainApp)) {
             event.setCancelled(true);
 
+            if (event.getCurrentItem() == null) return;
+            if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
+            if (event.getCurrentItem().getItemMeta() == null) return;
+
+            if (event.getCurrentItem().getType().equals(Material.BARRIER)) {
+                event.getClickedInventory().close();
+                return;
+            }
+
+            if (event.getWhoClicked().getLocation().getWorld().equals(Bukkit.getWorld("trade_world"))) {
+                if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+                    event.getWhoClicked().openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
+                    return;
+                }
+            }else {
+                if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+                    return;
+                }
+            }
+
             Player player = (Player) event.getWhoClicked();
 
             ItemStack item = event.getCurrentItem();
             String name = decapitalize(item.getItemMeta().getDisplayName());
-            event.getWhoClicked().sendMessage(name);
+            //event.getWhoClicked().sendMessage(name);
 
             event.getInventory().close();
 
@@ -124,6 +156,7 @@ public class MainApp implements Listener, CommandExecutor{
             }else {
                 WorldManager.setupWorld(player, name);
             }
+
 
         }
     }

@@ -178,7 +178,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
             }
         }
 
-        player.sendMessage("§a✓ Graph for §e" + stockName + " §acreated! (§7" + dataPoints.size() + " Datapoints§a)");
+        //player.sendMessage("§a✓ Graph for §e" + stockName + " §acreated! (§7" + dataPoints.size() + " Datapoints§a)");
         //sendExitMessage(player);
     }
 

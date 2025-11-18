@@ -39,6 +39,12 @@ public class SellItemGui implements CommandExecutor, Listener {
     );
 
     public static void setSellItemMenuInventory() {
+        ItemStack backItem = new ItemStack(Material.ARROW);
+        ItemMeta backItemMeta = backItem.getItemMeta();
+        backItemMeta.setDisplayName("§7Back to overview");
+        backItem.setItemMeta(backItemMeta);
+        SellItemMenuInventory.setItem(0, backItem);
+
         ItemStack exitItem = new ItemStack(Material.BARRIER);
         ItemMeta exitItemMeta = exitItem.getItemMeta();
         exitItemMeta.setDisplayName("§cClose menu");
@@ -115,15 +121,16 @@ public class SellItemGui implements CommandExecutor, Listener {
     }
 
     public static void openSellItemInventory(Player player, TradeCommodity commodity) {
-        ItemStack stockItem = new ItemStack(commodity.getMaterial());
-        ItemMeta stockItemMeta = stockItem.getItemMeta();
-        stockItemMeta.setDisplayName("§r§e" + capitalize(commodity.getCommodityName()));
-        stockItem.setItemMeta(stockItemMeta);
-        SellItemInventory.setItem(0, stockItem);
+        ItemStack backItem = new ItemStack(Material.ARROW);
+        ItemMeta backItemMeta = backItem.getItemMeta();
+        backItemMeta.setDisplayName("§7Back to overview");
+        backItem.setItemMeta(backItemMeta);
+        SellItemInventory.setItem(0, backItem);
 
-        ItemStack currentPriceItem = new ItemStack(Material.NAME_TAG);
+        ItemStack currentPriceItem = new ItemStack(commodity.getMaterial());
         ItemMeta currentPriceItemMeta = currentPriceItem.getItemMeta();
-        currentPriceItemMeta.setDisplayName("§eCurrent price: " + FetchFromDataFolder.getPrice(commodity) + " " + FetchFromDataFolder.getUnit(commodity));
+        currentPriceItemMeta.setDisplayName("§r§e" + capitalize(commodity.getCommodityName()));
+        currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + FetchFromDataFolder.getPrice(commodity)+  "$" + " " + FetchFromDataFolder.getUnit(commodity)));
         currentPriceItem.setItemMeta(currentPriceItemMeta);
         SellItemInventory.setItem(4, currentPriceItem);
 
@@ -221,6 +228,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                     + item.getItemMeta().getDisplayName()
                     + "§r is "
                     + String.valueOf(FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(stockName)))
+                    + "$"
                     + " "
                     + FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(stockName)));
 
@@ -231,6 +239,8 @@ public class SellItemGui implements CommandExecutor, Listener {
             event.getClickedInventory().close();
         } else if (event.getInventory().equals(SellItemMenuInventory) && event.getCurrentItem().getType().equals(Material.PLAYER_HEAD)) {
             openHelpSellBook(player);
+        }else if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+            player.openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
         }
         if (event.getInventory().equals(SellItemMenuInventory)) event.setCancelled(true);
 
@@ -241,6 +251,10 @@ public class SellItemGui implements CommandExecutor, Listener {
             if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
             if (event.getCurrentItem().getItemMeta() == null) return;
 
+            if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+                player.openInventory(SellItemMenuInventory);
+            }
+
             if (event.getInventory().equals(SellItemInventory) && event.getCurrentItem().getType().equals(Material.PLAYER_HEAD)) {
                 openHelpSellBook(player);
             }
@@ -250,7 +264,7 @@ public class SellItemGui implements CommandExecutor, Listener {
             }
 
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.LIME_DYE) {
-                Material sellingMaterial = event.getInventory().getItem(0).getType();
+                Material sellingMaterial = event.getInventory().getItem(4).getType();
 
                 int itemCount = 0;
                 int shulkerCount = 0;
@@ -267,7 +281,7 @@ public class SellItemGui implements CommandExecutor, Listener {
 
                     ItemStack currentItem = SellItemInventory.getItem(i);
                     if (currentItem != null) {
-                        if (currentItem.getType().equals(event.getInventory().getItem(0).getType())) {
+                        if (currentItem.getType().equals(event.getInventory().getItem(4).getType())) {
                             itemCount += currentItem.getAmount();
                         }else if (currentItem.getType().name().endsWith("SHULKER_BOX")) {
                             shulkerCount += 1;
@@ -281,10 +295,10 @@ public class SellItemGui implements CommandExecutor, Listener {
                                 return;
                             }
 
-                            if (box.getInventory().contains(event.getInventory().getItem(0).getType())) {
+                            if (box.getInventory().contains(event.getInventory().getItem(4).getType())) {
                                 for (ItemStack shulkerBoxItemStack : box.getInventory().getContents()) {
                                     if (shulkerBoxItemStack != null) {
-                                        if (shulkerBoxItemStack.getType().equals(event.getInventory().getItem(0).getType())) {
+                                        if (shulkerBoxItemStack.getType().equals(event.getInventory().getItem(4).getType())) {
                                             itemCount += shulkerBoxItemStack.getAmount();
                                         }
                                     }
@@ -296,7 +310,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                             bundleCount += 1;
                             BundleMeta meta = (BundleMeta) currentItem.getItemMeta();
 
-                            Material slot0Item = event.getInventory().getItem(0).getType();
+                            Material slot0Item = event.getInventory().getItem(4).getType();
                             for (ItemStack bundleItemStack : meta.getItems()) {
                                 if (bundleItemStack != null && bundleItemStack.getType() == slot0Item) {
                                     itemCount += bundleItemStack.getAmount();
@@ -329,7 +343,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                 return;
             }
 
-            if (item.getType().name().endsWith("SHULKER_BOX") || item.getType().equals(Material.BUNDLE) || item.getType().equals(event.getInventory().getItem(0).getType())) {
+            if (item.getType().name().endsWith("SHULKER_BOX") || item.getType().equals(Material.BUNDLE) || item.getType().equals(event.getInventory().getItem(4).getType())) {
                 if (item.getType().name().endsWith("SHULKER_BOX")) {
                     if (!(item.getItemMeta() instanceof BlockStateMeta meta)) {
                         event.setCancelled(true);
@@ -341,7 +355,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                         return;
                     }
 
-                    if (box.getInventory().contains(event.getInventory().getItem(0).getType())) {
+                    if (box.getInventory().contains(event.getInventory().getItem(4).getType())) {
 
                     } else {
                         event.setCancelled(true);
@@ -349,7 +363,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                 } else if (item.getType() == Material.BUNDLE) {
                     BundleMeta meta = (BundleMeta) item.getItemMeta();
 
-                    boolean contains = meta.getItems().stream().anyMatch(i -> i.getType() == event.getInventory().getItem(0).getType());
+                    boolean contains = meta.getItems().stream().anyMatch(i -> i.getType() == event.getInventory().getItem(4).getType());
 
                     if (contains) {
                         return;

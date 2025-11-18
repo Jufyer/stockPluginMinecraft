@@ -1,13 +1,13 @@
 package org.jufyer.plugin.stock.moneySystem;
 
 import org.bukkit.entity.Player;
-import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.jufyer.plugin.stock.Main.portfolio;
 
@@ -20,26 +20,31 @@ public class PortfolioManager {
     );
 
     public static void updateStock(Player player, TradeCommodity commodity, Integer newAmount) {
-        Map<String, Integer> stockMap = portfolio.get(player.getUniqueId());
+        UUID playerUUID = player.getUniqueId();
 
-        if (stockMap != null) {
-            if (newAmount > 0) {
-                stockMap.put(commodity.getCommodityName(), newAmount);
-                player.sendMessage("§6Stock: " + commodity.getCommodityName() + " updated to " + newAmount + "shares!");
-            } else {
+        Map<String, Integer> stockMap = portfolio.get(playerUUID);
+
+        if (stockMap == null) {
+            stockMap = new HashMap<>();
+            portfolio.put(playerUUID, stockMap);
+        }
+
+        if (newAmount > 0) {
+            stockMap.put(commodity.getCommodityName(), newAmount);
+            //player.sendMessage("§6Stock: " + commodity.getCommodityName() + " updated to " + newAmount + " shares!");
+        } else {
+            if (stockMap.containsKey(commodity.getCommodityName())) {
                 stockMap.remove(commodity.getCommodityName());
-                System.out.println("§6Stock: " + commodity.getCommodityName() + " removed from your Portfolio");
+                player.sendMessage("§6Stock: " + commodity.getCommodityName() + " removed from your Portfolio");
             }
         }
     }
 
     public static int getStockAmount(Player player, TradeCommodity commodity) {
         Map<String, Integer> stockMap = portfolio.get(player.getUniqueId());
-
-        if (stockMap != null) {
-            return stockMap.getOrDefault(commodity.getCommodityName(), 0);
+        if (stockMap == null) {
+            return 0;
         }
-
-        return 0;
+        return stockMap.getOrDefault(commodity.getCommodityName(), 0);
     }
 }
