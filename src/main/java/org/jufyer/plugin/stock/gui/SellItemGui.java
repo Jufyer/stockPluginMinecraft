@@ -14,6 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.jetbrains.annotations.NotNull;
+import org.jufyer.plugin.stock.Main;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.moneySystem.Money;
@@ -73,13 +74,16 @@ public class SellItemGui implements CommandExecutor, Listener {
                     TradeCommodity.fromCommodityName(itemName).getMaterial()
             );
 
+            double priceRaw = FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(itemName));       // Originalpreis
+            String unitRaw = FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(itemName));         // Originalunit
+
+            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+
             ItemMeta meta = itemStack.getItemMeta();
             meta.setDisplayName("§e" + capitalize(itemName));
             meta.setLore(List.of("§7Current price: §a"
-                    + FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(itemName))
-                    + " "
-                    + FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(itemName))
-            ));
+                    + String.format("%.2f", pricePerTonne) + " $/T")
+            );
             itemStack.setItemMeta(meta);
 
             // Jetzt setzen wir an den wirklich freien Slot
@@ -130,7 +134,13 @@ public class SellItemGui implements CommandExecutor, Listener {
         ItemStack currentPriceItem = new ItemStack(commodity.getMaterial());
         ItemMeta currentPriceItemMeta = currentPriceItem.getItemMeta();
         currentPriceItemMeta.setDisplayName("§r§e" + capitalize(commodity.getCommodityName()));
-        currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + FetchFromDataFolder.getPrice(commodity)+  "$" + " " + FetchFromDataFolder.getUnit(commodity)));
+
+        double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
+        String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
+
+        double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+
+        currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + String.format("%.2f", pricePerTonne) + " $/T"));
         currentPriceItem.setItemMeta(currentPriceItemMeta);
         SellItemInventory.setItem(4, currentPriceItem);
 
@@ -224,13 +234,15 @@ public class SellItemGui implements CommandExecutor, Listener {
 
             String stockName = decapitalize(event.getCurrentItem().getItemMeta().getDisplayName().replace("§e" , ""));
 
+            double priceRaw = FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(stockName));       // Originalpreis
+            String unitRaw = FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(stockName));         // Originalunit
+
+            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+
             player.sendMessage("Price of "
                     + item.getItemMeta().getDisplayName()
                     + "§r is "
-                    + String.valueOf(FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(stockName)))
-                    + "$"
-                    + " "
-                    + FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(stockName)));
+                    + String.format("%.2f", pricePerTonne) + " $/T");
 
             openSellItemInventory(player, TradeCommodity.fromCommodityName(stockName));
 
@@ -328,10 +340,28 @@ public class SellItemGui implements CommandExecutor, Listener {
                 SellItemInventory.clear();
                 SellItemInventory.close();
 
-                double pricePerUnit = UnitConverter.toUSD(FetchFromDataFolder.getPrice(TradeCommodity.fromMaterial(sellingMaterial)), FetchFromDataFolder.getUnit(TradeCommodity.fromMaterial(sellingMaterial)), UnitConverter.OutputUnit.T);
+                double pricePerUnit = 0;
+
+                try {
+                    TradeCommodity commodity = TradeCommodity.fromMaterial(sellingMaterial);
+
+                    double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
+                    String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
+
+                    double price = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+
+                    String unit = FetchFromDataFolder.getUnit(commodity);
+
+                    pricePerUnit = price;
+                } catch(Exception e) {
+                    Main.getInstance().getLogger().warning("Error converting the price for: " + sellingMaterial);
+                    e.printStackTrace();
+                    pricePerUnit = 0;
+                }
+
                 double wholePrice = pricePerUnit * itemCount;
                 Money.add(player, wholePrice);
-                player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: %.2f USD!", wholePrice, Money.get(player)));
+                player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: " +  Money.getFormatted(player) +  " USD!", wholePrice));
 
                 event.setCancelled(true);
             }

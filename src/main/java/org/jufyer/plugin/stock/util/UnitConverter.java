@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
 import org.json.JSONObject;
@@ -15,8 +17,7 @@ public class UnitConverter {
 
     public enum OutputUnit { T, KG }
 
-    // Wechselkurse von Frankfurter API
-    private static Map<String, Double> currencyToUSD = fetchCurrencyRates();
+    private static Map<String, Double> currencyToUSD = new HashMap<>();
 
     // Umrechnungsfaktoren auf Tonne
     private static final Map<String, Double> unitToTonne = new HashMap<>();
@@ -28,7 +29,7 @@ public class UnitConverter {
         unitToTonne.put("BBL", 0.136);
         unitToTonne.put("T.OZ", 0.0000311035);
         unitToTonne.put("CWT", 0.0453592);
-        unitToTonne.put("MMBTU", 0.000026);
+        unitToTonne.put("MMBTU", 0.000026); // symbolisch
     }
 
     // Maps mögliche Schreibvarianten zu Standard-Unit
@@ -38,23 +39,37 @@ public class UnitConverter {
         unitAliases.put("USD/KG", "KG");
         unitAliases.put("USD/LBS", "LBS");
         unitAliases.put("USD/BU", "BU");
-        unitAliases.put("USD/Bbl", "BBL");
-        unitAliases.put("USD/t.oz", "T.OZ");
+        unitAliases.put("USD/BBL", "BBL");
+        unitAliases.put("USD/T.OZ", "T.OZ");
         unitAliases.put("USD/CWT", "CWT");
-        unitAliases.put("USD/MMBtu", "MMBTU");
-        unitAliases.put("USd/Lbs", "LBS");
-        unitAliases.put("USd/Bu", "BU");
-        unitAliases.put("CNY/Kg", "KG");
+        unitAliases.put("USD/MMBTU", "MMBTU");
+        unitAliases.put("USd/LBS", "LBS");
+        unitAliases.put("USd/BU", "BU");
+        unitAliases.put("CNY/KG", "KG");
         unitAliases.put("MYR/T", "T");
         unitAliases.put("CNY/T", "T");
-        unitAliases.put("USD/t", "T");
+        unitAliases.put("USD/T", "T");
+    }
+
+    static {
+        // initialer Kursabruf
+        fetchCurrencyRates();
+
+        // Timer für automatisches Update alle 30 Minuten
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                fetchCurrencyRates();
+            }
+        }, 30 * 60 * 1000, 30 * 60 * 1000); // 30 min
     }
 
     /**
      * Wandelt einen Preiswert in USD/Tonne oder USD/Kg um
      */
     public static double toUSD(double value, String unit, OutputUnit outputUnit) {
-        // Einheit in Großbuchstaben
+        if(unit == null) throw new IllegalArgumentException("Unit cannot be null");
         unit = unit.trim().toUpperCase();
 
         // Währung und Maßeinheit trennen
@@ -64,32 +79,35 @@ public class UnitConverter {
         String currency = parts[0];
         String measure = parts[1];
 
-        // Einheit normalisieren, z. B. USd/Bu → BU
+        // Einheit normalisieren
         String stdMeasure = unitAliases.getOrDefault(currency + "/" + measure, measure);
 
         // Umrechnen in USD
         double valueInUSD = value;
         if(!currency.equals("USD")) {
             Double rate = currencyToUSD.get(currency);
-            if(rate == null) throw new IllegalArgumentException("No exchange rate for currency: " + currency);
-            valueInUSD = value / rate; // USD = value / rate
+            if(rate == null) {
+                Main.getInstance().getLogger().warning("No exchange rate for currency " + currency + ", using USD as fallback");
+            } else {
+                valueInUSD = value / rate; // USD = value / rate
+            }
         }
 
         // Umrechnen auf Tonne
         Double factor = unitToTonne.get(stdMeasure);
-        if(factor == null) throw new IllegalArgumentException("No conversion for unit: " + stdMeasure);
+        if(factor == null) {
+            Main.getInstance().getLogger().warning("Unknown unit " + stdMeasure + ", using Tonne as fallback");
+            factor = 1.0;
+        }
 
         double valueInTonne = valueInUSD / factor;
-
-        if(outputUnit == OutputUnit.KG) return valueInTonne / 1000.0;
-        return valueInTonne;
+        return (outputUnit == OutputUnit.KG) ? valueInTonne / 1000.0 : valueInTonne;
     }
 
     /**
      * Holt Wechselkurse von Frankfurter API
      */
-    public static Map<String, Double> fetchCurrencyRates() {
-        Map<String, Double> rates = new HashMap<>();
+    public static void fetchCurrencyRates() {
         try {
             URL url = new URL("https://api.frankfurter.dev/v1/latest?base=USD");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -103,38 +121,19 @@ public class UnitConverter {
             conn.disconnect();
 
             JSONObject json = new JSONObject(content.toString());
+            Map<String, Double> rates = new HashMap<>();
             if(json.has("rates")) {
                 JSONObject jsonRates = json.getJSONObject("rates");
                 for(String key : jsonRates.keySet()) rates.put(key.toUpperCase(), jsonRates.getDouble(key));
-            } else {
-                Main.getInstance().getLogger().info("API did not return rates, using defaults");
-                rates.put("USD", 1.0);
-                rates.put("CNY", 0.14);
-                rates.put("MYR", 0.22);
             }
+            rates.put("USD", 1.0); // sicherheitshalber immer
+            currencyToUSD = rates;
+
+            Main.getInstance().getLogger().info("Currency rates updated successfully");
+
         } catch(Exception e) {
             e.printStackTrace();
-            Main.getInstance().getLogger().info("Error fetching rates, using default values");
-            rates.put("USD", 1.0);
-            rates.put("CNY", 0.14);
-            rates.put("MYR", 0.22);
+            Main.getInstance().getLogger().warning("Error fetching rates, keeping old values");
         }
-        return rates;
     }
-
-//    public static void main(String[] args) {
-//        String[] testUnits = {
-//                "CNY/Kg", "USD/LBS", "MYR/T", "USd/Bu", "USd/Lbs", "USD/Bbl", "USD/t.oz"
-//        };
-//        System.out.println("=== USD per Tonne ===");
-//        for(String u : testUnits) {
-//            System.out.printf("%s → USD/T: %.2f%n", u, toUSD(100, u, OutputUnit.T));
-//        }
-//
-//        System.out.println("\n=== USD per Kg ===");
-//        for(String u : testUnits) {
-//            System.out.printf("%s → USD/Kg: %.4f%n", u, toUSD(100, u, OutputUnit.KG));
-//        }
-//    }
 }
-

@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class VillagerInvTradingWorld implements Listener {
-    public static Inventory VillagerInvTradingWorld = Bukkit.createInventory(null, 9*6, "Trading menu");
+    public static Inventory VillagerInvTradingWorld = Bukkit.createInventory(null, 9*4, "Trading menu");
     //public static final NamespacedKey BUY_ITEM_KEY = new NamespacedKey(Main.getInstance(), "BUY_ITEM");
 
     public static void setVillagerInvTradingWorld() {
@@ -25,7 +25,7 @@ public class VillagerInvTradingWorld implements Listener {
         ItemMeta exitItemMeta = exitItem.getItemMeta();
         exitItemMeta.setDisplayName("§cGo back home");
         exitItem.setItemMeta(exitItemMeta);
-        VillagerInvTradingWorld.setItem(9*6-1, exitItem);
+        VillagerInvTradingWorld.setItem(9*4-1, exitItem);
 
         ItemStack selectStockItem = new ItemStack(Material.GOLD_INGOT);
         ItemMeta selectStockItemMeta = selectStockItem.getItemMeta();

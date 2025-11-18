@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
+import org.jufyer.plugin.stock.util.UnitConverter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,11 +62,13 @@ public class MainApp implements Listener, CommandExecutor{
             ItemMeta meta = icon.getItemMeta();
 
             TradeCommodity commodity = TradeCommodity.fromCommodityName(stockName);
-            double price = FetchFromDataFolder.getPrice(commodity);
-            String unit = FetchFromDataFolder.getUnit(commodity);
+            double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
+            String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
+
+            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
 
             meta.setDisplayName("§r" + capitalize(stockName.replace("-", " ")));
-            meta.setLore(Arrays.asList("§7Price: §f" + price + "$" + " " + unit));
+            meta.setLore(Arrays.asList("§7Price: §f" + String.format("%.2f", pricePerTonne) + " $/T"));
             icon.setItemMeta(meta);
 
             MainApp.setItem(innerSlots[i], icon);
