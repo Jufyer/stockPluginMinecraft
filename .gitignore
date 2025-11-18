@@ -1,8 +1,34 @@
+# IntelliJ IDEA
 .idea/
 *.iml
+*.iws
+out/
+
+# Gradle
 .gradle/
 build/
+
+# Minecraft server run folder
 run/
 logs/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Java class files
 *.class
+
+# Crash reports and logs
 *.log
+hs_err_pid*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Eclipse files (falls mal benutzt)
+.project
+.classpath
+.settings/
