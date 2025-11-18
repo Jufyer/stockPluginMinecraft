@@ -7,7 +7,7 @@ plugins {
   id("xyz.jpenilla.run-paper") version "2.3.0"
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.3.0"
   // Shadow Plugin für das saubere Einbinden von Libraries (HTMLUnit, JSoup etc.)
-  id("com.github.johnrengelman.shadow") version "8.1.1"
+  id("io.github.goooler.shadow") version "8.1.8"
 }
 
 group = "org.jufyer.plugin"
@@ -60,6 +60,10 @@ tasks {
 
   build {
     dependsOn(shadowJar)
+  }
+
+  withType<xyz.jpenilla.runpaper.task.RunServer>().configureEach {
+    notCompatibleWithConfigurationCache("RunPaper is not yet Gradle 9 compatible")
   }
 }
 
