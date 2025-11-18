@@ -8,232 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f77f675-0b67-47c1-b2d7-f78bde3635af" name="Changes" comment="Added Buy Menu&#10;Fixed Bugs&#10;Improved UI&#10;Removed unnecessary commands">
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/BuyItemGui.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-10.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-11.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-12.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-13.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-14.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-15.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-16.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-17.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-18.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-19.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-20.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-21.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-22.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-23.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-24.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-25.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-26.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-27.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-28.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-29.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-4.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-5.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-6.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-7.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-8.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/logs/2025-11-18-9.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_644.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_645.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_646.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_647.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_648.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_649.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_650.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_651.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_652.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_653.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_654.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_655.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_656.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_657.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_658.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_659.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_660.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_661.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_662.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_663.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_664.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_665.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_666.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_667.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_668.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_669.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_670.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_671.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_672.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_673.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_674.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_675.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_676.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_677.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_678.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_679.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_680.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_681.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_682.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_683.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_684.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_685.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_686.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_687.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_688.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_689.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_690.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_691.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_692.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_693.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_694.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_695.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_696.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_697.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_698.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_699.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_700.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_701.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_702.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_703.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_704.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_705.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_706.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_707.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_708.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_709.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_710.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_711.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_712.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_713.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_714.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_715.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_716.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_717.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_718.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_719.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_720.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_721.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_722.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_723.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_724.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_725.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_726.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_727.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_728.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_729.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_730.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_731.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_732.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_733.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_734.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_735.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_736.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_737.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_738.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_739.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_740.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_741.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_742.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_743.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_744.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_745.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_746.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_747.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_748.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_749.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_750.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_751.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_752.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_753.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_754.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/world/data/map_755.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/BuyItemGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/SellItemGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/SellItemGui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/WorldManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/WorldManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/gui/graphui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/moneySystem/PortfolioManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/moneySystem/PortfolioManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/BlockPlacer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/jufyer/plugin/stock/util/BlockPlacer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/jufyer-stock-plugin-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BuyStock.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FetchFromDataFolder.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Main.class.uniqueId1" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Main.class.uniqueId1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PortfolioManager.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PriceHistoryChart$ChartStyle.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PriceHistoryChart$PriceData.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PriceHistoryChart.class.uniqueId8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/showPrices.class.uniqueId9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/plugins/.paper-remapped/extra-plugins/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/server.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/data/raids.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/level.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/level.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/poi/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/poi/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/trade_world/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/trade_world/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/advancements/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/data/idcounts.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/idcounts.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/raids.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/data/random_sequences.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/data/random_sequences.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/level.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/playerdata/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/world/stats/4fc4ff2d-caa9-4ebc-b929-7e768144edcb.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/data/raids.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/DIM-1/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/level.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_nether/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_nether/level.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/data/raids_end.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/entities/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.-1.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/DIM1/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/level.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/world_the_end/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/world_the_end/level.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/SellItemGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/SellItemGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/VillagerInvTradingWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/WorldManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/WorldManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/graphui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/gui/graphui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/moneySystem/PortfolioManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/moneySystem/PortfolioManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/BlockPlacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jufyer/plugin/stock/util/BlockPlacer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,6 +61,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -303,50 +79,51 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2nZjHopOTvU7zDByjReIeGPZqx8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build jufyer-stock-plugin.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.ASCIIBarChart.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.stockLoader.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.FetchWheatPrice.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.UpdateGitRepo.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.fetchFromWebsite.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.AdvancedChartDownloader.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.SvgExtractor.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.util.UnitConverter.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [cleanAllRunTaskCaches].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [cleanCache].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [cleanPaperCache].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [cleanPaperPluginsCache].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [reobfJar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.jufyer-stock-plugin [shadowJar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.paperweight-test-plugin-master [jar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.paperweight-test-plugin-master [runServer].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.paperweight-test-plugin-master [testClasses].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Plugins Suggestion&quot;: &quot;Plugin suggestions available&quot;,
-    &quot;Notification.DoNotAsk-Plugins Suggestion&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CodeProjects/Minecraft Coding/Aquatic/jufyer-aquatic-plugin&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build jufyer-stock-plugin.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.ASCIIBarChart.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.chatImplementation.stockLoader.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.FetchWheatPrice.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.UpdateGitRepo.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.getPrice.fetchFromWebsite.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.AdvancedChartDownloader.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.gui.SvgExtractor.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [:org.jufyer.plugin.stock.util.UnitConverter.main()].executor": "Run",
+    "Gradle.jufyer-stock-plugin [cleanAllRunTaskCaches].executor": "Run",
+    "Gradle.jufyer-stock-plugin [cleanCache].executor": "Run",
+    "Gradle.jufyer-stock-plugin [cleanPaperCache].executor": "Run",
+    "Gradle.jufyer-stock-plugin [cleanPaperPluginsCache].executor": "Run",
+    "Gradle.jufyer-stock-plugin [reobfJar].executor": "Run",
+    "Gradle.jufyer-stock-plugin [shadowJar].executor": "Run",
+    "Gradle.paperweight-test-plugin-master [jar].executor": "Run",
+    "Gradle.paperweight-test-plugin-master [runServer].executor": "Run",
+    "Gradle.paperweight-test-plugin-master [testClasses].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Plugins Suggestion": "Plugin suggestions available",
+    "Notification.DoNotAsk-Plugins Suggestion": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/CodeProjects/Minecraft Coding/Aquatic/jufyer-aquatic-plugin",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\CodeProjects\Minecraft Coding\stockTradinPlugin\jufyer-stock-plugin\run\world" />
@@ -624,10 +401,21 @@
       <option name="project" value="LOCAL" />
       <updated>1763489431695</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added Buy Menu&#10;Fixed Bugs&#10;Improved UI&#10;Removed unnecessary commands">
+      <option name="closed" value="true" />
+      <created>1763498065894</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1763498065894</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/run/plugins/jufyer-stock-plugin/data" />
+    </ignored-roots>
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="developing..." />
     <MESSAGE value="Finished SellItemGui" />
