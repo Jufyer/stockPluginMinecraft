@@ -64,7 +64,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
 
     BuyItemGui.setBuyItemMenuInventory();
-    getCommand("buy").setExecutor(new BuyItemGui());
+    //getCommand("buy").setExecutor(new BuyItemGui());
     Bukkit.getPluginManager().registerEvents(new BuyItemGui(), this);
 
     VillagerInvTradingWorld.setVillagerInvTradingWorld();
