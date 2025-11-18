@@ -4,24 +4,31 @@ import org.bukkit.Material;
 
 public enum TradeCommodity {
 
+    // --- Metalle & Minerale ---
     GOLD(Material.GOLD_INGOT, "gold"),
-    IRON_ORE(Material.IRON_ORE, "iron-ore"),
+    IRON_ORE(Material.IRON_INGOT, "iron-ore"),
     COPPER(Material.COPPER_INGOT, "copper"),
-    RHODIUM(Material.DIAMOND, "rhodium"),
-    PLATINUM(Material.NETHERITE_INGOT, "platinum"),
-    INDIUM(Material.EMERALD, "indium"),
+
+    RHODIUM(Material.NETHER_STAR, "rhodium"),          // extrem teuer
+    PLATINUM(Material.DIAMOND, "platinum"),            // teuer
+    INDIUM(Material.EMERALD, "indium"),                // wertvoll
     COBALT(Material.LAPIS_LAZULI, "cobalt"),
-    SILICON(Material.AMETHYST_SHARD, "silicon"),
+    SILICON(Material.QUARTZ, "silicon"),               // logischer als Amethyst
+
+    URANIUM(Material.NETHERITE_INGOT, "uranium"),      // sehr wertvoll/gefährlich
+
+    // --- Energie-Rohstoffe ---
+    NATURAL_GAS(Material.FIRE_CHARGE, "natural-gas"),
+    CRUDE_OIL(Material.BLACK_DYE, "crude-oil"),        // Öl = schwarz
     COAL(Material.COAL, "coal"),
-    NATURAL_GAS(Material.BLAZE_POWDER, "natural-gas"),
-    CRUDE_OIL(Material.LAVA_BUCKET, "crude-oil"),
-    URANIUM(Material.GLOWSTONE_DUST, "uranium"),
+
+    // --- Landwirtschaft ---
     WHEAT(Material.WHEAT, "wheat"),
-    CORN(Material.MELON_SLICE, "corn"),
+    CORN(Material.HAY_BLOCK, "corn"),                  // Melon war unpassend
     COFFEE(Material.COCOA_BEANS, "coffee"),
     SUGAR(Material.SUGAR, "sugar"),
-    COTTON(Material.STRING, "cotton"),
-    PALM_OIL(Material.BAMBOO, "palm-oil"),
+    COTTON(Material.WHITE_WOOL, "cotton"),             // besser als String
+    PALM_OIL(Material.SLIME_BALL, "palm-oil"),         // ölig/fettig
     ORANGE_JUICE(Material.HONEY_BOTTLE, "orange-juice"),
     LIVE_CATTLE(Material.LEATHER, "live-cattle"),
     MILK(Material.MILK_BUCKET, "milk"),

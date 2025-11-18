@@ -269,7 +269,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                     if (currentItem != null) {
                         if (currentItem.getType().equals(event.getInventory().getItem(0).getType())) {
                             itemCount += currentItem.getAmount();
-                        }else if (currentItem.getType() == Material.SHULKER_BOX) {
+                        }else if (currentItem.getType().name().endsWith("SHULKER_BOX")) {
                             shulkerCount += 1;
                             if (!(currentItem.getItemMeta() instanceof BlockStateMeta meta)) {
                                 event.setCancelled(true);
@@ -329,8 +329,8 @@ public class SellItemGui implements CommandExecutor, Listener {
                 return;
             }
 
-            if (item.getType().equals(Material.SHULKER_BOX) || item.getType().equals(Material.BUNDLE) || item.getType().equals(event.getInventory().getItem(0).getType())) {
-                if (item.getType() == Material.SHULKER_BOX) {
+            if (item.getType().name().endsWith("SHULKER_BOX") || item.getType().equals(Material.BUNDLE) || item.getType().equals(event.getInventory().getItem(0).getType())) {
+                if (item.getType().name().endsWith("SHULKER_BOX")) {
                     if (!(item.getItemMeta() instanceof BlockStateMeta meta)) {
                         event.setCancelled(true);
                         return;
