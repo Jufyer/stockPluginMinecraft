@@ -65,12 +65,12 @@ bukkitPluginYaml {
   apiVersion = "1.21.8"
   commands {
     register("stocks")
-    register("showPrices")
-    //register("graphui")
-    register("_internal_")
-    register("getBlockData")
-    register("placeblocks")
-    register("buy")
-    register("sellItems")
+//    register("_internal_")
+//    register("showPrices")
+//    register("graphui")
+//    register("getBlockData")
+//    register("placeblocks")
+//    register("buy")
+//    register("sellItems")
   }
 }
