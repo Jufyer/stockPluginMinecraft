@@ -410,12 +410,6 @@ public class SellItemGui implements CommandExecutor, Listener {
 
                     double pricePerUnit;
                     try {
-                        pricePerUnit = 0;
-
-
-                        TradeCommodity commodity = TradeCommodity.fromMaterial(sellingMaterial);
-
-
                         if (json == null) return;
 
                         double priceRaw = -1.0;
@@ -446,15 +440,12 @@ public class SellItemGui implements CommandExecutor, Listener {
                         pricePerUnit = 0;
                     }
 
-
-
                 double wholePrice = pricePerUnit * finalItemCount;
                 Money.add(player, wholePrice);
                 player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: " +  Money.getFormatted(player) +  " USD!", wholePrice));
                 });
                 event.setCancelled(true);
             }
-
 
             if (item.getType().equals(Material.LIGHT_GRAY_STAINED_GLASS_PANE) || item.getType().equals(Material.NAME_TAG)
                     || item.getType().equals(Material.LIME_DYE) || (item.getItemMeta().getDisplayName().startsWith("§e") && event.getSlot() == 45)) {
@@ -547,5 +538,4 @@ public class SellItemGui implements CommandExecutor, Listener {
 
         return text;
     }
-
 }

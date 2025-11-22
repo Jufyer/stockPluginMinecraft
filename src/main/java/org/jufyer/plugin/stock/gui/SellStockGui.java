@@ -249,17 +249,19 @@ public class SellStockGui implements CommandExecutor, Listener {
         ItemStack helpBook = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bm = (BookMeta) helpBook.getItemMeta();
 
-        bm.addPage("§6Buy Stock Help\n\n" +
+        // Page 1: General Overview
+        bm.addPage("§6Sell Stock Help\n\n" +
                 "Welcome to the Stock Market!\n\n" +
                 "§6Page 1: Overview\n" +
-                "§0- Click on a stock icon to view buy options.\n" +
-                "- Prices fluctuate over time.\n" +
-                "- Your portfolio is saved automatically.");
+                "§0- Click on a stock icon to view selling options.\n" +
+                "- You can only sell stocks you currently own.\n" +
+                "- Earnings are added to your balance.");
 
-        bm.addPage("§6Page 2: Buying\n" +
+        // Page 2: Selling Mechanics
+        bm.addPage("§6Page 2: Selling\n" +
                 "§0- Select amounts: 1, 10, or 64.\n" +
-                "- Ensure you have enough money in your wallet.\n" +
-                "- Bought shares are added to your digital portfolio.");
+                "- Ensure you have enough shares in your portfolio.\n" +
+                "- Sold shares are removed immediately.");
 
         bm.setAuthor("StockMarket");
         bm.setTitle("Sell Help");
