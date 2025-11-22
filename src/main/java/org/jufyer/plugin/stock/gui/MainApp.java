@@ -18,7 +18,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
-import org.jufyer.plugin.stock.getPrice.FetchPrice;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.util.UnitConverter;
 
@@ -65,10 +64,10 @@ public class MainApp implements Listener, CommandExecutor{
             double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
             String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
 
-            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
             meta.setDisplayName("§r" + capitalize(stockName.replace("-", " ")));
-            meta.setLore(Arrays.asList("§7Price: §f" + String.format("%.2f", pricePerTonne) + " $/T"));
+            meta.setLore(Arrays.asList("§7Price: §f" + String.format("%.2f", pricePerKilo) + " $/kg"));
             icon.setItemMeta(meta);
 
             MainApp.setItem(innerSlots[i], icon);

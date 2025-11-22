@@ -23,7 +23,6 @@ import org.jufyer.plugin.stock.util.UnitConverter;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.jufyer.plugin.stock.Main.wallet;
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
 
 public class SellItemGui implements CommandExecutor, Listener {
@@ -77,12 +76,12 @@ public class SellItemGui implements CommandExecutor, Listener {
             double priceRaw = FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(itemName));       // Originalpreis
             String unitRaw = FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(itemName));         // Originalunit
 
-            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
             ItemMeta meta = itemStack.getItemMeta();
             meta.setDisplayName("§e" + capitalize(itemName));
             meta.setLore(List.of("§7Current price: §a"
-                    + String.format("%.2f", pricePerTonne) + " $/T")
+                    + String.format("%.2f", pricePerKilo) + " $/kg")
             );
             itemStack.setItemMeta(meta);
 
@@ -138,9 +137,9 @@ public class SellItemGui implements CommandExecutor, Listener {
         double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
         String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
 
-        double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+        double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
-        currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + String.format("%.2f", pricePerTonne) + " $/T"));
+        currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + String.format("%.2f", pricePerKilo) + " $/kg"));
         currentPriceItem.setItemMeta(currentPriceItemMeta);
         SellItemInventory.setItem(4, currentPriceItem);
 
@@ -237,12 +236,12 @@ public class SellItemGui implements CommandExecutor, Listener {
             double priceRaw = FetchFromDataFolder.getPrice(TradeCommodity.fromCommodityName(stockName));       // Originalpreis
             String unitRaw = FetchFromDataFolder.getUnit(TradeCommodity.fromCommodityName(stockName));         // Originalunit
 
-            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
             player.sendMessage("Price of "
                     + item.getItemMeta().getDisplayName()
                     + "§r is "
-                    + String.format("%.2f", pricePerTonne) + " $/T");
+                    + String.format("%.2f", pricePerKilo) + " $/kg");
 
             openSellItemInventory(player, TradeCommodity.fromCommodityName(stockName));
 
@@ -348,7 +347,7 @@ public class SellItemGui implements CommandExecutor, Listener {
                     double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
                     String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
 
-                    double price = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+                    double price = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
                     String unit = FetchFromDataFolder.getUnit(commodity);
 

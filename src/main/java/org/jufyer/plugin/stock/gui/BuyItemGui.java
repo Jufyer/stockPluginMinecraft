@@ -79,10 +79,10 @@ public class BuyItemGui implements CommandExecutor, Listener {
             double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
             String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
 
-            double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
+            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
             meta.setLore(List.of(
-                    "§7Current price: §a" + String.format("%.2f", pricePerTonne) + " $/T",
+                    "§7Current price: §a" + String.format("%.2f", pricePerKilo) + " $/kg",
                     "§eClick to view buy options"
             ));
             itemStack.setItemMeta(meta);
@@ -120,14 +120,14 @@ public class BuyItemGui implements CommandExecutor, Listener {
         String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
 
         // Preis in USD/Tonne und auf 2 Nachkommastellen runden
-        double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
-        price = Math.round(pricePerTonne * 100.0) / 100.0;
+        double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+        price = Math.round(pricePerKilo * 100.0) / 100.0;
 
         balance = Money.getFormatted(player); // bereits formatiert
         owned = PortfolioManager.getStockAmount(player, commodity);
 
         infoMeta.setLore(Arrays.asList(
-                "§7Price per share: §a" + String.format("%.2f", price) + " $/T",
+                "§7Price per share: §a" + String.format("%.2f", price) + " $/kg",
                 "§7Your money: §6" + balance + "$",
                 "§7Owned shares: §b" + owned
         ));
@@ -291,8 +291,8 @@ public class BuyItemGui implements CommandExecutor, Listener {
                 // Preis wieder aus Daten + UnitConverter
                 double priceRaw = FetchFromDataFolder.getPrice(commodity);
                 String unitRaw = FetchFromDataFolder.getUnit(commodity);
-                double pricePerTonne = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.T);
-                double price = Math.round(pricePerTonne * 100.0) / 100.0;
+                double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+                double price = Math.round(pricePerKilo * 100.0) / 100.0;
 
                 double totalCost = Math.round(price * amountToBuy * 100.0) / 100.0; // totalCost ebenfalls runden
 
