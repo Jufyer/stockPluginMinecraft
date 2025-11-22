@@ -12,8 +12,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jufyer.plugin.stock.getPrice.FetchFromGitRepo;
 import org.jufyer.plugin.stock.gui.*;
+import org.jufyer.plugin.stock.moneySystem.Money;
 import org.jufyer.plugin.stock.util.LockPlayer;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,12 +72,100 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
     Bukkit.getPluginManager().registerEvents(new WorldManager(), this);
 
+    for (Player player : Bukkit.getOnlinePlayers()) {
+          loadWallet(player);
+          loadPortfolio(player);
+    }
+
+    Bukkit.getPluginManager().registerEvents(new Money(), this);
   }
 
-  @Override
-  public void onDisable(){
+    @Override
+    public void onDisable() {
+        saveAllWallets();
+        saveAllPortfolios();
+    }
 
-  }
+    public void saveAllWallets() {
+        File dataFolder = new File(getDataFolder(), "playerData\\wallet");
+        if (!dataFolder.exists()) dataFolder.mkdirs();
+
+        for (UUID uuid : wallet.keySet()) {
+            File walletFile = new File(dataFolder, uuid.toString() + ".txt");
+            try (FileWriter writer = new FileWriter(walletFile)) {
+                writer.write(String.valueOf(wallet.get(uuid)));
+            } catch (IOException e) {
+                getLogger().severe("Error saving wallet for UUID: " + uuid);
+                e.printStackTrace();
+            }
+        }
+        getLogger().info("Saved all Wallets.");
+    }
+
+    public static void loadWallet(Player player) {
+        File dataFolder = new File(Main.getInstance().getDataFolder(), "playerData\\wallet");
+        if (!dataFolder.exists()) dataFolder.mkdirs();
+
+        File walletFile = new File(dataFolder, player.getUniqueId().toString() + ".txt");
+        if (!walletFile.exists()) {
+            wallet.put(player.getUniqueId(), 0.0); // Standard-Wallet = 0
+            return;
+        }
+
+        try {
+            String content = new String(java.nio.file.Files.readAllBytes(walletFile.toPath()));
+            wallet.put(player.getUniqueId(), Double.parseDouble(content));
+        } catch (IOException | NumberFormatException e) {
+            Main.getInstance().getLogger().warning("Error loading wallet by " + player.getName() + ". Setting to 0.");
+            wallet.put(player.getUniqueId(), 0.0);
+        }
+    }
+
+    public void saveAllPortfolios() {
+        File dataFolder = new File(getDataFolder(), "playerData/portfolio");
+        if (!dataFolder.exists()) dataFolder.mkdirs();
+
+        for (UUID uuid : portfolio.keySet()) {
+            File portfolioFile = new File(dataFolder, uuid.toString() + ".txt");
+            try (FileWriter writer = new FileWriter(portfolioFile)) {
+                Map<String, Integer> playerPortfolio = portfolio.get(uuid);
+                for (Map.Entry<String, Integer> entry : playerPortfolio.entrySet()) {
+                    writer.write(entry.getKey() + ":" + entry.getValue() + "\n");
+                }
+            } catch (IOException e) {
+                getLogger().severe("Error saving portfolio for UUID: " + uuid);
+                e.printStackTrace();
+            }
+        }
+        getLogger().info("Saved all portfolios.");
+    }
+
+    public static void loadPortfolio(Player player) {
+        File dataFolder = new File(Main.getInstance().getDataFolder(), "playerData/portfolio");
+        if (!dataFolder.exists()) dataFolder.mkdirs();
+
+        File portfolioFile = new File(dataFolder, player.getUniqueId().toString() + ".txt");
+        if (!portfolioFile.exists()) {
+            portfolio.put(player.getUniqueId(), new HashMap<>()); // Leeres Portfolio
+            return;
+        }
+
+        Map<String, Integer> playerPortfolio = new HashMap<>();
+        try {
+            List<String> lines = java.nio.file.Files.readAllLines(portfolioFile.toPath());
+            for (String line : lines) {
+                if (line.isEmpty() || !line.contains(":")) continue;
+                String[] parts = line.split(":");
+                String stock = parts[0];
+                int amount = Integer.parseInt(parts[1]);
+                playerPortfolio.put(stock, amount);
+            }
+            portfolio.put(player.getUniqueId(), playerPortfolio);
+        } catch (IOException | NumberFormatException e) {
+            Main.getInstance().getLogger().warning("Error loading portfolio for " + player.getName() + ". Setting empty.");
+            portfolio.put(player.getUniqueId(), new HashMap<>());
+        }
+    }
 
 //  @Override
 //  public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

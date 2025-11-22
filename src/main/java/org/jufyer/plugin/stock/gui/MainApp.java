@@ -8,15 +8,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jufyer.plugin.stock.Main;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.util.UnitConverter;
@@ -24,7 +22,8 @@ import org.jufyer.plugin.stock.util.UnitConverter;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApp implements Listener, CommandExecutor{
+public class MainApp implements Listener, CommandExecutor {
+
     public static Inventory MainApp = Bukkit.createInventory(null, 54, "§rStocks");
 
     private static final List<String> STOCK_NAMES = Arrays.asList(
@@ -34,166 +33,172 @@ public class MainApp implements Listener, CommandExecutor{
             "orange-juice", "live-cattle", "milk", "sulfur"
     );
 
-    public static void invSetup() {
-        //ItemStack wheatIcon = new ItemStack(Material.HAY_BLOCK);
+    // Slots im inneren Rechteck
+    private static final int[] INNER_SLOTS = new int[28];
 
-        //ItemMeta meta = wheatIcon.getItemMeta();
-        //meta.setDisplayName("§rPrice: " + String.valueOf(FetchPrice.getPrice(TradeCommodity.WHEAT)) + " " + String.valueOf(FetchPrice.getUnit(TradeCommodity.WHEAT)));
-
-        //wheatIcon.setItemMeta(meta);
-
-        //MainApp.addItem(wheatIcon);
-        int[] innerSlots = new int[28];
+    static {
         int index = 0;
-
         for (int row = 1; row <= 4; row++) {
             for (int col = 1; col <= 7; col++) {
-                innerSlots[index++] = row * 9 + col;
+                INNER_SLOTS[index++] = row * 9 + col;
             }
         }
+    }
 
+    public static void invSetup() {
+
+        // Erstmal: Placeholder Icons (damit GUI sofort sichtbar ist)
         int i = 0;
         for (String stockName : STOCK_NAMES) {
-            if (i >= innerSlots.length) break;
 
-            Material mat = TradeCommodity.fromCommodityName(stockName).getMaterial();
-            ItemStack icon = new ItemStack(mat);
-            ItemMeta meta = icon.getItemMeta();
+            if (i >= INNER_SLOTS.length) break;
 
             TradeCommodity commodity = TradeCommodity.fromCommodityName(stockName);
-            double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
-            String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
+            Material mat = commodity.getMaterial();
 
-            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+            ItemStack loading = new ItemStack(mat);
+            ItemMeta lm = loading.getItemMeta();
+            lm.setDisplayName("§7" + capitalize(stockName));
+            lm.setLore(Arrays.asList("§8Loading price…"));
+            loading.setItemMeta(lm);
 
-            meta.setDisplayName("§r" + capitalize(stockName.replace("-", " ")));
-            meta.setLore(Arrays.asList("§7Price: §f" + String.format("%.2f", pricePerKilo) + " $/kg"));
-            icon.setItemMeta(meta);
-
-            MainApp.setItem(innerSlots[i], icon);
+            MainApp.setItem(INNER_SLOTS[i], loading);
             i++;
+
+            // Jetzt: async Preis laden und später aktualisieren
+            int slot = INNER_SLOTS[i - 1];
+            FetchFromDataFolder.getLatestByName(commodity).thenAccept(json -> {
+
+                if (json == null) return;
+
+                double priceRaw = -1.0;
+
+                String valStr = json.getString("value", null);
+
+                if (valStr != null) {
+                    try {
+                        priceRaw = Double.parseDouble(valStr.replace(',', '.'));
+                    } catch (NumberFormatException ignored) {
+                    }
+                } else {
+                    try {
+                        priceRaw = json.getJsonNumber("price").doubleValue();
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                final double price = priceRaw;
+
+                String unit = json.getString("currency", "");
+
+                double perKg = UnitConverter.toUSD(price, unit, UnitConverter.OutputUnit.KG);
+
+                Bukkit.getScheduler().runTask(
+                        Main.getInstance(),
+                        () -> {
+                            ItemStack icon = new ItemStack(mat);
+                            ItemMeta im = icon.getItemMeta();
+                            im.setDisplayName("§r" + capitalize(stockName));
+                            im.setLore(Arrays.asList(
+                                    "§7Price: §f" + String.format("%.2f", perKg) + " $/kg"
+                            ));
+                            icon.setItemMeta(im);
+                            MainApp.setItem(slot, icon);
+                        }
+                );
+
+            });
         }
 
+        // Exit Item
         ItemStack exitItem = new ItemStack(Material.BARRIER);
-        ItemMeta exitItemMeta = exitItem.getItemMeta();
-        exitItemMeta.setDisplayName("§cClose menu");
-        exitItem.setItemMeta(exitItemMeta);
+        ItemMeta exitMeta = exitItem.getItemMeta();
+        exitMeta.setDisplayName("§cClose menu");
+        exitItem.setItemMeta(exitMeta);
         MainApp.setItem(8, exitItem);
 
+        // Back Item
         ItemStack backItem = new ItemStack(Material.ARROW);
-        ItemMeta backItemMeta = backItem.getItemMeta();
-        backItemMeta.setDisplayName("§7Back to overview");
-        backItem.setItemMeta(backItemMeta);
+        ItemMeta backMeta = backItem.getItemMeta();
+        backMeta.setDisplayName("§7Back to overview");
+        backItem.setItemMeta(backMeta);
         MainApp.setItem(0, backItem);
 
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
-        Player player = (Player) commandSender;
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd,
+                             @NotNull String label, @NotNull String[] args) {
+
+        if (!(sender instanceof Player player)) return true;
+
         player.openInventory(MainApp);
-
-        return false;
+        return true;
     }
 
     @EventHandler
-    public void onInventoryDrag(InventoryDragEvent event) {
-        if (event.getInventory().equals(MainApp)) {
-            event.setCancelled(true);
+    public void onInventoryDrag(InventoryDragEvent e) {
+        if (e.getInventory().equals(MainApp)) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInventoryMoveItem(InventoryMoveItemEvent e) {
+        if (e.getSource().equals(MainApp)) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInventoryInteract(InventoryInteractEvent e) {
+        if (e.getInventory().equals(MainApp)) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent e) {
+
+        if (!e.getInventory().equals(MainApp)) return;
+        e.setCancelled(true);
+
+        ItemStack item = e.getCurrentItem();
+        if (item == null || item.getItemMeta() == null) return;
+
+        Player player = (Player) e.getWhoClicked();
+
+        // Exit
+        if (item.getType() == Material.BARRIER) {
+            player.closeInventory();
+            return;
         }
-    }
 
-    @EventHandler
-    public void onInventoryMoveItem(InventoryMoveItemEvent event) {
-        if (event.getSource().equals(MainApp)) {
-            event.setCancelled(true);
+        // Back
+        if (item.getType() == Material.ARROW) {
+            if (player.getWorld().equals(Bukkit.getWorld("trade_world"))) {
+                player.openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
+            }
+            return;
         }
-    }
 
-    @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getInventory().equals(MainApp)) {
-            event.setCancelled(true);
+        // Select commodity
+        String displayName = item.getItemMeta().getDisplayName();
+        String commodityName = decapitalize(displayName);
 
-            if (event.getCurrentItem() == null) return;
-            if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-            if (event.getCurrentItem().getItemMeta() == null) return;
+        player.closeInventory();
+        player.setVelocity(new Vector(0, 0, 0));
 
-            if (event.getCurrentItem().getType().equals(Material.BARRIER)) {
-                event.getClickedInventory().close();
-                return;
-            }
-
-            if (event.getWhoClicked().getLocation().getWorld().equals(Bukkit.getWorld("trade_world"))) {
-                if (event.getCurrentItem().getType().equals(Material.ARROW)) {
-                    event.getWhoClicked().openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
-                    return;
-                }
-            }else {
-                if (event.getCurrentItem().getType().equals(Material.ARROW)) {
-                    return;
-                }
-            }
-
-            Player player = (Player) event.getWhoClicked();
-
-            ItemStack item = event.getCurrentItem();
-            String name = decapitalize(item.getItemMeta().getDisplayName());
-            //event.getWhoClicked().sendMessage(name);
-
-            event.getInventory().close();
-
-            //player.setRotation(0,0);
-            player.setVelocity(new Vector(0,0,0));
-
-//            new BukkitRunnable() {
-//                @Override
-//                public void run() {
-//                    graphui.executeStuff((Player) event.getWhoClicked(), name);
-//                }
-//            }.runTaskLater(Main.getInstance(), 10);
-
-            if (WorldManager.activeTraders.containsKey(player.getUniqueId())) {
-                graphui.executeStuff(player, name);
-            }else {
-                WorldManager.setupWorld(player, name);
-            }
-
-
-        }
-    }
-
-    @EventHandler
-    public void onInventoryInteract(InventoryInteractEvent event) {
-        if (event.getInventory().equals(MainApp)) {
-            event.setCancelled(true);
+        if (WorldManager.activeTraders.containsKey(player.getUniqueId())) {
+            graphui.executeStuff(player, commodityName);
+        } else {
+            WorldManager.setupWorld(player, commodityName);
         }
     }
 
     private static String decapitalize(String text) {
         if (text == null || text.isEmpty()) return text;
-
-        text = text.replace(" ", "-");
-
-        return text.toLowerCase();
+        return text.replace(" ", "-").toLowerCase();
     }
 
     private static String capitalize(String text) {
         if (text == null || text.isEmpty()) return text;
-
-        // ersetze Bindestriche durch Leerzeichen für saubere Anzeige
-        text = text.replace("-", " ");
-
-        String[] words = text.split(" ");
-        StringBuilder result = new StringBuilder();
-
-        for (String word : words) {
-            if (word.isEmpty()) continue;
-            result.append(Character.toUpperCase(word.charAt(0)))
-                    .append(word.substring(1).toLowerCase())
-                    .append(" ");
-        }
-
-        return result.toString().trim();
+        return Arrays.stream(text.split(" "))
+                .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1))
+                .reduce((a, b) -> a + " " + b).orElse(text);
     }
 }

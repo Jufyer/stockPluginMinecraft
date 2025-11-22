@@ -1,12 +1,16 @@
 package org.jufyer.plugin.stock.moneySystem;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.jufyer.plugin.stock.Main;
 
 import java.text.DecimalFormat;
 
 import static org.jufyer.plugin.stock.Main.wallet;
 
-public class Money {
+public class Money implements Listener {
 
     // Rundet einen double-Wert auf 2 Nachkommastellen
     private static double roundTwoDecimals(double value) {
@@ -52,5 +56,11 @@ public class Money {
     private static String formatDecimal(double number) {
         DecimalFormat df = new DecimalFormat("#,##0.##"); // max. 2 Nachkommastellen
         return df.format(number);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Main.loadWallet(event.getPlayer());
+        Main.loadPortfolio(event.getPlayer());
     }
 }

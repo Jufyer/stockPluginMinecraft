@@ -1,10 +1,14 @@
 package org.jufyer.plugin.stock.getPrice;
 
+import org.bukkit.Bukkit;
 import org.jufyer.plugin.stock.Main;
 import javax.json.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.CompletableFuture;
+
+import static org.jufyer.plugin.stock.util.UtilityMethods.loadJsonAsync;
 
 public class FetchFromDataFolder {
 
@@ -13,56 +17,45 @@ public class FetchFromDataFolder {
 
     private static JsonArray data;
 
-    public static JsonObject getLatestByName(TradeCommodity commodity) {
+    public static CompletableFuture<JsonObject> getLatestByName(TradeCommodity commodity) {
+
         String name = commodity.getCommodityName();
-        // Construct the file path using the commodity name
-        String JSON_FILE_PATH = String.valueOf(Main.getInstance().getDataFolder()) + "/data/" + name + ".json";
+        String filePath = Main.getInstance().getDataFolder() + "/data/" + name + ".json";
 
-        try (FileInputStream fis = new FileInputStream(JSON_FILE_PATH);
-             JsonReader reader = Json.createReader(fis)) {
-            data = reader.readArray();
-        } catch (IOException e) {
-            System.err.println("Error loading JSON file: " + JSON_FILE_PATH + " - " + e.getMessage());
-            data = Json.createArrayBuilder().build();
-            return null;
-        }
+        return loadJsonAsync(filePath).thenApply(data -> {
 
-        JsonObject latest = null;
-        LocalDateTime latestDateTime = null;
+            JsonObject latest = null;
+            LocalDateTime latestDateTime = null;
 
-        for (JsonValue value : data) {
-            // Check if the value is an object before casting
-            if (!(value instanceof JsonObject)) {
-                continue;
-            }
+            for (JsonValue value : data) {
+                if (!(value instanceof JsonObject obj)) continue;
 
-            JsonObject obj = value.asJsonObject();
-            String itemName = obj.getString("name", null); // Use safe getString with default
-            String dateStr = obj.getString("date", null);
+                String itemName = obj.getString("name", null);
+                String dateStr  = obj.getString("date", null);
 
-            if (name.equals(itemName) && dateStr != null) {
+                if (itemName == null || dateStr == null) continue;
+                if (!itemName.equals(name)) continue;
+
                 try {
-                    LocalDateTime currentDateTime = LocalDateTime.parse(dateStr, DATE_FORMAT);
+                    LocalDateTime current = LocalDateTime.parse(dateStr, DATE_FORMAT);
 
-                    if (latest == null || currentDateTime.isAfter(latestDateTime)) {
+                    if (latest == null || current.isAfter(latestDateTime)) {
                         latest = obj;
-                        latestDateTime = currentDateTime;
+                        latestDateTime = current;
                     }
-                } catch (Exception e) {
-                    System.err.println("Invalid date format in: " + dateStr + " for " + name);
-                }
+                } catch (Exception ignore) {}
             }
-        }
-
-        return latest;
+            return latest;
+        });
     }
+
 
     public static JsonObject getByNameAndDate(TradeCommodity commodity, String date) {
         String name = commodity.getCommodityName();
         String JSON_FILE_PATH = String.valueOf(Main.getInstance().getDataFolder()) + "/data/" + name + ".json";
 
         try (FileInputStream fis = new FileInputStream(JSON_FILE_PATH);
-             JsonReader reader = Json.createReader(fis)) {
+            JsonReader reader = Json.createReader(fis)) {
             data = reader.readArray();
         } catch (IOException e) {
             System.err.println("Error loading JSON file: " + JSON_FILE_PATH + " - " + e.getMessage());
@@ -89,52 +82,39 @@ public class FetchFromDataFolder {
         return null;
     }
 
-    public static double getPrice(TradeCommodity commodity) {
-        JsonObject latestData = getLatestByName(commodity);
+    public static CompletableFuture<Double> getPrice(TradeCommodity commodity) {
+        return getLatestByName(commodity).thenApply(latest -> {
 
-        if (latestData == null) {
-            System.err.println("No current data for the commodity: " + commodity.getCommodityName());
-            return 0.0;
-        }
+            if (latest == null) {
+                System.err.println("No current data for commodity: " + commodity.getCommodityName());
+                return 0.0;
+            }
 
-        // The price is stored under the "value" key as a string
-        String priceString = latestData.getString("value", null);
+            String priceString = latest.getString("value", null);
+            if (priceString == null) return 0.0;
 
-        if (priceString == null) {
-            System.err.println("Value 'value' missing in the latest dataset for: " + commodity.getCommodityName());
-            return 0.0;
-        }
-
-        try {
-            // Parse the string value to a double. Replace comma with dot to ensure correct parsing.
-            return Double.parseDouble(priceString.replace(',', '.'));
-        } catch (NumberFormatException e) {
-            System.err.println("Error parsing the price '" + priceString + "' for " + commodity.getCommodityName() + ": " + e.getMessage());
-            return 0.0;
-        }
+            try {
+                return Double.parseDouble(priceString.replace(',', '.'));
+            } catch (NumberFormatException e) {
+                return 0.0;
+            }
+        });
     }
 
-    public static String getUnit(TradeCommodity commodity) {
-        JsonObject latestData = getLatestByName(commodity);
+    public static CompletableFuture<String> getUnit(TradeCommodity commodity) {
+        return getLatestByName(commodity).thenApply(latestData -> {
+            if (latestData == null) {
+                return "";
+            }
 
-        if (latestData == null) {
-            System.err.println("No current data for the commodity: " + commodity.getCommodityName());
-            return "";
-        }
+            String currencyString = latestData.getString("currency", null);
 
-        // The price is stored under the "currency" key as a string
-        String currencyString = latestData.getString("currency", null);
+            if (currencyString == null) {
+                return "";
+            }
 
-        if (currencyString == null) {
-            System.err.println("Value 'currency' missing in the latest dataset for: " + commodity.getCommodityName());
-            return "";
-        }
-
-        try {
             return currencyString;
-        } catch (NumberFormatException e) {
-            System.err.println("Error parsing the price '" + currencyString + "' for " + commodity.getCommodityName() + ": " + e.getMessage());
-            return "";
-        }
+        });
     }
+
 }

@@ -23,9 +23,10 @@ import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.moneySystem.Money;
 import org.jufyer.plugin.stock.moneySystem.PortfolioManager;
 import org.jufyer.plugin.stock.util.UnitConverter;
+import org.jufyer.plugin.stock.Main;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
 
@@ -48,8 +49,12 @@ public class BuyItemGui implements CommandExecutor, Listener {
     /**
      * Initialisiert das Hauptmenü mit allen verfügbaren Aktien.
      * Diese Methode sollte beim Plugin-Start einmal aufgerufen werden.
+     *
+     * GUI wird sofort mit Platzhaltern gefüllt; Preise kommen später asynchron.
      */
     public static void setBuyItemMenuInventory() {
+        BuyItemMenuInventory.clear();
+
         ItemStack backItem = new ItemStack(Material.ARROW);
         ItemMeta backItemMeta = backItem.getItemMeta();
         backItemMeta.setDisplayName("§7Back to overview");
@@ -70,24 +75,58 @@ public class BuyItemGui implements CommandExecutor, Listener {
             }
 
             TradeCommodity commodity = TradeCommodity.fromCommodityName(itemName);
-            if (commodity == null) continue;
+            if (commodity == null) {
+                i++;
+                continue;
+            }
 
-            ItemStack itemStack = new ItemStack(commodity.getMaterial());
-            ItemMeta meta = itemStack.getItemMeta();
+            // Erstelle Platzhalter-Item (so sieht's nicht leer aus)
+            ItemStack placeholder = new ItemStack(commodity.getMaterial());
+            ItemMeta meta = placeholder.getItemMeta();
             meta.setDisplayName("§e" + capitalize(itemName));
+            meta.setLore(Arrays.asList("§7Loading price...", "§eClick to view buy options"));
+            placeholder.setItemMeta(meta);
 
-            double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
-            String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
+            final int slotIndex = i; // capture current slot
+            BuyItemMenuInventory.setItem(slotIndex, placeholder);
 
-            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+            // Asynchron Preis und Unit laden und dann Item aktualisieren (on main thread)
+            CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
+            CompletableFuture<String> unitFuture = FetchFromDataFolder.getUnit(commodity);
 
-            meta.setLore(List.of(
-                    "§7Current price: §a" + String.format("%.2f", pricePerKilo) + " $/kg",
-                    "§eClick to view buy options"
-            ));
-            itemStack.setItemMeta(meta);
+            priceFuture.thenCombine(unitFuture, (priceRaw, unitRaw) -> {
+                // compute price per KG (safe defaults)
+                double pricePerKg;
+                try {
+                    pricePerKg = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+                } catch (Exception e) {
+                    pricePerKg = 0.0;
+                }
+                return pricePerKg;
+            }).whenComplete((pricePerKg, ex) -> {
+                // update inventory synchronously
+                Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                    // check inventory still exists and slot hasn't been changed
+                    ItemStack itemStack = BuyItemMenuInventory.getItem(slotIndex);
+                    if (itemStack == null) return;
 
-            BuyItemMenuInventory.setItem(i, itemStack);
+                    ItemMeta m = itemStack.getItemMeta();
+                    String priceLine;
+                    if (pricePerKg <= 0.0) {
+                        priceLine = "§7Current price: §cN/A";
+                    } else {
+                        priceLine = "§7Current price: §a" + String.format("%.2f", pricePerKg) + " $/kg";
+                    }
+
+                    List<String> lore = new ArrayList<>();
+                    lore.add(priceLine);
+                    lore.add("§eClick to view buy options");
+                    m.setLore(lore);
+                    itemStack.setItemMeta(m);
+                    BuyItemMenuInventory.setItem(slotIndex, itemStack);
+                });
+            });
+
             i++;
         }
 
@@ -102,44 +141,23 @@ public class BuyItemGui implements CommandExecutor, Listener {
 
     /**
      * Öffnet das spezifische Kauf-Inventar für eine Aktie.
+     * GUI öffnet sofort mit Platzhalter; echte Werte werden asynchron nachgeladen.
      */
     public static void openBuyActionInventory(Player player, TradeCommodity commodity) {
         BuyActionInventory.clear(); // Reset vor dem Öffnen
 
-        double price = FetchFromDataFolder.getPrice(commodity);
-        String unit = FetchFromDataFolder.getUnit(commodity);
-        String balance = Money.getFormatted(player);
-        int owned = PortfolioManager.getStockAmount(player, commodity);
-
-        // --- Info Item (Mitte Oben) ---
+        // Info Item (Platzhalter)
         ItemStack infoItem = new ItemStack(commodity.getMaterial());
         ItemMeta infoMeta = infoItem.getItemMeta();
         infoMeta.setDisplayName("§e" + capitalize(commodity.getCommodityName()));
-
-        double priceRaw = FetchFromDataFolder.getPrice(commodity);       // Originalpreis
-        String unitRaw = FetchFromDataFolder.getUnit(commodity);         // Originalunit
-
-        // Preis in USD/Tonne und auf 2 Nachkommastellen runden
-        double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
-        price = Math.round(pricePerKilo * 100.0) / 100.0;
-
-        balance = Money.getFormatted(player); // bereits formatiert
-        owned = PortfolioManager.getStockAmount(player, commodity);
-
-        infoMeta.setLore(Arrays.asList(
-                "§7Price per share: §a" + String.format("%.2f", price) + " $/kg",
-                "§7Your money: §6" + balance + "$",
-                "§7Owned shares: §b" + owned
-        ));
+        infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + Money.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
         infoItem.setItemMeta(infoMeta);
         BuyActionInventory.setItem(4, infoItem);
 
-        // --- Buy Buttons ---
-        BuyActionInventory.setItem(20, createBuyButton(price, 1));
-        BuyActionInventory.setItem(22, createBuyButton(price, 10));
-        BuyActionInventory.setItem(24, createBuyButton(price, 64));
-
-
+        // Buttons als Platzhalter mit price=0 (werden später aktualisiert)
+        BuyActionInventory.setItem(20, createBuyButton(0.0, 1));
+        BuyActionInventory.setItem(22, createBuyButton(0.0, 10));
+        BuyActionInventory.setItem(24, createBuyButton(0.0, 64));
 
         // 3. Standard Navigation
         ItemStack exitItem = new ItemStack(Material.BARRIER);
@@ -160,9 +178,9 @@ public class BuyItemGui implements CommandExecutor, Listener {
         fillerItemMeta.setDisplayName(" ");
         fillerItem.setItemMeta(fillerItemMeta);
 
-        for (int i = 0; i < 54; i++) {
-            if (BuyActionInventory.getItem(i) == null) {
-                BuyActionInventory.setItem(i, fillerItem);
+        for (int idx = 0; idx < 54; idx++) {
+            if (BuyActionInventory.getItem(idx) == null) {
+                BuyActionInventory.setItem(idx, fillerItem);
             }
         }
 
@@ -174,7 +192,45 @@ public class BuyItemGui implements CommandExecutor, Listener {
         skull.setItemMeta(skullItemMeta);
         BuyActionInventory.setItem(45, skull);
 
+        // Open inventory immediately
         player.openInventory(BuyActionInventory);
+
+        // Asynchron load price & unit, then update GUI (safely on main thread)
+        CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
+        CompletableFuture<String> unitFuture = FetchFromDataFolder.getUnit(commodity);
+
+        priceFuture.thenCombine(unitFuture, (priceRaw, unitRaw) -> {
+            double pricePerKg;
+            try {
+                pricePerKg = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+            } catch (Exception e) {
+                pricePerKg = 0.0;
+            }
+            // round to 2 decimals for display
+            pricePerKg = Math.round(pricePerKg * 100.0) / 100.0;
+            return pricePerKg;
+        }).whenComplete((pricePerKg, ex) -> {
+            Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                // Update info item (slot 4) and buttons
+                ItemStack info = BuyActionInventory.getItem(4);
+                if (info != null && info.hasItemMeta()) {
+                    ItemMeta im = info.getItemMeta();
+                    String priceLine = pricePerKg <= 0.0 ? "§7Price per share: §cN/A" : "§7Price per share: §a" + String.format("%.2f", pricePerKg) + " $/kg";
+                    im.setLore(Arrays.asList(
+                            priceLine,
+                            "§7Your money: §6" + Money.getFormatted(player) + "$",
+                            "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)
+                    ));
+                    info.setItemMeta(im);
+                    BuyActionInventory.setItem(4, info);
+                }
+
+                // Update buttons with real price
+                BuyActionInventory.setItem(20, createBuyButton(pricePerKg, 1));
+                BuyActionInventory.setItem(22, createBuyButton(pricePerKg, 10));
+                BuyActionInventory.setItem(24, createBuyButton(pricePerKg, 64));
+            });
+        });
     }
 
     private static ItemStack createBuyButton(double price, int amount) {
@@ -182,10 +238,16 @@ public class BuyItemGui implements CommandExecutor, Listener {
         ItemMeta meta = button.getItemMeta();
         meta.setDisplayName("§aBuy " + amount + " shares");
 
-        double totalCost = Math.round(price * amount * 100.0) / 100.0; // Preis * Menge auf 2 Nachkommastellen runden
+        String costString;
+        if (price <= 0.0) {
+            costString = "N/A";
+        } else {
+            double totalCost = Math.round(price * amount * 100.0) / 100.0; // Preis * Menge auf 2 Nachkommastellen runden
+            costString = String.format("%.2f", totalCost);
+        }
 
         meta.setLore(Arrays.asList(
-                "§7Cost: §c" + String.format("%.2f", totalCost) + "$",
+                "§7Cost: §c" + costString + (price <= 0.0 ? "" : "$"),
                 "§eClick to purchase"
         ));
         button.setItemMeta(meta);
@@ -288,31 +350,50 @@ public class BuyItemGui implements CommandExecutor, Listener {
                 TradeCommodity commodity = TradeCommodity.fromCommodityName(commodityName);
                 if (commodity == null) return;
 
-                // Preis wieder aus Daten + UnitConverter
-                double priceRaw = FetchFromDataFolder.getPrice(commodity);
-                String unitRaw = FetchFromDataFolder.getUnit(commodity);
-                double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
-                double price = Math.round(pricePerKilo * 100.0) / 100.0;
+                // Asynchron Preis+Unit laden und dann erst die Transaction synchron ausführen
+                CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
+                CompletableFuture<String> unitFuture = FetchFromDataFolder.getUnit(commodity);
 
-                double totalCost = Math.round(price * amountToBuy * 100.0) / 100.0; // totalCost ebenfalls runden
-
-                // Geld prüfen und abziehen
-                if (Money.get(player) >= totalCost) {
-                    if (Money.remove(player, totalCost)) {
-                        int currentStock = PortfolioManager.getStockAmount(player, commodity);
-                        PortfolioManager.updateStock(player, commodity, currentStock + amountToBuy);
-
-                        player.sendMessage("§aYou bought §e" + amountToBuy + "§a shares of §6" + capitalize(commodityName) + "§a for §c" + String.format("%.2f", totalCost) + "$");
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1.3f);
-
-                        openBuyActionInventory(player, commodity); // GUI neu laden
-                    } else {
-                        player.sendMessage("§cTransaction failed.");
+                priceFuture.thenCombine(unitFuture, (priceRaw, unitRaw) -> {
+                    double pricePerKg;
+                    try {
+                        pricePerKg = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+                    } catch (Exception e) {
+                        pricePerKg = 0.0;
                     }
-                } else {
-                    player.sendMessage("§cNot enough money! You need §4" + String.format("%.2f", totalCost) + "$");
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0.5f);
-                }
+                    // round to 2 decimals for calculation/display
+                    pricePerKg = Math.round(pricePerKg * 100.0) / 100.0;
+                    return pricePerKg;
+                }).whenComplete((pricePerKg, ex) -> {
+                    // run transaction on main thread
+                    Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                        if (pricePerKg <= 0.0) {
+                            player.sendMessage("§cCannot buy: price unavailable right now.");
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0.5f);
+                            return;
+                        }
+
+                        double totalCost = Math.round(pricePerKg * amountToBuy * 100.0) / 100.0;
+
+                        // Geld prüfen und abziehen
+                        if (Money.get(player) >= totalCost) {
+                            if (Money.remove(player, totalCost)) {
+                                int currentStock = PortfolioManager.getStockAmount(player, commodity);
+                                PortfolioManager.updateStock(player, commodity, currentStock + amountToBuy);
+
+                                player.sendMessage("§aYou bought §e" + amountToBuy + "§a shares of §6" + capitalize(commodityName) + "§a for §c" + String.format("%.2f", totalCost) + "$");
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1.3f);
+
+                                openBuyActionInventory(player, commodity); // GUI neu laden
+                            } else {
+                                player.sendMessage("§cTransaction failed.");
+                            }
+                        } else {
+                            player.sendMessage("§cNot enough money! You need §4" + String.format("%.2f", totalCost) + "$");
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0.5f);
+                        }
+                    });
+                });
             }
         }
     }
