@@ -22,8 +22,8 @@ import java.util.Map;
 public class WorldManager implements Listener {
 
     public static final Map<java.util.UUID, Location> activeTraders = new HashMap<>();
+    private static Map<java.util.UUID, Location> startLoc = new HashMap<>();
 
-    private static int playerCounter = 0;
     private static final int SLOT_DISTANCE = 50;
     public static final NamespacedKey VILLAGER_TRADING_KEY = new NamespacedKey(Main.getInstance(), "VILLAGER_TRADING");
 
@@ -56,6 +56,7 @@ public class WorldManager implements Listener {
             tradeWorld.setPVP(false);
             tradeWorld.setTime(1000);
         }
+        startLoc.put(player.getUniqueId(), player.getLocation());
 
         int index = getPlayerTradeIndex(player);
         Location base = new Location(tradeWorld, index * SLOT_DISTANCE, 100, 0);
@@ -114,10 +115,13 @@ public class WorldManager implements Listener {
             }
         }
 
-        World mainWorld = Bukkit.getWorld("world");
-        if (mainWorld != null) {
-            player.teleport(mainWorld.getSpawnLocation());
-        }
+
+        //player.teleport(mainWorld.getSpawnLocation());
+        //player.teleport(startLoc.get(player.getUniqueId()));
+        player.teleport(new Location(startLoc.get(player.getUniqueId()).getWorld(), startLoc.get(player.getUniqueId()).getX(), startLoc.get(player.getUniqueId()).getY(), startLoc.get(player.getUniqueId()).getZ()));
+        startLoc.remove(player.getUniqueId());
+        //player.sendMessage("Welcome back");
+
     }
 
     public static boolean isTrading(Player player) {
