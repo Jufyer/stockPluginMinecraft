@@ -44,6 +44,12 @@ public class VillagerInvTradingWorld implements Listener {
         buyStocksItemMeta.setDisplayName("§rBuy Stocks");
         buyStocksItem.setItemMeta(buyStocksItemMeta);
         VillagerInvTradingWorld.setItem(16, buyStocksItem);
+
+        ItemStack sellStocksItem = new ItemStack(Material.EMERALD);
+        ItemMeta sellStocksItemMeta = sellStocksItem.getItemMeta();
+        sellStocksItemMeta.setDisplayName("§rSell Stocks");
+        sellStocksItem.setItemMeta(sellStocksItemMeta);
+        VillagerInvTradingWorld.setItem(20, sellStocksItem);
     }
 
     @EventHandler
@@ -61,9 +67,11 @@ public class VillagerInvTradingWorld implements Listener {
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Sell Items")) {
                 player.openInventory(SellItemGui.SellItemMenuInventory);
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Buy Stocks")) {
-                player.openInventory(BuyItemGui.BuyItemMenuInventory);
+                player.openInventory(BuyStockGui.BuyItemMenuInventory);
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("§cClose Menu")) {
                 event.getInventory().close();
+            } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Sell Stocks")) {
+                player.openInventory(SellStockGui.SellStockMenuInventory);
             }
         }
     }

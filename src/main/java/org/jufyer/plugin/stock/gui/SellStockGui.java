@@ -30,11 +30,11 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
 
-public class BuyItemGui implements CommandExecutor, Listener {
+public class SellStockGui implements CommandExecutor, Listener {
 
     // Inventare analog zur SellItemGui
-    public static Inventory BuyItemMenuInventory = Bukkit.createInventory(null, 54, "§aBuy stock menu");
-    public static Inventory BuyActionInventory = Bukkit.createInventory(null, 54, "§2Select amount to buy");
+    public static Inventory SellStockMenuInventory = Bukkit.createInventory(null, 54, "§aSell stock menu");
+    public static Inventory SellStockInventory = Bukkit.createInventory(null, 54, "§2Select amount to sell");
 
     // Blockierte Slots für das Layout (Rand)
     private static final int[] blocked = {0,1,2,3,4,5,6,7,8, 9,17,18,26,27,35,36,44, 46,47,48,49,50,51,52};
@@ -46,26 +46,20 @@ public class BuyItemGui implements CommandExecutor, Listener {
             "orange-juice", "live-cattle", "milk", "sulfur"
     );
 
-    /**
-     * Initialisiert das Hauptmenü mit allen verfügbaren Aktien.
-     * Diese Methode sollte beim Plugin-Start einmal aufgerufen werden.
-     *
-     * GUI wird sofort mit Platzhaltern gefüllt; Preise kommen später asynchron.
-     */
     public static void setBuyItemMenuInventory() {
-        BuyItemMenuInventory.clear();
+        SellStockMenuInventory.clear();
 
         ItemStack backItem = new ItemStack(Material.ARROW);
         ItemMeta backItemMeta = backItem.getItemMeta();
         backItemMeta.setDisplayName("§7Back to overview");
         backItem.setItemMeta(backItemMeta);
-        BuyItemMenuInventory.setItem(0, backItem);
+        SellStockMenuInventory.setItem(0, backItem);
 
         ItemStack exitItem = new ItemStack(Material.BARRIER);
         ItemMeta exitItemMeta = exitItem.getItemMeta();
         exitItemMeta.setDisplayName("§cClose menu");
         exitItem.setItemMeta(exitItemMeta);
-        BuyItemMenuInventory.setItem(8, exitItem);
+        SellStockMenuInventory.setItem(8, exitItem);
 
         int i = 10;
         for (String itemName : STOCK_NAMES) {
@@ -84,11 +78,11 @@ public class BuyItemGui implements CommandExecutor, Listener {
             ItemStack placeholder = new ItemStack(commodity.getMaterial());
             ItemMeta meta = placeholder.getItemMeta();
             meta.setDisplayName("§e" + capitalize(itemName));
-            meta.setLore(Arrays.asList("§7Loading price...", "§eClick to view buy options"));
+            meta.setLore(Arrays.asList("§7Loading price...", "§eClick to view selling options"));
             placeholder.setItemMeta(meta);
 
             final int slotIndex = i; // capture current slot
-            BuyItemMenuInventory.setItem(slotIndex, placeholder);
+            SellStockMenuInventory.setItem(slotIndex, placeholder);
 
             // Asynchron Preis und Unit laden und dann Item aktualisieren (on main thread)
             CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
@@ -107,7 +101,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
                 // update inventory synchronously
                 Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
                     // check inventory still exists and slot hasn't been changed
-                    ItemStack itemStack = BuyItemMenuInventory.getItem(slotIndex);
+                    ItemStack itemStack = SellStockMenuInventory.getItem(slotIndex);
                     if (itemStack == null) return;
 
                     ItemMeta m = itemStack.getItemMeta();
@@ -120,10 +114,10 @@ public class BuyItemGui implements CommandExecutor, Listener {
 
                     List<String> lore = new ArrayList<>();
                     lore.add(priceLine);
-                    lore.add("§eClick to view buy options");
+                    lore.add("§eClick to view selling options");
                     m.setLore(lore);
                     itemStack.setItemMeta(m);
-                    BuyItemMenuInventory.setItem(slotIndex, itemStack);
+                    SellStockMenuInventory.setItem(slotIndex, itemStack);
                 });
             });
 
@@ -136,15 +130,11 @@ public class BuyItemGui implements CommandExecutor, Listener {
         ItemMeta skullItemMeta = skull.getItemMeta();
         skullItemMeta.setDisplayName("§6Help");
         skull.setItemMeta(skullItemMeta);
-        BuyItemMenuInventory.setItem(45, skull);
+        SellStockMenuInventory.setItem(45, skull);
     }
 
-    /**
-     * Öffnet das spezifische Kauf-Inventar für eine Aktie.
-     * GUI öffnet sofort mit Platzhalter; echte Werte werden asynchron nachgeladen.
-     */
     public static void openBuyActionInventory(Player player, TradeCommodity commodity) {
-        BuyActionInventory.clear(); // Reset vor dem Öffnen
+        SellStockInventory.clear(); // Reset vor dem Öffnen
 
         // Info Item (Platzhalter)
         ItemStack infoItem = new ItemStack(commodity.getMaterial());
@@ -152,25 +142,25 @@ public class BuyItemGui implements CommandExecutor, Listener {
         infoMeta.setDisplayName("§e" + capitalize(commodity.getCommodityName()));
         infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + Money.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
         infoItem.setItemMeta(infoMeta);
-        BuyActionInventory.setItem(4, infoItem);
+        SellStockInventory.setItem(4, infoItem);
 
         // Buttons als Platzhalter mit price=0 (werden später aktualisiert)
-        BuyActionInventory.setItem(20, createBuyButton(0.0, 1));
-        BuyActionInventory.setItem(22, createBuyButton(0.0, 10));
-        BuyActionInventory.setItem(24, createBuyButton(0.0, 64));
+        SellStockInventory.setItem(20, createBuyButton(0.0, 1));
+        SellStockInventory.setItem(22, createBuyButton(0.0, 10));
+        SellStockInventory.setItem(24, createBuyButton(0.0, 64));
 
         // 3. Standard Navigation
         ItemStack exitItem = new ItemStack(Material.BARRIER);
         ItemMeta exitItemMeta = exitItem.getItemMeta();
         exitItemMeta.setDisplayName("§cClose menu");
         exitItem.setItemMeta(exitItemMeta);
-        BuyActionInventory.setItem(8, exitItem);
+        SellStockInventory.setItem(8, exitItem);
 
         ItemStack backItem = new ItemStack(Material.ARROW);
         ItemMeta backItemMeta = backItem.getItemMeta();
         backItemMeta.setDisplayName("§7Back to overview");
         backItem.setItemMeta(backItemMeta);
-        BuyActionInventory.setItem(0, backItem); // Slot 0 für Zurück
+        SellStockInventory.setItem(0, backItem); // Slot 0 für Zurück
 
         // 4. Filler Glass Panes
         ItemStack fillerItem = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
@@ -179,8 +169,8 @@ public class BuyItemGui implements CommandExecutor, Listener {
         fillerItem.setItemMeta(fillerItemMeta);
 
         for (int idx = 0; idx < 54; idx++) {
-            if (BuyActionInventory.getItem(idx) == null) {
-                BuyActionInventory.setItem(idx, fillerItem);
+            if (SellStockInventory.getItem(idx) == null) {
+                SellStockInventory.setItem(idx, fillerItem);
             }
         }
 
@@ -190,10 +180,10 @@ public class BuyItemGui implements CommandExecutor, Listener {
         ItemMeta skullItemMeta = skull.getItemMeta();
         skullItemMeta.setDisplayName("§6Help");
         skull.setItemMeta(skullItemMeta);
-        BuyActionInventory.setItem(45, skull);
+        SellStockInventory.setItem(45, skull);
 
         // Open inventory immediately
-        player.openInventory(BuyActionInventory);
+        player.openInventory(SellStockInventory);
 
         // Asynchron load price & unit, then update GUI (safely on main thread)
         CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
@@ -212,7 +202,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
         }).whenComplete((pricePerKg, ex) -> {
             Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
                 // Update info item (slot 4) and buttons
-                ItemStack info = BuyActionInventory.getItem(4);
+                ItemStack info = SellStockInventory.getItem(4);
                 if (info != null && info.hasItemMeta()) {
                     ItemMeta im = info.getItemMeta();
                     String priceLine = pricePerKg <= 0.0 ? "§7Price per share: §cN/A" : "§7Price per share: §a" + String.format("%.2f", pricePerKg) + " $/kg";
@@ -222,13 +212,13 @@ public class BuyItemGui implements CommandExecutor, Listener {
                             "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)
                     ));
                     info.setItemMeta(im);
-                    BuyActionInventory.setItem(4, info);
+                    SellStockInventory.setItem(4, info);
                 }
 
                 // Update buttons with real price
-                BuyActionInventory.setItem(20, createBuyButton(pricePerKg, 1));
-                BuyActionInventory.setItem(22, createBuyButton(pricePerKg, 10));
-                BuyActionInventory.setItem(24, createBuyButton(pricePerKg, 64));
+                SellStockInventory.setItem(20, createBuyButton(pricePerKg, 1));
+                SellStockInventory.setItem(22, createBuyButton(pricePerKg, 10));
+                SellStockInventory.setItem(24, createBuyButton(pricePerKg, 64));
             });
         });
     }
@@ -236,7 +226,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
     private static ItemStack createBuyButton(double price, int amount) {
         ItemStack button = new ItemStack(Material.EMERALD);
         ItemMeta meta = button.getItemMeta();
-        meta.setDisplayName("§aBuy " + amount + " shares");
+        meta.setDisplayName("§aSell " + amount + " shares");
 
         String costString;
         if (price <= 0.0) {
@@ -248,7 +238,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
 
         meta.setLore(Arrays.asList(
                 "§7Cost: §c" + costString + (price <= 0.0 ? "" : "$"),
-                "§eClick to purchase"
+                "§eClick to sell"
         ));
         button.setItemMeta(meta);
         return button;
@@ -272,7 +262,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
                 "- Bought shares are added to your digital portfolio.");
 
         bm.setAuthor("StockMarket");
-        bm.setTitle("Buy Help");
+        bm.setTitle("Sell Help");
         helpBook.setItemMeta(bm);
         player.openBook(helpBook);
     }
@@ -290,7 +280,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
                     player.sendMessage("§cUnknown commodity. Opening menu...");
                 }
             }
-            player.openInventory(BuyItemMenuInventory);
+            player.openInventory(SellStockMenuInventory);
         }
         return true;
     }
@@ -306,7 +296,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
         String displayName = clickedItem.getItemMeta().getDisplayName();
 
         // --- Hauptmenü Logik ---
-        if (clickedInv.equals(BuyItemMenuInventory)) {
+        if (clickedInv.equals(SellStockMenuInventory)) {
             event.setCancelled(true); // Nichts herausnehmen
 
             if (displayName.startsWith("§e")) {
@@ -325,7 +315,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
         }
 
         // --- Kauf Menü Logik ---
-        if (clickedInv.equals(BuyActionInventory)) {
+        if (clickedInv.equals(SellStockInventory)) {
             event.setCancelled(true); // Nichts herausnehmen oder verschieben
 
             if (displayName.equals("§cClose menu")) {
@@ -333,7 +323,7 @@ public class BuyItemGui implements CommandExecutor, Listener {
                 return;
             }
             if (displayName.equals("§7Back to overview")) {
-                player.openInventory(BuyItemMenuInventory);
+                player.openInventory(SellStockMenuInventory);
                 return;
             }
             if (displayName.equals("§6Help")) {
@@ -342,8 +332,8 @@ public class BuyItemGui implements CommandExecutor, Listener {
             }
 
             // --- Kauf-Logik im InventoryClickEvent ---
-            if (displayName.startsWith("§aBuy ")) {
-                int amountToBuy = Integer.parseInt(displayName.replace("§aBuy ", "").replace(" shares", ""));
+            if (displayName.startsWith("§aSell ")) {
+                int amountToBuy = Integer.parseInt(displayName.replace("§aSell ", "").replace(" shares", ""));
                 ItemStack infoItem = clickedInv.getItem(4);
                 if (infoItem == null || !infoItem.hasItemMeta()) return;
                 String commodityName = decapitalize(infoItem.getItemMeta().getDisplayName().replace("§e", ""));
@@ -376,21 +366,20 @@ public class BuyItemGui implements CommandExecutor, Listener {
                         double totalCost = Math.round(pricePerKg * amountToBuy * 100.0) / 100.0;
 
                         // Geld prüfen und abziehen
-                        if (Money.get(player) >= totalCost) {
-                            if (Money.remove(player, totalCost)) {
+                        if (PortfolioManager.getStockAmount(player, commodity) >= amountToBuy){
+                            if (Money.add(player, totalCost)) {
                                 int currentStock = PortfolioManager.getStockAmount(player, commodity);
-                                PortfolioManager.updateStock(player, commodity, currentStock + amountToBuy);
+                                PortfolioManager.updateStock(player, commodity, currentStock - amountToBuy);
 
-                                player.sendMessage("§aYou bought §e" + amountToBuy + "§a shares of §6" + capitalize(commodityName) + "§a for §c" + String.format("%.2f", totalCost) + "$");
+                                player.sendMessage("§aYou sold §e" + amountToBuy + "§a shares of §6" + capitalize(commodityName) + "§a for §c" + String.format("%.2f", totalCost) + "$");
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1.3f);
 
                                 openBuyActionInventory(player, commodity); // GUI neu laden
                             } else {
                                 player.sendMessage("§cTransaction failed.");
                             }
-                        } else {
-                            player.sendMessage("§cNot enough money! You need §4" + String.format("%.2f", totalCost) + "$");
-                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0.5f);
+                        }else {
+                            player.sendMessage("§cYou don't have enough stocks to sell.");
                         }
                     });
                 });
@@ -400,21 +389,21 @@ public class BuyItemGui implements CommandExecutor, Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-        if (event.getInventory().equals(BuyItemMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
+        if (event.getInventory().equals(SellStockMenuInventory) || event.getInventory().equals(SellStockInventory)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryMoveItem(InventoryMoveItemEvent event) {
-        if (event.getSource().equals(BuyItemMenuInventory) || event.getSource().equals(BuyActionInventory)) {
+        if (event.getSource().equals(SellStockMenuInventory) || event.getSource().equals(SellStockInventory)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryInteract(InventoryInteractEvent event) {
-        if (event.getInventory().equals(BuyItemMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
+        if (event.getInventory().equals(SellStockMenuInventory) || event.getInventory().equals(SellStockInventory)) {
             event.setCancelled(true);
         }
     }

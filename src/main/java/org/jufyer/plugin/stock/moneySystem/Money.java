@@ -17,9 +17,10 @@ public class Money implements Listener {
         return Math.round(value * 100.0) / 100.0;
     }
 
-    public static void add(Player player, Double value) {
+    public static boolean add(Player player, Double value) {
         wallet.putIfAbsent(player.getUniqueId(), 0.0d);
         wallet.compute(player.getUniqueId(), (k, currentMoney) -> roundTwoDecimals(currentMoney + value));
+        return true;
     }
 
     public static boolean remove(Player player, Double value) {

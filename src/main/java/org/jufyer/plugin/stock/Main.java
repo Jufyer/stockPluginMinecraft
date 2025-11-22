@@ -1,13 +1,7 @@
 package org.jufyer.plugin.stock;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.*;
-import org.bukkit.block.data.type.Slab;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jufyer.plugin.stock.getPrice.FetchFromGitRepo;
@@ -64,9 +58,9 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     //getCommand("sellItems").setExecutor(new SellItemGui());
     Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
 
-    BuyItemGui.setBuyItemMenuInventory();
+    BuyStockGui.setBuyItemMenuInventory();
     //getCommand("buy").setExecutor(new BuyItemGui());
-    Bukkit.getPluginManager().registerEvents(new BuyItemGui(), this);
+    Bukkit.getPluginManager().registerEvents(new BuyStockGui(), this);
 
     VillagerInvTradingWorld.setVillagerInvTradingWorld();
     Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
@@ -78,6 +72,10 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     }
 
     Bukkit.getPluginManager().registerEvents(new Money(), this);
+
+    SellStockGui.setBuyItemMenuInventory();
+    //getCommand("sellItems").setExecutor(new SellItemGui());
+    Bukkit.getPluginManager().registerEvents(new SellStockGui(), this);
   }
 
     @Override
