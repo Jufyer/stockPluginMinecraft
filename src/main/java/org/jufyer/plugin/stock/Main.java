@@ -45,7 +45,6 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     //getCommand("showPrices").setExecutor(new showPrices());
     //getCommand("graphui").setExecutor(new graphui());
 
-    Bukkit.getPluginManager().registerEvents(new LockPlayer(), this);
     Bukkit.getPluginManager().registerEvents(new graphui(), this);
 
     //getCommand("getBlockData").setExecutor(this);
