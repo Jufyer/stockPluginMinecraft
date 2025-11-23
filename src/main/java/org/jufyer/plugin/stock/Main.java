@@ -27,53 +27,39 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
   @Override
   public void onEnable() {
-    instance = this;
+      instance = this;
+      FetchFromGitRepo.update();
 
-//    if (FetchPrice.getPrice(TradeCommodity.WHEAT) != 0) {
-//      double wheatPrice = FetchPrice.getPrice(TradeCommodity.WHEAT);
-//      String wheatUnit = FetchPrice.getUnit(TradeCommodity.WHEAT);
-//
-//      getLogger().info("Wheat Price is: " + wheatPrice + " " + wheatUnit);
-//    }
+      getCommand("stocks").setExecutor(new MainApp());
 
-    FetchFromGitRepo.update();
+      MainApp.invSetup();
+      SellItemGui.setSellItemMenuInventory();
+      SellStockGui.setBuyItemMenuInventory();
+      BuyStockGui.setBuyItemMenuInventory();
+      VillagerInvTradingWorld.setVillagerInvTradingWorld();
 
-    MainApp.invSetup();
-    getCommand("stocks").setExecutor(new MainApp());
-    Bukkit.getPluginManager().registerEvents(new MainApp(), this);
+      Bukkit.getPluginManager().registerEvents(new MainApp(), this);
+      Bukkit.getPluginManager().registerEvents(new graphui(), this);
+      Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
+      Bukkit.getPluginManager().registerEvents(new BuyStockGui(), this);
+      Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
+      Bukkit.getPluginManager().registerEvents(new WorldManager(), this);
+      Bukkit.getPluginManager().registerEvents(new MoneyManager(), this);
+      Bukkit.getPluginManager().registerEvents(new SellStockGui(), this);
 
-    //getCommand("showPrices").setExecutor(new showPrices());
-    //getCommand("graphui").setExecutor(new graphui());
+      for (Player player : Bukkit.getOnlinePlayers()) {
+            loadWallet(player);
+            loadPortfolio(player);
+      }
 
-    Bukkit.getPluginManager().registerEvents(new graphui(), this);
-
-    //getCommand("getBlockData").setExecutor(this);
-
-    //getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
-    //getCommand("buy").setExecutor(new BuyStock());
-
-    SellItemGui.setSellItemMenuInventory();
-    //getCommand("sellItems").setExecutor(new SellItemGui());
-    Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
-
-    BuyStockGui.setBuyItemMenuInventory();
-    //getCommand("buy").setExecutor(new BuyItemGui());
-    Bukkit.getPluginManager().registerEvents(new BuyStockGui(), this);
-
-    VillagerInvTradingWorld.setVillagerInvTradingWorld();
-    Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
-    Bukkit.getPluginManager().registerEvents(new WorldManager(), this);
-
-    for (Player player : Bukkit.getOnlinePlayers()) {
-          loadWallet(player);
-          loadPortfolio(player);
-    }
-
-    Bukkit.getPluginManager().registerEvents(new MoneyManager(), this);
-
-    SellStockGui.setBuyItemMenuInventory();
-    //getCommand("sellItems").setExecutor(new SellItemGui());
-    Bukkit.getPluginManager().registerEvents(new SellStockGui(), this);
+      //getCommand("sellItems").setExecutor(new SellItemGui());
+      //getCommand("buy").setExecutor(new BuyItemGui());
+      //getCommand("showPrices").setExecutor(new showPrices());
+      //getCommand("graphui").setExecutor(new graphui());
+      //getCommand("getBlockData").setExecutor(this);
+      //getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
+      //getCommand("buy").setExecutor(new BuyStock());
+      //getCommand("sellItems").setExecutor(new SellItemGui());
   }
 
     @Override
