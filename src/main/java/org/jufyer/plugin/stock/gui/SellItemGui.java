@@ -301,10 +301,10 @@ public class SellItemGui implements Listener {
 
                         double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
-                        player.sendMessage("Price of "
-                                + item.getItemMeta().getDisplayName()
-                                + "§r is "
-                                + String.format("%.2f", pricePerKilo) + " $/kg");
+//                        player.sendMessage("Price of "
+//                                + item.getItemMeta().getDisplayName()
+//                                + "§r is "
+//                                + String.format("%.2f", pricePerKilo) + " $/kg");
 
             });
 
@@ -397,9 +397,11 @@ public class SellItemGui implements Listener {
                 }
                 itemCount = itemCount -1;
 
-                player.sendMessage("Items: " + String.valueOf(itemCount));
-                player.sendMessage("Shulker: " + String.valueOf(shulkerCount));
-                player.sendMessage("Bundle: " + String.valueOf(bundleCount));
+//                player.sendMessage("Items: " + String.valueOf(itemCount));
+//                player.sendMessage("Shulker: " + String.valueOf(shulkerCount));
+//                player.sendMessage("Bundle: " + String.valueOf(bundleCount));
+
+                //TODO: Player Shulker + Bundle wiedergeben
 
                 SellItemInventory.clear();
                 SellItemInventory.close();
