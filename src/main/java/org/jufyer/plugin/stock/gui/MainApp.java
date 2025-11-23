@@ -187,7 +187,7 @@ public class MainApp implements Listener, CommandExecutor {
         player.setVelocity(new Vector(0, 0, 0));
 
         if (WorldManager.activeTraders.containsKey(player.getUniqueId())) {
-            graphui.executeStuff(player, commodityName);
+            StockGraph.displayStockGraph(player, commodityName);
         } else {
             WorldManager.setupWorld(player, commodityName);
         }

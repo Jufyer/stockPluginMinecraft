@@ -1,16 +1,12 @@
 package org.jufyer.plugin.stock.gui;
 
 import org.bukkit.*;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.Main;
 import org.jufyer.plugin.stock.util.BlockPlacer;
 
@@ -81,7 +77,7 @@ public class WorldManager implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                graphui.executeStuff(player, stock);
+                StockGraph.displayStockGraph(player, stock);
 
                 return;
             }

@@ -30,54 +30,29 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class graphui implements CommandExecutor, Listener, TabCompleter {
+public class StockGraph implements Listener {
 
-    private static final Gson gson = new Gson();
+    private static final Gson GSON = new Gson();
+    private static final Map<Player, List<ItemFrame>> ACTIVE_PLAYER_GRAPHS = new HashMap<>();
+//    private static final List<String> STOCK_NAMES = Arrays.asList(
+//            "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
+//            "cobalt", "silicon", "coal", "natural-gas", "crude-oil", "uranium",
+//            "wheat", "corn", "coffee", "sugar", "cotton", "palm-oil",
+//            "orange-juice", "live-cattle", "milk", "sulfur"
+//    );
+//
+//    @Override
+//    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String @NotNull [] args) {
+//        if (args.length == 1) {
+//            String input = args[0].toLowerCase();
+//            return STOCK_NAMES.stream()
+//                    .filter(name -> name.startsWith(input))
+//                    .collect(Collectors.toList());
+//        }
+//        return List.of();
+//    }
 
-    private static final Map<Player, List<ItemFrame>> ITEM_FRAMES_GRAPH = new HashMap<>();
-
-    private static final List<String> STOCK_NAMES = Arrays.asList(
-            "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
-            "cobalt", "silicon", "coal", "natural-gas", "crude-oil", "uranium",
-            "wheat", "corn", "coffee", "sugar", "cotton", "palm-oil",
-            "orange-juice", "live-cattle", "milk", "sulfur"
-    );
-
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player player)) return true;
-
-        if (args.length == 0) {
-            player.sendMessage("§cPlease name a stock: §e/graphui <stock>");
-            player.sendMessage("§7Available stocks: " + String.join(", ", STOCK_NAMES));
-            return true;
-        }
-
-        String stockName = args[0].toLowerCase();
-
-        // Lade Stock-Daten
-        List<StockDataPoint> dataPoints = loadStockData(stockName);
-
-        if (dataPoints.isEmpty()) {
-            //player.sendMessage("§cNo data for stock '§e" + stockName + "§c' found!");
-            return true;
-        }
-        //player.setRotation(0,0);
-        player.setVelocity(new Vector(0,0,0));
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                executeStuff(player, stockName);
-
-                return;
-            }
-        }.runTaskLater(Main.getInstance(), 10);
-
-        return true;
-    }
-
-    public static void executeStuff(Player player, String stockName) {
+    public static void displayStockGraph(Player player, String stockName) {
 
         List<StockDataPoint> dataPoints = loadStockData(stockName);
 
@@ -86,19 +61,12 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
             return;
         }
 
-//        if (!player.getLocation().getRotation().equals(io.papermc.paper.math.Rotation.rotation(0, 0))){
-//            return;
-//        }
-
-        // Sortiere nach Datum
         dataPoints.sort(Comparator.comparing(d -> d.date));
 
         World world = player.getWorld();
-        //Location startLoc = player.getLocation();
         Location startLoc = WorldManager.activeTraders.get(player.getUniqueId());
         BlockFace facing = getCardinalDirection(player);
 
-        // Berechne die Richtung für die Item Frames
         int xOffset = 0, zOffset = 0;
         int xStep = 0, zStep = 0;
         Rotation rotation = Rotation.NONE;
@@ -110,15 +78,12 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
         rotation = Rotation.FLIPPED;
 
 
+        int MAX_GRAPH_POINTS = 896;
+        List<StockDataPoint> sampledData = downsampleData(dataPoints, MAX_GRAPH_POINTS);
 
-        // Sample Daten für bessere Darstellung (max 896 Punkte für 7 Maps)
-        List<StockDataPoint> sampledData = sampleData(dataPoints, 896);
-
-        // 7x4 Grid (28 Maps)
         int mapsPerRow = 7;
         int rows = 4;
 
-        // Startposition zentrieren
         double startX = startLoc.getX() + (xOffset * 2) - (xStep * 3);
         double startY = startLoc.getY() + 4;
         double startZ = startLoc.getZ() + (zOffset * 7) - (zStep * 3);
@@ -131,7 +96,6 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
 
                 Location frameLoc = new Location(world, x, y, z, 0, 0);
 
-                // Item Frame spawnen
                 ItemFrame frame = (ItemFrame) world.spawnEntity(frameLoc, EntityType.ITEM_FRAME);
 
                 frame.setFacingDirection(BlockFace.SOUTH);
@@ -139,20 +103,17 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
                 frame.setFixed(true);
                 frame.setInvulnerable(true);
                 frame.setCustomNameVisible(false);
-                //frame.setRotation(rotation);
 
-                // Map erstellen
                 MapView view = Bukkit.createMap(world);
                 view.getRenderers().clear();
                 view.setScale(MapView.Scale.NORMAL);
                 view.setTrackingPosition(false);
-                view.addRenderer(new StockGraphRenderer(sampledData, col, row, mapsPerRow, rows, stockName));
+                view.addRenderer(new StockMapRenderer(sampledData, col, row, mapsPerRow, rows, stockName));
 
                 ItemStack mapItem = new ItemStack(Material.FILLED_MAP);
                 MapMeta meta = (MapMeta) mapItem.getItemMeta();
                 if (meta != null) {
                     meta.setMapView(view);
-                    //meta.setDisplayName("§6" + stockName.toUpperCase() + " [" + col + "," + row + "]");
                     mapItem.setItemMeta(meta);
                 }
 
@@ -160,7 +121,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
                 frame.setItem(mapItem);
                 frame.setItemDropChance(0);
 
-                ITEM_FRAMES_GRAPH.computeIfAbsent(player, k -> new ArrayList<>()).add(frame);
+                ACTIVE_PLAYER_GRAPHS.computeIfAbsent(player, k -> new ArrayList<>()).add(frame);
 
                 for (Player p : Bukkit.getServer().getOnlinePlayers()) {
                     if (p.equals(player)) continue;
@@ -168,9 +129,6 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
                 }
             }
         }
-
-        //player.sendMessage("§a✓ Graph for §e" + stockName + " §acreated! (§7" + dataPoints.size() + " Datapoints§a)");
-        //sendExitMessage(player);
     }
 
 
@@ -184,7 +142,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
         }
 
         try (FileReader reader = new FileReader(stockFile)) {
-            JsonArray array = gson.fromJson(reader, JsonArray.class);
+            JsonArray array = GSON.fromJson(reader, JsonArray.class);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
 
             for (int i = 0; i < array.size(); i++) {
@@ -195,7 +153,6 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
                     String currency = obj.get("currency").getAsString();
                     points.add(new StockDataPoint(date, value, currency));
                 } catch (Exception e) {
-                    // false entry skip
                 }
             }
         } catch (Exception e) {
@@ -205,7 +162,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
         return points;
     }
 
-    private static List<StockDataPoint> sampleData(List<StockDataPoint> data, int maxPoints) {
+    private static List<StockDataPoint> downsampleData(List<StockDataPoint> data, int maxPoints) {
         if (data.size() <= maxPoints) {
             return new ArrayList<>(data);
         }
@@ -223,7 +180,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
 
     private static BlockFace getCardinalDirection(Player player) {
         float yaw = player.getLocation().getYaw();
-        yaw = (yaw % 360 + 360) % 360; // Normalisieren auf 0–360°
+        yaw = (yaw % 360 + 360) % 360;
 
         if (yaw >= 315 || yaw < 45)
             return BlockFace.SOUTH;
@@ -233,18 +190,6 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
             return BlockFace.NORTH;
         else
             return BlockFace.EAST;
-    }
-
-
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String @NotNull [] args) {
-        if (args.length == 1) {
-            String input = args[0].toLowerCase();
-            return STOCK_NAMES.stream()
-                    .filter(name -> name.startsWith(input))
-                    .collect(Collectors.toList());
-        }
-        return List.of();
     }
 
     private static class StockDataPoint {
@@ -259,13 +204,13 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
         }
     }
 
-    public static class StockGraphRenderer extends MapRenderer {
+    public static class StockMapRenderer extends MapRenderer {
         private final List<StockDataPoint> dataPoints;
         private final int tileX, tileY;
         private final int tilesWide, tilesHigh;
         private final String stockName;
 
-        public StockGraphRenderer(List<StockDataPoint> dataPoints, int tileX, int tileY, int tilesWide, int tilesHigh, String stockName) {
+        public StockMapRenderer(List<StockDataPoint> dataPoints, int tileX, int tileY, int tilesWide, int tilesHigh, String stockName) {
             this.dataPoints = dataPoints;
             this.tileX = tileX;
             this.tileY = tileY;
@@ -287,7 +232,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
             double minValue = dataPoints.stream().mapToDouble(p -> p.value).min().orElse(0);
             double maxValue = dataPoints.stream().mapToDouble(p -> p.value).max().orElse(100);
             double valueRange = maxValue - minValue;
-            if (valueRange == 0) valueRange = 1; // Vermeide Division durch 0
+            if (valueRange == 0) valueRange = 1;
 
             int totalWidth = tilesWide * 128;
             int totalHeight = tilesHigh * 128;
@@ -332,28 +277,28 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
                 int globalX2 = axisX + ((i + 1) * graphWidth / dataPoints.size());
                 int globalY2 = axisY - (int) (norm2 * graphHeight);
 
-                if (lineIntersectsTile(globalX1, globalY1, globalX2, globalY2, offsetX, offsetY)) {
+                if (isLineSegmentVisible(globalX1, globalY1, globalX2, globalY2, offsetX, offsetY)) {
                     int localX1 = globalX1 - offsetX;
                     int localY1 = globalY1 - offsetY;
                     int localX2 = globalX2 - offsetX;
                     int localY2 = globalY2 - offsetY;
 
                     byte color = (value2 >= value1) ? MapPalette.LIGHT_GREEN : MapPalette.RED;
-                    drawLine(canvas, localX1, localY1, localX2, localY2, color);
+                    drawBresenhamLine(canvas, localX1, localY1, localX2, localY2, color);
                 }
             }
 
             if (tileX == 0 && tileY == 0) {
-                drawText(canvas, 2, 5, stockName.toUpperCase());
-                drawText(canvas, 2, 15, String.format("%.2f", maxValue));
+                drawMapText(canvas, 2, 5, stockName.toUpperCase());
+                drawMapText(canvas, 2, 15, String.format("%.2f", maxValue));
             }
             if (tileX == 0 && offsetY <= axisY && offsetY + 128 > axisY) {
                 int localAxisY = axisY - offsetY;
-                drawText(canvas, 2, localAxisY - 5, String.format("%.2f", minValue));
+                drawMapText(canvas, 2, localAxisY - 5, String.format("%.2f", minValue));
             }
         }
 
-        private boolean lineIntersectsTile(int x1, int y1, int x2, int y2, int tileX, int tileY) {
+        private boolean isLineSegmentVisible(int x1, int y1, int x2, int y2, int tileX, int tileY) {
             int tileRight = tileX + 128;
             int tileBottom = tileY + 128;
 
@@ -370,7 +315,7 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
             return !(maxX < tileX || minX >= tileRight || maxY < tileY || minY >= tileBottom);
         }
 
-        private void drawLine(MapCanvas canvas, int x1, int y1, int x2, int y2, byte color) {
+        private void drawBresenhamLine(MapCanvas canvas, int x1, int y1, int x2, int y2, byte color) {
             int dx = Math.abs(x2 - x1);
             int dy = Math.abs(y2 - y1);
             int sx = x1 < x2 ? 1 : -1;
@@ -387,85 +332,16 @@ public class graphui implements CommandExecutor, Listener, TabCompleter {
             }
         }
 
-        private void drawText(MapCanvas canvas, int x, int y, String text) {
+        private void drawMapText(MapCanvas canvas, int x, int y, String text) {
             MapFont font = MinecraftFont.Font;
             canvas.drawText(x, y, font, text);
         }
     }
 
-    /*private static final Map<String, UUID> clickMap = new HashMap<>();
-
-    public static void registerClick(String key, Player player) {
-        clickMap.put(key, player.getUniqueId());
-    }
-
-    public static boolean isValid(String key, Player player) {
-        UUID stored = clickMap.get(key);
-        if (stored != null && stored.equals(player.getUniqueId())) {
-            clickMap.remove(key); // Einmalig gültig
-            return true;
-        }
-        return false;
-    }
-
-    public static void clear(Player player) {
-        clickMap.values().removeIf(uuid -> uuid.equals(player.getUniqueId()));
-    }
-
-    public static void sendExitMessage(Player player){
-        String clickKey = UUID.randomUUID().toString();
-
-        TextComponent wheat = new TextComponent("§6§lExit Graph");
-        wheat.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/_internal_ " + clickKey));
-        wheat.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder("§7Click here to unlock").create()));
-
-        player.spigot().sendMessage(wheat);
-
-        registerClick(clickKey, player);
-    }
-
-    @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent e) {
-        String msg = e.getMessage();
-        Player player = e.getPlayer();
-
-        if (msg.startsWith("/_internal_ ")) {
-            e.setCancelled(true);
-            String key = msg.substring("/_internal_ ".length());
-
-            if (isValid(key, player)) {
-                LockPlayer.unlock(player);
-
-                List<ItemFrame> frames = ITEM_FRAMES_GRAPH.remove(player);
-                if (frames != null) {
-                    for (ItemFrame frame : frames) {
-                        frame.setItem(new ItemStack(Material.AIR));
-                        frame.remove();
-                    }
-                }
-
-                player.sendMessage("§aYou have been unlocked!");
-            } else {
-                player.sendMessage("§cInvalid or expired click.");
-            }
-        }
-    }*/
-
-    /*@EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            if (p.equals(player)) continue;
-            if (ITEM_FRAMES_GRAPH.get(p) == null) continue;
-            for (ItemFrame itemFrame : ITEM_FRAMES_GRAPH.get(p)) {
-                player.hideEntity(Main.getInstance(), itemFrame);
-            }
-        }
-    }*/
-
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-
+        if (event.getPlayer().getLocation().getWorld().equals(Bukkit.getWorld("trade_world"))) {
+            WorldManager.endTrade(event.getPlayer());
+        }
     }
 }

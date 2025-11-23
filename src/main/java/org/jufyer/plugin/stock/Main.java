@@ -35,11 +35,11 @@ public final class Main extends JavaPlugin implements CommandExecutor {
       MainApp.invSetup();
       SellItemGui.setSellItemMenuInventory();
       SellStockGui.setBuyItemMenuInventory();
-      BuyStockGui.setBuyItemMenuInventory();
+      BuyStockGui.setBuyStockMenuInventory();
       VillagerInvTradingWorld.setVillagerInvTradingWorld();
 
       Bukkit.getPluginManager().registerEvents(new MainApp(), this);
-      Bukkit.getPluginManager().registerEvents(new graphui(), this);
+      Bukkit.getPluginManager().registerEvents(new StockGraph(), this);
       Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
       Bukkit.getPluginManager().registerEvents(new BuyStockGui(), this);
       Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);

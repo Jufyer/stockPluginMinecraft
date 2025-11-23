@@ -35,7 +35,7 @@ import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 public class BuyStockGui implements CommandExecutor, Listener {
 
     // Inventare analog zur SellItemGui
-    public static Inventory BuyItemMenuInventory = Bukkit.createInventory(null, 54, "§aBuy stock menu");
+    public static Inventory BuyStockMenuInventory = Bukkit.createInventory(null, 54, "§aBuy stock menu");
     public static Inventory BuyActionInventory = Bukkit.createInventory(null, 54, "§2Select amount to buy");
 
     // Blockierte Slots für das Layout (Rand)
@@ -48,20 +48,20 @@ public class BuyStockGui implements CommandExecutor, Listener {
             "orange-juice", "live-cattle", "milk", "sulfur"
     );
 
-    public static void setBuyItemMenuInventory() {
-        BuyItemMenuInventory.clear();
+    public static void setBuyStockMenuInventory() {
+        BuyStockMenuInventory.clear();
 
         ItemStack backItem = new ItemStack(Material.ARROW);
         ItemMeta backItemMeta = backItem.getItemMeta();
         backItemMeta.setDisplayName("§7Back to overview");
         backItem.setItemMeta(backItemMeta);
-        BuyItemMenuInventory.setItem(0, backItem);
+        BuyStockMenuInventory.setItem(0, backItem);
 
         ItemStack exitItem = new ItemStack(Material.BARRIER);
         ItemMeta exitItemMeta = exitItem.getItemMeta();
         exitItemMeta.setDisplayName("§cClose menu");
         exitItem.setItemMeta(exitItemMeta);
-        BuyItemMenuInventory.setItem(8, exitItem);
+        BuyStockMenuInventory.setItem(8, exitItem);
 
         int i = 10;
         for (String itemName : STOCK_NAMES) {
@@ -84,7 +84,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
             placeholder.setItemMeta(meta);
 
             final int slotIndex = i; // capture current slot
-            BuyItemMenuInventory.setItem(slotIndex, placeholder);
+            BuyStockMenuInventory.setItem(slotIndex, placeholder);
 
             // Asynchron Preis und Unit laden und dann Item aktualisieren (on main thread)
             CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
@@ -103,7 +103,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
                 // update inventory synchronously
                 Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
                     // check inventory still exists and slot hasn't been changed
-                    ItemStack itemStack = BuyItemMenuInventory.getItem(slotIndex);
+                    ItemStack itemStack = BuyStockMenuInventory.getItem(slotIndex);
                     if (itemStack == null) return;
 
                     ItemMeta m = itemStack.getItemMeta();
@@ -119,7 +119,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
                     lore.add("§eClick to view buy options");
                     m.setLore(lore);
                     itemStack.setItemMeta(m);
-                    BuyItemMenuInventory.setItem(slotIndex, itemStack);
+                    BuyStockMenuInventory.setItem(slotIndex, itemStack);
                 });
             });
 
@@ -132,7 +132,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
         ItemMeta skullItemMeta = skull.getItemMeta();
         skullItemMeta.setDisplayName("§6Help");
         skull.setItemMeta(skullItemMeta);
-        BuyItemMenuInventory.setItem(45, skull);
+        BuyStockMenuInventory.setItem(45, skull);
     }
 
     public static void openBuyActionInventory(Player player, TradeCommodity commodity) {
@@ -282,7 +282,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
                     player.sendMessage("§cUnknown commodity. Opening menu...");
                 }
             }
-            player.openInventory(BuyItemMenuInventory);
+            player.openInventory(BuyStockMenuInventory);
         }
         return true;
     }
@@ -298,7 +298,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
         String displayName = clickedItem.getItemMeta().getDisplayName();
 
         // --- Hauptmenü Logik ---
-        if (clickedInv.equals(BuyItemMenuInventory)) {
+        if (clickedInv.equals(BuyStockMenuInventory)) {
             event.setCancelled(true); // Nichts herausnehmen
 
             if (displayName.startsWith("§e")) {
@@ -325,7 +325,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
                 return;
             }
             if (displayName.equals("§7Back to overview")) {
-                player.openInventory(BuyItemMenuInventory);
+                player.openInventory(BuyStockMenuInventory);
                 return;
             }
             if (displayName.equals("§6Help")) {
@@ -392,21 +392,21 @@ public class BuyStockGui implements CommandExecutor, Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-        if (event.getInventory().equals(BuyItemMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
+        if (event.getInventory().equals(BuyStockMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryMoveItem(InventoryMoveItemEvent event) {
-        if (event.getSource().equals(BuyItemMenuInventory) || event.getSource().equals(BuyActionInventory)) {
+        if (event.getSource().equals(BuyStockMenuInventory) || event.getSource().equals(BuyActionInventory)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryInteract(InventoryInteractEvent event) {
-        if (event.getInventory().equals(BuyItemMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
+        if (event.getInventory().equals(BuyStockMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
             event.setCancelled(true);
         }
     }

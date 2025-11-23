@@ -67,7 +67,7 @@ public class VillagerInvTradingWorld implements Listener {
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Sell Items")) {
                 player.openInventory(SellItemGui.SellItemMenuInventory);
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Buy Stocks")) {
-                player.openInventory(BuyStockGui.BuyItemMenuInventory);
+                player.openInventory(BuyStockGui.BuyStockMenuInventory);
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("§cClose Menu")) {
                 event.getInventory().close();
             } else if (event.getInventory().equals(VillagerInvTradingWorld) && event.getCurrentItem().getItemMeta().getDisplayName().equals("Sell Stocks")) {
