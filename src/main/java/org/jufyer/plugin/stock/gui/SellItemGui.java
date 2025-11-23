@@ -17,13 +17,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.Main;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
-import org.jufyer.plugin.stock.moneySystem.Money;
+import org.jufyer.plugin.stock.moneySystem.MoneyManager;
 import org.jufyer.plugin.stock.util.UnitConverter;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
+import static org.jufyer.plugin.stock.util.UtilityMethods.capitalize;
+import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 
 public class SellItemGui implements CommandExecutor, Listener {
     public static Inventory SellItemMenuInventory = Bukkit.createInventory(null, 54, "§6Sell item menu");
@@ -441,8 +443,8 @@ public class SellItemGui implements CommandExecutor, Listener {
                     }
 
                 double wholePrice = pricePerUnit * finalItemCount;
-                Money.add(player, wholePrice);
-                player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: " +  Money.getFormatted(player) +  " USD!", wholePrice));
+                MoneyManager.add(player, wholePrice);
+                player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: " +  MoneyManager.getFormatted(player) +  " USD!", wholePrice));
                 });
                 event.setCancelled(true);
             }
@@ -509,33 +511,5 @@ public class SellItemGui implements CommandExecutor, Listener {
         if (event.getInventory().equals(SellItemMenuInventory)) {
             event.setCancelled(true);
         }
-    }
-
-    private static String capitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-
-        text = text.replace("-", " ");
-
-        String[] words = text.split(" ");
-        StringBuilder result = new StringBuilder();
-
-        for (String word : words) {
-            if (word.isEmpty()) continue;
-            result.append(Character.toUpperCase(word.charAt(0)))
-                    .append(word.substring(1).toLowerCase())
-                    .append(" ");
-        }
-
-        return result.toString().trim();
-    }
-
-    private static String decapitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-
-        text = text.toLowerCase();
-
-        text = text.replace(" ", "-");
-
-        return text;
     }
 }

@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
-import org.jufyer.plugin.stock.moneySystem.Money;
+import org.jufyer.plugin.stock.moneySystem.MoneyManager;
 import org.jufyer.plugin.stock.moneySystem.PortfolioManager;
 import org.jufyer.plugin.stock.util.UnitConverter;
 import org.jufyer.plugin.stock.Main;
@@ -29,6 +29,8 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
+import static org.jufyer.plugin.stock.util.UtilityMethods.capitalize;
+import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 
 public class BuyStockGui implements CommandExecutor, Listener {
 
@@ -46,12 +48,6 @@ public class BuyStockGui implements CommandExecutor, Listener {
             "orange-juice", "live-cattle", "milk", "sulfur"
     );
 
-    /**
-     * Initialisiert das Hauptmenü mit allen verfügbaren Aktien.
-     * Diese Methode sollte beim Plugin-Start einmal aufgerufen werden.
-     *
-     * GUI wird sofort mit Platzhaltern gefüllt; Preise kommen später asynchron.
-     */
     public static void setBuyItemMenuInventory() {
         BuyItemMenuInventory.clear();
 
@@ -139,10 +135,6 @@ public class BuyStockGui implements CommandExecutor, Listener {
         BuyItemMenuInventory.setItem(45, skull);
     }
 
-    /**
-     * Öffnet das spezifische Kauf-Inventar für eine Aktie.
-     * GUI öffnet sofort mit Platzhalter; echte Werte werden asynchron nachgeladen.
-     */
     public static void openBuyActionInventory(Player player, TradeCommodity commodity) {
         BuyActionInventory.clear(); // Reset vor dem Öffnen
 
@@ -150,7 +142,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
         ItemStack infoItem = new ItemStack(commodity.getMaterial());
         ItemMeta infoMeta = infoItem.getItemMeta();
         infoMeta.setDisplayName("§e" + capitalize(commodity.getCommodityName()));
-        infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + Money.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
+        infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + MoneyManager.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
         infoItem.setItemMeta(infoMeta);
         BuyActionInventory.setItem(4, infoItem);
 
@@ -218,7 +210,7 @@ public class BuyStockGui implements CommandExecutor, Listener {
                     String priceLine = pricePerKg <= 0.0 ? "§7Price per share: §cN/A" : "§7Price per share: §a" + String.format("%.2f", pricePerKg) + " $/kg";
                     im.setLore(Arrays.asList(
                             priceLine,
-                            "§7Your money: §6" + Money.getFormatted(player) + "$",
+                            "§7Your money: §6" + MoneyManager.getFormatted(player) + "$",
                             "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)
                     ));
                     info.setItemMeta(im);
@@ -376,8 +368,8 @@ public class BuyStockGui implements CommandExecutor, Listener {
                         double totalCost = Math.round(pricePerKg * amountToBuy * 100.0) / 100.0;
 
                         // Geld prüfen und abziehen
-                        if (Money.get(player) >= totalCost) {
-                            if (Money.remove(player, totalCost)) {
+                        if (MoneyManager.get(player) >= totalCost) {
+                            if (MoneyManager.remove(player, totalCost)) {
                                 int currentStock = PortfolioManager.getStockAmount(player, commodity);
                                 PortfolioManager.updateStock(player, commodity, currentStock + amountToBuy);
 
@@ -417,26 +409,5 @@ public class BuyStockGui implements CommandExecutor, Listener {
         if (event.getInventory().equals(BuyItemMenuInventory) || event.getInventory().equals(BuyActionInventory)) {
             event.setCancelled(true);
         }
-    }
-
-    private static String capitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        text = text.replace("-", " ");
-        String[] words = text.split(" ");
-        StringBuilder result = new StringBuilder();
-        for (String word : words) {
-            if (word.isEmpty()) continue;
-            result.append(Character.toUpperCase(word.charAt(0)))
-                    .append(word.substring(1).toLowerCase())
-                    .append(" ");
-        }
-        return result.toString().trim();
-    }
-
-    private static String decapitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        text = text.toLowerCase();
-        text = text.replace(" ", "-");
-        return text;
     }
 }

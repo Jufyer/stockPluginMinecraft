@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
-import org.jufyer.plugin.stock.moneySystem.Money;
+import org.jufyer.plugin.stock.moneySystem.MoneyManager;
 import org.jufyer.plugin.stock.moneySystem.PortfolioManager;
 import org.jufyer.plugin.stock.util.UnitConverter;
 import org.jufyer.plugin.stock.Main;
@@ -29,6 +29,8 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
+import static org.jufyer.plugin.stock.util.UtilityMethods.capitalize;
+import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 
 public class SellStockGui implements CommandExecutor, Listener {
 
@@ -140,7 +142,7 @@ public class SellStockGui implements CommandExecutor, Listener {
         ItemStack infoItem = new ItemStack(commodity.getMaterial());
         ItemMeta infoMeta = infoItem.getItemMeta();
         infoMeta.setDisplayName("§e" + capitalize(commodity.getCommodityName()));
-        infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + Money.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
+        infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + MoneyManager.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
         infoItem.setItemMeta(infoMeta);
         SellStockInventory.setItem(4, infoItem);
 
@@ -208,7 +210,7 @@ public class SellStockGui implements CommandExecutor, Listener {
                     String priceLine = pricePerKg <= 0.0 ? "§7Price per share: §cN/A" : "§7Price per share: §a" + String.format("%.2f", pricePerKg) + " $/kg";
                     im.setLore(Arrays.asList(
                             priceLine,
-                            "§7Your money: §6" + Money.getFormatted(player) + "$",
+                            "§7Your money: §6" + MoneyManager.getFormatted(player) + "$",
                             "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)
                     ));
                     info.setItemMeta(im);
@@ -369,7 +371,7 @@ public class SellStockGui implements CommandExecutor, Listener {
 
                         // Geld prüfen und abziehen
                         if (PortfolioManager.getStockAmount(player, commodity) >= amountToBuy){
-                            if (Money.add(player, totalCost)) {
+                            if (MoneyManager.add(player, totalCost)) {
                                 int currentStock = PortfolioManager.getStockAmount(player, commodity);
                                 PortfolioManager.updateStock(player, commodity, currentStock - amountToBuy);
 
@@ -408,26 +410,5 @@ public class SellStockGui implements CommandExecutor, Listener {
         if (event.getInventory().equals(SellStockMenuInventory) || event.getInventory().equals(SellStockInventory)) {
             event.setCancelled(true);
         }
-    }
-
-    private static String capitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        text = text.replace("-", " ");
-        String[] words = text.split(" ");
-        StringBuilder result = new StringBuilder();
-        for (String word : words) {
-            if (word.isEmpty()) continue;
-            result.append(Character.toUpperCase(word.charAt(0)))
-                    .append(word.substring(1).toLowerCase())
-                    .append(" ");
-        }
-        return result.toString().trim();
-    }
-
-    private static String decapitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        text = text.toLowerCase();
-        text = text.replace(" ", "-");
-        return text;
     }
 }

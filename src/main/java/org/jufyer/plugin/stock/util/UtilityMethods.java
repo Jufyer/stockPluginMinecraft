@@ -20,4 +20,25 @@ public class UtilityMethods {
             }
         });
     }
+
+    public static String capitalize(String text) {
+        if (text == null || text.isEmpty()) return text;
+        text = text.replace("-", " ");
+        String[] words = text.split(" ");
+        StringBuilder result = new StringBuilder();
+        for (String word : words) {
+            if (word.isEmpty()) continue;
+            result.append(Character.toUpperCase(word.charAt(0)))
+                    .append(word.substring(1).toLowerCase())
+                    .append(" ");
+        }
+        return result.toString().trim();
+    }
+
+    public static String decapitalize(String text) {
+        if (text == null || text.isEmpty()) return text;
+        text = text.toLowerCase();
+        text = text.replace(" ", "-");
+        return text;
+    }
 }

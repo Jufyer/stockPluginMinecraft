@@ -22,6 +22,9 @@ import org.jufyer.plugin.stock.util.UnitConverter;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.jufyer.plugin.stock.util.UtilityMethods.capitalize;
+import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
+
 public class MainApp implements Listener, CommandExecutor {
 
     public static Inventory MainApp = Bukkit.createInventory(null, 54, "§rStocks");
@@ -188,17 +191,5 @@ public class MainApp implements Listener, CommandExecutor {
         } else {
             WorldManager.setupWorld(player, commodityName);
         }
-    }
-
-    private static String decapitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        return text.replace(" ", "-").toLowerCase();
-    }
-
-    private static String capitalize(String text) {
-        if (text == null || text.isEmpty()) return text;
-        return Arrays.stream(text.split(" "))
-                .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1))
-                .reduce((a, b) -> a + " " + b).orElse(text);
     }
 }

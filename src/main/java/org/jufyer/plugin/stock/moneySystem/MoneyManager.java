@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 
 import static org.jufyer.plugin.stock.Main.wallet;
 
-public class Money implements Listener {
+public class MoneyManager implements Listener {
 
     // Rundet einen double-Wert auf 2 Nachkommastellen
     private static double roundTwoDecimals(double value) {

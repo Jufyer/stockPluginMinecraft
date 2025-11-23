@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jufyer.plugin.stock.getPrice.FetchFromGitRepo;
 import org.jufyer.plugin.stock.gui.*;
-import org.jufyer.plugin.stock.moneySystem.Money;
-import org.jufyer.plugin.stock.util.LockPlayer;
+import org.jufyer.plugin.stock.moneySystem.MoneyManager;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -71,7 +70,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
           loadPortfolio(player);
     }
 
-    Bukkit.getPluginManager().registerEvents(new Money(), this);
+    Bukkit.getPluginManager().registerEvents(new MoneyManager(), this);
 
     SellStockGui.setBuyItemMenuInventory();
     //getCommand("sellItems").setExecutor(new SellItemGui());
