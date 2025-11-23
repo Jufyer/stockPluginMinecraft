@@ -23,12 +23,12 @@ public class WorldManager implements Listener {
     private static final int SLOT_DISTANCE = 50;
     public static final NamespacedKey VILLAGER_TRADING_KEY = new NamespacedKey(Main.getInstance(), "VILLAGER_TRADING");
 
-    private static final List<String> STOCK_NAMES = Arrays.asList(
-            "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
-            "cobalt", "silicon", "coal", "natural-gas", "crude-oil", "uranium",
-            "wheat", "corn", "coffee", "sugar", "cotton", "palm-oil",
-            "orange-juice", "live-cattle", "milk", "sulfur"
-    );
+//    private static final List<String> STOCK_NAMES = Arrays.asList(
+//            "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
+//            "cobalt", "silicon", "coal", "natural-gas", "crude-oil", "uranium",
+//            "wheat", "corn", "coffee", "sugar", "cotton", "palm-oil",
+//            "orange-juice", "live-cattle", "milk", "sulfur"
+//    );
 
     public static void setupWorld(Player player, String stock) {
         World tradeWorld = Bukkit.getWorld("trade_world");

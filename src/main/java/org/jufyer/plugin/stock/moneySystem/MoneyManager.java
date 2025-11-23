@@ -12,7 +12,6 @@ import static org.jufyer.plugin.stock.Main.wallet;
 
 public class MoneyManager implements Listener {
 
-    // Rundet einen double-Wert auf 2 Nachkommastellen
     private static double roundTwoDecimals(double value) {
         return Math.round(value * 100.0) / 100.0;
     }
@@ -36,7 +35,6 @@ public class MoneyManager implements Listener {
         return roundTwoDecimals(wallet.get(player.getUniqueId()));
     }
 
-    // Neue Methode für formatierten Wert mit Tsd., Mio., Mrd., Bio.
     public static String getFormatted(Player player) {
         wallet.putIfAbsent(player.getUniqueId(), 0.0d);
         double value = roundTwoDecimals(wallet.get(player.getUniqueId()));
@@ -55,7 +53,7 @@ public class MoneyManager implements Listener {
     }
 
     private static String formatDecimal(double number) {
-        DecimalFormat df = new DecimalFormat("#,##0.##"); // max. 2 Nachkommastellen
+        DecimalFormat df = new DecimalFormat("#,##0.##");
         return df.format(number);
     }
 

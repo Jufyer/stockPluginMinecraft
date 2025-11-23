@@ -90,7 +90,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
         File walletFile = new File(dataFolder, player.getUniqueId().toString() + ".txt");
         if (!walletFile.exists()) {
-            wallet.put(player.getUniqueId(), 0.0); // Standard-Wallet = 0
+            wallet.put(player.getUniqueId(), 0.0);
             return;
         }
 
@@ -128,7 +128,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
         File portfolioFile = new File(dataFolder, player.getUniqueId().toString() + ".txt");
         if (!portfolioFile.exists()) {
-            portfolio.put(player.getUniqueId(), new HashMap<>()); // Leeres Portfolio
+            portfolio.put(player.getUniqueId(), new HashMap<>());
             return;
         }
 

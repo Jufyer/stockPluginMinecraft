@@ -27,7 +27,7 @@ import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
 import static org.jufyer.plugin.stock.util.UtilityMethods.capitalize;
 import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 
-public class SellItemGui implements CommandExecutor, Listener {
+public class SellItemGui implements Listener {
     public static Inventory SellItemMenuInventory = Bukkit.createInventory(null, 54, "§6Sell item menu");
     public static Inventory SellItemInventory = Bukkit.createInventory(null, 54, "§4Put the items below!");
 
@@ -66,13 +66,11 @@ public class SellItemGui implements CommandExecutor, Listener {
         int i = 10;
         for (String itemName : STOCK_NAMES) {
 
-            // Freie Slots überspringen
             while (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36) i++;
 
             TradeCommodity commodity = TradeCommodity.fromCommodityName(itemName);
             Material mat = commodity.getMaterial();
 
-            // Platzhalter-Item (damit GUI sofort geladen wird)
             ItemStack placeholder = new ItemStack(mat);
             ItemMeta placeholderMeta = placeholder.getItemMeta();
             placeholderMeta.setDisplayName("§e" + capitalize(itemName));
@@ -83,7 +81,6 @@ public class SellItemGui implements CommandExecutor, Listener {
 
             int slot = i;
 
-            // Async Preis laden
             FetchFromDataFolder.getLatestByName(commodity).thenAccept(json -> {
                 if (json == null) return;
 
@@ -258,14 +255,14 @@ public class SellItemGui implements CommandExecutor, Listener {
         player.openBook(HelpSellBook);
     }
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
-        if (commandSender instanceof Player player) {
-            player.openInventory(SellItemMenuInventory);
-        }
-
-        return false;
-    }
+//    @Override
+//    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
+//        if (commandSender instanceof Player player) {
+//            player.openInventory(SellItemMenuInventory);
+//        }
+//
+//        return false;
+//    }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {

@@ -12,12 +12,12 @@ import java.util.UUID;
 import static org.jufyer.plugin.stock.Main.portfolio;
 
 public class PortfolioManager {
-    private static final List<String> STOCK_NAMES = Arrays.asList(
-            "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
-            "cobalt", "silicon", "coal", "natural-gas", "crude-oil", "uranium",
-            "wheat", "corn", "coffee", "sugar", "cotton", "palm-oil",
-            "orange-juice", "live-cattle", "milk", "sulfur"
-    );
+//    private static final List<String> STOCK_NAMES = Arrays.asList(
+//            "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
+//            "cobalt", "silicon", "coal", "natural-gas", "crude-oil", "uranium",
+//            "wheat", "corn", "coffee", "sugar", "cotton", "palm-oil",
+//            "orange-juice", "live-cattle", "milk", "sulfur"
+//    );
 
     public static void updateStock(Player player, TradeCommodity commodity, Integer newAmount) {
         UUID playerUUID = player.getUniqueId();

@@ -36,7 +36,6 @@ public class MainApp implements Listener, CommandExecutor {
             "orange-juice", "live-cattle", "milk", "sulfur"
     );
 
-    // Slots im inneren Rechteck
     private static final int[] INNER_SLOTS = new int[28];
 
     static {
@@ -50,7 +49,6 @@ public class MainApp implements Listener, CommandExecutor {
 
     public static void invSetup() {
 
-        // Erstmal: Placeholder Icons (damit GUI sofort sichtbar ist)
         int i = 0;
         for (String stockName : STOCK_NAMES) {
 
@@ -68,7 +66,6 @@ public class MainApp implements Listener, CommandExecutor {
             MainApp.setItem(INNER_SLOTS[i], loading);
             i++;
 
-            // Jetzt: async Preis laden und später aktualisieren
             int slot = INNER_SLOTS[i - 1];
             FetchFromDataFolder.getLatestByName(commodity).thenAccept(json -> {
 

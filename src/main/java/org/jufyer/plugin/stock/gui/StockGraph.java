@@ -65,18 +65,9 @@ public class StockGraph implements Listener {
 
         World world = player.getWorld();
         Location startLoc = WorldManager.activeTraders.get(player.getUniqueId());
-        BlockFace facing = getCardinalDirection(player);
 
-        int xOffset = 0, zOffset = 0;
-        int xStep = 0, zStep = 0;
-        Rotation rotation = Rotation.NONE;
-
-
-        zOffset = 1;
-        xStep = -1;
-        zStep = 0;
-        rotation = Rotation.FLIPPED;
-
+        int xOffset = 0, zOffset = 1;
+        int xStep = -1, zStep = 0;
 
         int MAX_GRAPH_POINTS = 896;
         List<StockDataPoint> sampledData = downsampleData(dataPoints, MAX_GRAPH_POINTS);
@@ -176,20 +167,6 @@ public class StockGraph implements Listener {
         }
 
         return sampled;
-    }
-
-    private static BlockFace getCardinalDirection(Player player) {
-        float yaw = player.getLocation().getYaw();
-        yaw = (yaw % 360 + 360) % 360;
-
-        if (yaw >= 315 || yaw < 45)
-            return BlockFace.SOUTH;
-        else if (yaw >= 45 && yaw < 135)
-            return BlockFace.WEST;
-        else if (yaw >= 135 && yaw < 225)
-            return BlockFace.NORTH;
-        else
-            return BlockFace.EAST;
     }
 
     private static class StockDataPoint {
