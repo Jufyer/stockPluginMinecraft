@@ -1,11 +1,9 @@
 package org.jufyer.plugin.stock.gui;
 
+import net.minecraft.world.item.BundleItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.ShulkerBox;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,13 +11,13 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
-import org.jetbrains.annotations.NotNull;
 import org.jufyer.plugin.stock.Main;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.moneySystem.MoneyManager;
 import org.jufyer.plugin.stock.util.UnitConverter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -345,6 +343,8 @@ public class SellItemGui implements Listener {
                 int itemCount = 0;
                 int shulkerCount = 0;
                 int bundleCount = 0;
+                List<ItemStack> Bundles = new ArrayList<>();
+                List<ItemStack> ShulkerBoxes = new ArrayList<>();
                 for (int i = 0; i <= 53; i++) {
                     boolean isBlocked = false;
                     for (int b : blocked) {
@@ -376,20 +376,22 @@ public class SellItemGui implements Listener {
                                     if (shulkerBoxItemStack != null) {
                                         if (shulkerBoxItemStack.getType().equals(event.getInventory().getItem(4).getType())) {
                                             itemCount += shulkerBoxItemStack.getAmount();
+                                            ShulkerBoxes.add(currentItem);
                                         }
                                     }
                                 }
                             } else {
                                 event.setCancelled(true);
                             }
-                        } else if (currentItem.getType() == Material.BUNDLE) {
+                        } else if (currentItem.getItemMeta() instanceof BundleMeta) {
                             bundleCount += 1;
                             BundleMeta meta = (BundleMeta) currentItem.getItemMeta();
-
                             Material slot0Item = event.getInventory().getItem(4).getType();
+
                             for (ItemStack bundleItemStack : meta.getItems()) {
                                 if (bundleItemStack != null && bundleItemStack.getType() == slot0Item) {
                                     itemCount += bundleItemStack.getAmount();
+                                    Bundles.add(currentItem);
                                 }
                             }
                         }
@@ -401,10 +403,30 @@ public class SellItemGui implements Listener {
 //                player.sendMessage("Shulker: " + String.valueOf(shulkerCount));
 //                player.sendMessage("Bundle: " + String.valueOf(bundleCount));
 
-                //TODO: Player Shulker + Bundle wiedergeben
+                Inventory giveItemsBackInv = Bukkit.createInventory(null, 54, "§4Take your items!");
+                for (ItemStack bundle : Bundles) {
+                    BundleMeta meta = (BundleMeta) bundle.getItemMeta();
+                    List<ItemStack> noItems = new ArrayList<>();
+                    meta.setItems(noItems);
+                    bundle.setItemMeta(meta);
+                    giveItemsBackInv.addItem(bundle);
+                }
+
+                for (ItemStack shulker : ShulkerBoxes) {
+                    BlockStateMeta meta = (BlockStateMeta) shulker.getItemMeta();
+                    ShulkerBox box = (ShulkerBox) meta.getBlockState();
+                    box.getInventory().clear();
+
+                    meta.setBlockState(box);
+                    shulker.setItemMeta(meta);
+
+                    giveItemsBackInv.addItem(shulker);
+                }
 
                 SellItemInventory.clear();
                 SellItemInventory.close();
+
+                player.openInventory(giveItemsBackInv);
 
                 int finalItemCount = itemCount;
                 FetchFromDataFolder.getLatestByName(TradeCommodity.fromMaterial(sellingMaterial)).thenAccept(json -> {
@@ -454,7 +476,7 @@ public class SellItemGui implements Listener {
                 return;
             }
 
-            if (item.getType().name().endsWith("SHULKER_BOX") || item.getType().equals(Material.BUNDLE) || item.getType().equals(event.getInventory().getItem(4).getType())) {
+            if (item.getType().name().endsWith("SHULKER_BOX") || item.getItemMeta() instanceof BundleMeta || item.getType().equals(event.getInventory().getItem(4).getType())) {
                 if (item.getType().name().endsWith("SHULKER_BOX")) {
                     if (!(item.getItemMeta() instanceof BlockStateMeta meta)) {
                         event.setCancelled(true);
