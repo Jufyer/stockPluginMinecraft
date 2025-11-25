@@ -3,13 +3,11 @@ package org.jufyer.plugin.stock.gui;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent; // Neu importiert
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
@@ -17,13 +15,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
+import org.jufyer.plugin.stock.Main;
 import org.jufyer.plugin.stock.getPrice.FetchFromDataFolder;
 import org.jufyer.plugin.stock.getPrice.TradeCommodity;
 import org.jufyer.plugin.stock.moneySystem.MoneyManager;
 import org.jufyer.plugin.stock.moneySystem.PortfolioManager;
 import org.jufyer.plugin.stock.util.UnitConverter;
-import org.jufyer.plugin.stock.Main;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -34,8 +31,8 @@ import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 
 public class SellStockGui implements Listener {
 
-    public static Inventory SellStockMenuInventory = Bukkit.createInventory(null, 54, "§aSell stock menu");
-    public static Inventory SellStockInventory = Bukkit.createInventory(null, 54, "§2Select amount to sell");
+    public static final Inventory SellStockMenuInventory = Bukkit.createInventory(null, 54, "§aSell stock menu");
+    private static final Map<UUID, TradeCommodity> openSellStockInventories = new HashMap<>();
 
     private static final List<String> STOCK_NAMES = Arrays.asList(
             "gold", "iron-ore", "copper", "rhodium", "platinum", "indium",
@@ -44,7 +41,7 @@ public class SellStockGui implements Listener {
             "orange-juice", "live-cattle", "milk", "sulfur"
     );
 
-    public static void setBuyItemMenuInventory() {
+    public static void setSellStockMenuInventory() {
         SellStockMenuInventory.clear();
 
         ItemStack backItem = new ItemStack(Material.ARROW);
@@ -77,7 +74,7 @@ public class SellStockGui implements Listener {
             meta.setLore(Arrays.asList("§7Loading price...", "§eClick to view selling options"));
             placeholder.setItemMeta(meta);
 
-            final int slotIndex = i; // capture current slot
+            final int slotIndex = i;
             SellStockMenuInventory.setItem(slotIndex, placeholder);
 
             CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
@@ -128,31 +125,33 @@ public class SellStockGui implements Listener {
         SellStockMenuInventory.setItem(45, skull);
     }
 
-    public static void openBuyActionInventory(Player player, TradeCommodity commodity) {
-        SellStockInventory.clear(); // Reset before opening
+    public static void openSellActionInventory(Player player, TradeCommodity commodity) {
+        Inventory sellStockInventory = Bukkit.createInventory(null, 54, "§2Select amount to sell (" + capitalize(commodity.getCommodityName()) + ")");
+
+        openSellStockInventories.put(player.getUniqueId(), commodity);
 
         ItemStack infoItem = new ItemStack(commodity.getMaterial());
         ItemMeta infoMeta = infoItem.getItemMeta();
         infoMeta.setDisplayName("§e" + capitalize(commodity.getCommodityName()));
         infoMeta.setLore(Arrays.asList("§7Price per share: §aLoading...", "§7Your money: §6" + MoneyManager.getFormatted(player) + "$", "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)));
         infoItem.setItemMeta(infoMeta);
-        SellStockInventory.setItem(4, infoItem);
+        sellStockInventory.setItem(4, infoItem);
 
-        SellStockInventory.setItem(20, createBuyButton(0.0, 1));
-        SellStockInventory.setItem(22, createBuyButton(0.0, 10));
-        SellStockInventory.setItem(24, createBuyButton(0.0, 64));
+        sellStockInventory.setItem(20, createSellButton(0.0, 1));
+        sellStockInventory.setItem(22, createSellButton(0.0, 10));
+        sellStockInventory.setItem(24, createSellButton(0.0, 64));
 
         ItemStack exitItem = new ItemStack(Material.BARRIER);
         ItemMeta exitItemMeta = exitItem.getItemMeta();
         exitItemMeta.setDisplayName("§cClose menu");
         exitItem.setItemMeta(exitItemMeta);
-        SellStockInventory.setItem(8, exitItem);
+        sellStockInventory.setItem(8, exitItem);
 
         ItemStack backItem = new ItemStack(Material.ARROW);
         ItemMeta backItemMeta = backItem.getItemMeta();
         backItemMeta.setDisplayName("§7Back to overview");
         backItem.setItemMeta(backItemMeta);
-        SellStockInventory.setItem(0, backItem);
+        sellStockInventory.setItem(0, backItem);
 
         ItemStack fillerItem = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemMeta fillerItemMeta = fillerItem.getItemMeta();
@@ -160,8 +159,8 @@ public class SellStockGui implements Listener {
         fillerItem.setItemMeta(fillerItemMeta);
 
         for (int idx = 0; idx < 54; idx++) {
-            if (SellStockInventory.getItem(idx) == null) {
-                SellStockInventory.setItem(idx, fillerItem);
+            if (sellStockInventory.getItem(idx) == null) {
+                sellStockInventory.setItem(idx, fillerItem);
             }
         }
 
@@ -170,9 +169,9 @@ public class SellStockGui implements Listener {
         ItemMeta skullItemMeta = skull.getItemMeta();
         skullItemMeta.setDisplayName("§6Help");
         skull.setItemMeta(skullItemMeta);
-        SellStockInventory.setItem(45, skull);
+        sellStockInventory.setItem(45, skull);
 
-        player.openInventory(SellStockInventory);
+        player.openInventory(sellStockInventory);
 
         // Asynchron load price & unit, then update GUI (safely on main thread)
         CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
@@ -189,7 +188,10 @@ public class SellStockGui implements Listener {
             return pricePerKg;
         }).whenComplete((pricePerKg, ex) -> {
             Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-                ItemStack info = SellStockInventory.getItem(4);
+                if (!player.getOpenInventory().getTitle().startsWith("§2Select amount to sell")) return;
+                Inventory currentInventory = player.getOpenInventory().getTopInventory();
+
+                ItemStack info = currentInventory.getItem(4);
                 if (info != null && info.hasItemMeta()) {
                     ItemMeta im = info.getItemMeta();
                     String priceLine = pricePerKg <= 0.0 ? "§7Price per share: §cN/A" : "§7Price per share: §a" + String.format("%.2f", pricePerKg) + " $/kg";
@@ -199,18 +201,18 @@ public class SellStockGui implements Listener {
                             "§7Owned shares: §b" + PortfolioManager.getStockAmount(player, commodity)
                     ));
                     info.setItemMeta(im);
-                    SellStockInventory.setItem(4, info);
+                    currentInventory.setItem(4, info);
                 }
 
                 // Update buttons with real price
-                SellStockInventory.setItem(20, createBuyButton(pricePerKg, 1));
-                SellStockInventory.setItem(22, createBuyButton(pricePerKg, 10));
-                SellStockInventory.setItem(24, createBuyButton(pricePerKg, 64));
+                currentInventory.setItem(20, createSellButton(pricePerKg, 1));
+                currentInventory.setItem(22, createSellButton(pricePerKg, 10));
+                currentInventory.setItem(24, createSellButton(pricePerKg, 64));
             });
         });
     }
 
-    private static ItemStack createBuyButton(double price, int amount) {
+    private static ItemStack createSellButton(double price, int amount) {
         ItemStack button = new ItemStack(Material.EMERALD);
         ItemMeta meta = button.getItemMeta();
         meta.setDisplayName("§aSell " + amount + " shares");
@@ -224,7 +226,7 @@ public class SellStockGui implements Listener {
         }
 
         meta.setLore(Arrays.asList(
-                "§7Cost: §c" + costString + (price <= 0.0 ? "" : "$"),
+                "§7Total: §a" + costString + (price <= 0.0 ? "" : "$"),
                 "§eClick to sell"
         ));
         button.setItemMeta(meta);
@@ -232,7 +234,7 @@ public class SellStockGui implements Listener {
     }
 
 
-    public static void openHelpBuyBook(Player player) {
+    public static void openHelpSellBook(Player player) {
         ItemStack helpBook = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bm = (BookMeta) helpBook.getItemMeta();
 
@@ -256,24 +258,6 @@ public class SellStockGui implements Listener {
         player.openBook(helpBook);
     }
 
-//    @Override
-//    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
-//        if (commandSender instanceof Player player) {
-//            // Falls Parameter übergeben wurden (z.B. /buy gold) direkt öffnen, sonst Menü
-//            if (strings.length == 1) {
-//                TradeCommodity commodity = TradeCommodity.fromCommodityName(strings[0]);
-//                if (commodity != null) {
-//                    openBuyActionInventory(player, commodity);
-//                    return true;
-//                } else {
-//                    player.sendMessage("§cUnknown commodity. Opening menu...");
-//                }
-//            }
-//            player.openInventory(SellStockMenuInventory);
-//        }
-//        return true;
-//    }
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
@@ -285,7 +269,12 @@ public class SellStockGui implements Listener {
         String displayName = clickedItem.getItemMeta().getDisplayName();
 
         if (clickedInv.equals(SellStockMenuInventory)) {
-            event.setCancelled(true); // Nichts herausnehmen
+            if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+                player.openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
+                event.setCancelled(true);
+            }
+
+            event.setCancelled(true);
 
             if (displayName.startsWith("§e")) {
                 String stockName = decapitalize(displayName.replace("§e", ""));
@@ -293,38 +282,38 @@ public class SellStockGui implements Listener {
 
                 if (commodity != null) {
                     player.sendMessage("§7Selected stock: §a" + capitalize(stockName));
-                    openBuyActionInventory(player, commodity);
+                    openSellActionInventory(player, commodity);
                 }
             } else if (displayName.equals("§cClose menu")) {
                 player.closeInventory();
             } else if (displayName.equals("§6Help")) {
-                openHelpBuyBook(player);
+                openHelpSellBook(player);
             }
         }
 
-        if (clickedInv.equals(SellStockInventory)) {
+        if (event.getView().getTitle().startsWith("§2Select amount to sell")) {
             event.setCancelled(true);
+
+            TradeCommodity commodity = openSellStockInventories.get(player.getUniqueId());
+            if (commodity == null) return;
 
             if (displayName.equals("§cClose menu")) {
                 player.closeInventory();
+                openSellStockInventories.remove(player.getUniqueId());
                 return;
             }
             if (displayName.equals("§7Back to overview")) {
                 player.openInventory(SellStockMenuInventory);
+                openSellStockInventories.remove(player.getUniqueId());
                 return;
             }
             if (displayName.equals("§6Help")) {
-                openHelpBuyBook(player);
+                openHelpSellBook(player);
                 return;
             }
 
             if (displayName.startsWith("§aSell ")) {
-                int amountToBuy = Integer.parseInt(displayName.replace("§aSell ", "").replace(" shares", ""));
-                ItemStack infoItem = clickedInv.getItem(4);
-                if (infoItem == null || !infoItem.hasItemMeta()) return;
-                String commodityName = decapitalize(infoItem.getItemMeta().getDisplayName().replace("§e", ""));
-                TradeCommodity commodity = TradeCommodity.fromCommodityName(commodityName);
-                if (commodity == null) return;
+                int amountToSell = Integer.parseInt(displayName.replace("§aSell ", "").replace(" shares", ""));
 
                 CompletableFuture<Double> priceFuture = FetchFromDataFolder.getPrice(commodity);
                 CompletableFuture<String> unitFuture = FetchFromDataFolder.getUnit(commodity);
@@ -342,27 +331,28 @@ public class SellStockGui implements Listener {
                     // run transaction on main thread
                     Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
                         if (pricePerKg <= 0.0) {
-                            player.sendMessage("§cCannot buy: price unavailable right now.");
+                            player.sendMessage("§cCannot sell: price unavailable right now.");
                             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0.5f);
                             return;
                         }
 
-                        double totalCost = Math.round(pricePerKg * amountToBuy * 100.0) / 100.0;
+                        double totalCost = Math.round(pricePerKg * amountToSell * 100.0) / 100.0;
 
-                        if (PortfolioManager.getStockAmount(player, commodity) >= amountToBuy){
+                        if (PortfolioManager.getStockAmount(player, commodity) >= amountToSell){
                             if (MoneyManager.add(player, totalCost)) {
                                 int currentStock = PortfolioManager.getStockAmount(player, commodity);
-                                PortfolioManager.updateStock(player, commodity, currentStock - amountToBuy);
+                                PortfolioManager.updateStock(player, commodity, currentStock - amountToSell);
 
-                                player.sendMessage("§aYou sold §e" + amountToBuy + "§a shares of §6" + capitalize(commodityName) + "§a for §c" + String.format("%.2f", totalCost) + "$");
+                                player.sendMessage("§aYou sold §e" + amountToSell + "§a shares of §6" + capitalize(commodity.getCommodityName()) + "§a for §c" + String.format("%.2f", totalCost) + "$");
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1.3f);
 
-                                openBuyActionInventory(player, commodity); // GUI neu laden
+                                openSellActionInventory(player, commodity);
                             } else {
                                 player.sendMessage("§cTransaction failed.");
                             }
-                        }else {
+                        } else {
                             player.sendMessage("§cYou don't have enough stocks to sell.");
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0.5f);
                         }
                     });
                 });
@@ -371,22 +361,35 @@ public class SellStockGui implements Listener {
     }
 
     @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if (event.getView().getTitle().startsWith("§2Select amount to sell")) {
+            openSellStockInventories.remove(event.getPlayer().getUniqueId());
+        }
+    }
+
+    @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-        if (event.getInventory().equals(SellStockMenuInventory) || event.getInventory().equals(SellStockInventory)) {
+        if (event.getInventory().equals(SellStockMenuInventory) || event.getView().getTitle().startsWith("§2Select amount to sell")) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryMoveItem(InventoryMoveItemEvent event) {
-        if (event.getSource().equals(SellStockMenuInventory) || event.getSource().equals(SellStockInventory)) {
+        if (event.getSource().equals(SellStockMenuInventory) || event.getDestination().equals(SellStockMenuInventory)) {
+            event.setCancelled(true);
+            return;
+        }
+
+        if ((event.getSource().getHolder() == null && event.getSource().getSize() == 54) ||
+                (event.getDestination().getHolder() == null && event.getDestination().getSize() == 54)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryInteract(InventoryInteractEvent event) {
-        if (event.getInventory().equals(SellStockMenuInventory) || event.getInventory().equals(SellStockInventory)) {
+        if (event.getInventory().equals(SellStockMenuInventory) || event.getView().getTitle().startsWith("§2Select amount to sell")) {
             event.setCancelled(true);
         }
     }

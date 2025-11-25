@@ -19,15 +19,19 @@ import org.jufyer.plugin.stock.util.UnitConverter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap; // Neu hinzugefügt
 import java.util.List;
+import java.util.Map; // Neu hinzugefügt
+import java.util.UUID; // Neu hinzugefügt
 
 import static org.jufyer.plugin.stock.util.CreateCustomHeads.createCustomHead;
 import static org.jufyer.plugin.stock.util.UtilityMethods.capitalize;
 import static org.jufyer.plugin.stock.util.UtilityMethods.decapitalize;
 
 public class SellItemGui implements Listener {
-    public static Inventory SellItemMenuInventory = Bukkit.createInventory(null, 54, "§6Sell item menu");
-    public static Inventory SellItemInventory = Bukkit.createInventory(null, 54, "§4Put the items below!");
+
+    public static final Inventory SellItemMenuInventory = Bukkit.createInventory(null, 54, "§6Sell item menu");
+    private static final Map<UUID, TradeCommodity> openSellInventories = new HashMap<>();
 
     private static final int[] blocked = {1,2,3,5,6,7,9,17,18,26,27,35,36,44,46,47,48,49,50,51,52};
 
@@ -50,16 +54,6 @@ public class SellItemGui implements Listener {
         exitItemMeta.setDisplayName("§cClose menu");
         exitItem.setItemMeta(exitItemMeta);
         SellItemMenuInventory.setItem(8, exitItem);
-
-//        ItemStack stockItem = new ItemStack(Material.WHEAT);
-//        ItemMeta meta = stockItem.getItemMeta();
-//        meta.setDisplayName("§e" + "Wheat");
-//        meta.setLore(List.of("§7Aktueller Preis: §a"
-//                + FetchFromDataFolder.getPrice(TradeCommodity.WHEAT)
-//                + " "
-//                + FetchFromDataFolder.getUnit(TradeCommodity.WHEAT)));
-//        stockItem.setItemMeta(meta);
-//        SellItemMenuInventory.setItem(13, stockItem);
 
         int i = 10;
         for (String itemName : STOCK_NAMES) {
@@ -121,33 +115,13 @@ public class SellItemGui implements Listener {
         skullItemMeta.setDisplayName("§6Help");
         skull.setItemMeta(skullItemMeta);
         SellItemMenuInventory.setItem(45, skull);
-
-        // Kaufen-Button
-//        ItemStack buy = new ItemStack(Material.LIME_CONCRETE);
-//        ItemMeta buyMeta = buy.getItemMeta();
-//        buyMeta.setDisplayName("§aBuy");
-//        buyMeta.setLore(List.of("§7Buy for current price"));
-//        buy.setItemMeta(buyMeta);
-//        SellItemMenuInventory.setItem(24, buy);
-
-        // Verkaufen-Button
-//        ItemStack sell = new ItemStack(Material.RED_CONCRETE);
-//        ItemMeta sellMeta = sell.getItemMeta();
-//        sellMeta.setDisplayName("§cSell");
-//        sellMeta.setLore(List.of("§7Sell your " + "Wheat"));
-//        sell.setItemMeta(sellMeta);
-//        SellItemMenuInventory.setItem(20, sell);
-
-        // Info (aktueller Kontostand)
-//        ItemStack info = new ItemStack(Material.PAPER);
-//        ItemMeta infoMeta = info.getItemMeta();
-//        infoMeta.setDisplayName("§bDein Kontostand");
-//        infoMeta.setLore(List.of("§7" + wallet.get()));
-//        info.setItemMeta(infoMeta);
-//        SellItemMenuInventory.setItem(22, info);
     }
 
     public static void openSellItemInventory(Player player, TradeCommodity commodity) {
+        Inventory SellItemInventory = Bukkit.createInventory(null, 54, "§4Put the items below! (" + capitalize(commodity.getCommodityName()) + ")");
+
+        openSellInventories.put(player.getUniqueId(), commodity);
+
         ItemStack backItem = new ItemStack(Material.ARROW);
         ItemMeta backItemMeta = backItem.getItemMeta();
         backItemMeta.setDisplayName("§7Back to overview");
@@ -159,31 +133,33 @@ public class SellItemGui implements Listener {
         currentPriceItemMeta.setDisplayName("§r§e" + capitalize(commodity.getCommodityName()));
 
         FetchFromDataFolder.getLatestByName(commodity).thenAccept(json -> {
-                    if (json == null) return;
+            if (json == null) return;
 
-                    double priceRaw = -1.0;
+            double priceRaw = -1.0;
 
-                    String valStr = json.getString("value", null);
+            String valStr = json.getString("value", null);
 
-                    if (valStr != null) {
-                        try {
-                            priceRaw = Double.parseDouble(valStr.replace(',', '.'));
-                        } catch (NumberFormatException ignored) {
-                        }
-                    } else {
-                        try {
-                            priceRaw = json.getJsonNumber("price").doubleValue();
-                        } catch (Exception ignored) {
-                        }
-                    }
+            if (valStr != null) {
+                try {
+                    priceRaw = Double.parseDouble(valStr.replace(',', '.'));
+                } catch (NumberFormatException ignored) {
+                }
+            } else {
+                try {
+                    priceRaw = json.getJsonNumber("price").doubleValue();
+                } catch (Exception ignored) {
+                }
+            }
 
-                    String unitRaw = json.getString("currency", "");
+            String unitRaw = json.getString("currency", "");
 
-                    double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
+            double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
 
-                    currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + String.format("%.2f", pricePerKilo) + " $/kg"));
-                    currentPriceItem.setItemMeta(currentPriceItemMeta);
-                    SellItemInventory.setItem(4, currentPriceItem);
+            Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+                currentPriceItemMeta.setLore(Arrays.asList("§eCurrent price: " + String.format("%.2f", pricePerKilo) + " $/kg"));
+                currentPriceItem.setItemMeta(currentPriceItemMeta);
+                SellItemInventory.setItem(4, currentPriceItem);
+            });
         });
 
         ItemStack exitItem = new ItemStack(Material.BARRIER);
@@ -241,7 +217,7 @@ public class SellItemGui implements Listener {
                 "§0- Click on 'Sell items' to sell your selected stock.\n" +
                 "- Make sure the item type matches the stock you selected.\n" +
                 "- Bundles and ShulkerBoxes containing your stock can also be sold.\n" +
-                "   - You will get them back after selling.");
+                "   - You will get them back after selling.");
 
         bm.addPage("§6Page 3: Navigation\n" +
                 "§0- Click the BARRIER to close the menu.\n" +
@@ -253,98 +229,79 @@ public class SellItemGui implements Listener {
         player.openBook(HelpSellBook);
     }
 
-//    @Override
-//    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
-//        if (commandSender instanceof Player player) {
-//            player.openInventory(SellItemMenuInventory);
-//        }
-//
-//        return false;
-//    }
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+        Inventory clickedInventory = event.getClickedInventory();
         if (event.getCurrentItem() == null) return;
 
-        if (event.getInventory().equals(SellItemMenuInventory) && event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§e")) {
-            ItemStack item = event.getCurrentItem();
-
-            if (event.getCurrentItem() == null) return;
-            if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-            if (event.getCurrentItem().getItemMeta() == null) return;
-
-            String stockName = decapitalize(event.getCurrentItem().getItemMeta().getDisplayName().replace("§e" , ""));
-
-            FetchFromDataFolder.getLatestByName(TradeCommodity.fromCommodityName(stockName)).thenAccept(json -> {
-                        if (json == null) return;
-
-                        double priceRaw = -1.0;
-
-                        String valStr = json.getString("value", null);
-
-                        if (valStr != null) {
-                            try {
-                                priceRaw = Double.parseDouble(valStr.replace(',', '.'));
-                            } catch (NumberFormatException ignored) {
-                            }
-                        } else {
-                            try {
-                                priceRaw = json.getJsonNumber("price").doubleValue();
-                            } catch (Exception ignored) {
-                            }
-                        }
-
-                        String unitRaw = json.getString("currency", "");
-
-                        double pricePerKilo = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
-
-//                        player.sendMessage("Price of "
-//                                + item.getItemMeta().getDisplayName()
-//                                + "§r is "
-//                                + String.format("%.2f", pricePerKilo) + " $/kg");
-
-            });
-
-            openSellItemInventory(player, TradeCommodity.fromCommodityName(stockName));
+        if (event.getInventory().equals(SellItemMenuInventory)) {
+            if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+                player.openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
+                event.setCancelled(true);
+            }
 
             event.setCancelled(true);
-        } else if (event.getInventory().equals(SellItemMenuInventory) && event.getCurrentItem().getItemMeta().getDisplayName().equals("§cClose menu")) {
-            event.getClickedInventory().close();
-        } else if (event.getInventory().equals(SellItemMenuInventory) && event.getCurrentItem().getType().equals(Material.PLAYER_HEAD)) {
-            openHelpSellBook(player);
-        }else if (event.getCurrentItem().getType().equals(Material.ARROW)) {
-            player.openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
-        }
-        if (event.getInventory().equals(SellItemMenuInventory)) event.setCancelled(true);
 
-        if (event.getInventory().equals(SellItemInventory)) {
-            ItemStack item = event.getCurrentItem();
+            if (event.getCurrentItem().getItemMeta() == null || event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
 
-            if (event.getCurrentItem() == null) return;
-            if (event.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-            if (event.getCurrentItem().getItemMeta() == null) return;
+            if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§e")) {
 
-            if (event.getCurrentItem().getType().equals(Material.ARROW)) {
-                player.openInventory(SellItemMenuInventory);
-            }
+                String stockName = decapitalize(event.getCurrentItem().getItemMeta().getDisplayName().replace("§e" , ""));
+                TradeCommodity commodity = TradeCommodity.fromCommodityName(stockName);
+                openSellItemInventory(player, commodity);
 
-            if (event.getInventory().equals(SellItemInventory) && event.getCurrentItem().getType().equals(Material.PLAYER_HEAD)) {
+            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§cClose menu")) {
+                player.closeInventory();
+            } else if (event.getCurrentItem().getType().equals(Material.PLAYER_HEAD)) {
                 openHelpSellBook(player);
+            } else if (event.getCurrentItem().getType().equals(Material.ARROW)) {
+                player.openInventory(VillagerInvTradingWorld.VillagerInvTradingWorld);
+            }
+            return;
+        }
+
+        if (event.getView().getTitle().startsWith("§4Put the items below!")) {
+
+            TradeCommodity commodity = openSellInventories.get(player.getUniqueId());
+            if (commodity == null) return; // Sollte nicht passieren, aber zur Sicherheit.
+
+            ItemStack item = event.getCurrentItem();
+            if (item == null) return;
+
+            // Back-Button
+            if (item.getType().equals(Material.ARROW) && event.getSlot() == 0) {
+                player.openInventory(SellItemMenuInventory);
+                event.setCancelled(true);
+                return;
             }
 
-            if (event.getInventory().equals(SellItemInventory) && event.getCurrentItem().getType().equals(Material.BARRIER)) {
-                event.getClickedInventory().close();
+            // Help-Button
+            if (item.getType().equals(Material.PLAYER_HEAD) && event.getSlot() == 45) {
+                openHelpSellBook(player);
+                event.setCancelled(true);
+                return;
             }
 
-            if (event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.LIME_DYE) {
-                Material sellingMaterial = event.getInventory().getItem(4).getType();
+            // Close-Button
+            if (item.getType().equals(Material.BARRIER) && event.getSlot() == 8) {
+                player.closeInventory();
+                event.setCancelled(true);
+                return;
+            }
+
+            if (item.getType() == Material.LIME_DYE && event.getSlot() == 53) {
+                Material sellingMaterial = event.getInventory().getItem(4) != null ? event.getInventory().getItem(4).getType() : null;
+                if (sellingMaterial == null) {
+                    event.setCancelled(true);
+                    player.sendMessage("§cError: No commodity selected.");
+                    return;
+                }
 
                 int itemCount = 0;
-                int shulkerCount = 0;
-                int bundleCount = 0;
                 List<ItemStack> Bundles = new ArrayList<>();
                 List<ItemStack> ShulkerBoxes = new ArrayList<>();
+
                 for (int i = 0; i <= 53; i++) {
                     boolean isBlocked = false;
                     for (int b : blocked) {
@@ -355,41 +312,25 @@ public class SellItemGui implements Listener {
                     }
                     if (isBlocked) continue;
 
-                    ItemStack currentItem = SellItemInventory.getItem(i);
-                    if (currentItem != null) {
-                        if (currentItem.getType().equals(event.getInventory().getItem(4).getType())) {
+                    ItemStack currentItem = event.getInventory().getItem(i);
+                    if (currentItem != null && !currentItem.equals(item)) {
+                        if (currentItem.getType().equals(sellingMaterial)) {
                             itemCount += currentItem.getAmount();
-                        }else if (currentItem.getType().name().endsWith("SHULKER_BOX")) {
-                            shulkerCount += 1;
-                            if (!(currentItem.getItemMeta() instanceof BlockStateMeta meta)) {
-                                event.setCancelled(true);
-                                return;
-                            }
-
-                            if (!(meta.getBlockState() instanceof ShulkerBox box)) {
-                                event.setCancelled(true);
-                                return;
-                            }
-
-                            if (box.getInventory().contains(event.getInventory().getItem(4).getType())) {
-                                for (ItemStack shulkerBoxItemStack : box.getInventory().getContents()) {
-                                    if (shulkerBoxItemStack != null) {
-                                        if (shulkerBoxItemStack.getType().equals(event.getInventory().getItem(4).getType())) {
+                        } else if (currentItem.getType().name().endsWith("SHULKER_BOX")) {
+                            if (currentItem.getItemMeta() instanceof BlockStateMeta meta && meta.getBlockState() instanceof ShulkerBox box) {
+                                if (box.getInventory().contains(sellingMaterial)) {
+                                    for (ItemStack shulkerBoxItemStack : box.getInventory().getContents()) {
+                                        if (shulkerBoxItemStack != null && shulkerBoxItemStack.getType().equals(sellingMaterial)) {
                                             itemCount += shulkerBoxItemStack.getAmount();
                                             ShulkerBoxes.add(currentItem);
                                         }
                                     }
                                 }
-                            } else {
-                                event.setCancelled(true);
                             }
                         } else if (currentItem.getItemMeta() instanceof BundleMeta) {
-                            bundleCount += 1;
                             BundleMeta meta = (BundleMeta) currentItem.getItemMeta();
-                            Material slot0Item = event.getInventory().getItem(4).getType();
-
                             for (ItemStack bundleItemStack : meta.getItems()) {
-                                if (bundleItemStack != null && bundleItemStack.getType() == slot0Item) {
+                                if (bundleItemStack != null && bundleItemStack.getType() == sellingMaterial) {
                                     itemCount += bundleItemStack.getAmount();
                                     Bundles.add(currentItem);
                                 }
@@ -397,11 +338,17 @@ public class SellItemGui implements Listener {
                         }
                     }
                 }
-                itemCount = itemCount -1;
 
-//                player.sendMessage("Items: " + String.valueOf(itemCount));
-//                player.sendMessage("Shulker: " + String.valueOf(shulkerCount));
-//                player.sendMessage("Bundle: " + String.valueOf(bundleCount));
+                if (event.getInventory().getItem(4) != null && event.getInventory().getItem(4).getType().equals(sellingMaterial)) {
+                    itemCount -= event.getInventory().getItem(4).getAmount();
+                }
+
+                if (itemCount <= 0) {
+                    player.sendMessage("§cYou don't have any of the selected commodity to sell!");
+                    event.setCancelled(true);
+                    return;
+                }
+
 
                 Inventory giveItemsBackInv = Bukkit.createInventory(null, 54, "§4Take your items!");
                 for (ItemStack bundle : Bundles) {
@@ -416,27 +363,21 @@ public class SellItemGui implements Listener {
                     BlockStateMeta meta = (BlockStateMeta) shulker.getItemMeta();
                     ShulkerBox box = (ShulkerBox) meta.getBlockState();
                     box.getInventory().clear();
-
                     meta.setBlockState(box);
                     shulker.setItemMeta(meta);
-
                     giveItemsBackInv.addItem(shulker);
                 }
 
-                SellItemInventory.clear();
-                SellItemInventory.close();
-
+                player.closeInventory();
                 player.openInventory(giveItemsBackInv);
 
                 int finalItemCount = itemCount;
                 FetchFromDataFolder.getLatestByName(TradeCommodity.fromMaterial(sellingMaterial)).thenAccept(json -> {
-
-                    double pricePerUnit;
+                    double pricePerUnit = 0;
                     try {
                         if (json == null) return;
 
                         double priceRaw = -1.0;
-
                         String valStr = json.getString("value", null);
 
                         if (valStr != null) {
@@ -452,64 +393,64 @@ public class SellItemGui implements Listener {
                         }
 
                         String unitRaw = json.getString("currency", "");
-
                         double price = UnitConverter.toUSD(priceRaw, unitRaw, UnitConverter.OutputUnit.KG);
-
                         pricePerUnit = price;
-
                     } catch (Exception e) {
                         Main.getInstance().getLogger().warning("Error converting the price for: " + sellingMaterial);
                         e.printStackTrace();
                         pricePerUnit = 0;
                     }
 
-                double wholePrice = pricePerUnit * finalItemCount;
-                MoneyManager.add(player, wholePrice);
-                player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: " +  MoneyManager.getFormatted(player) +  " USD!", wholePrice));
+                    double wholePrice = pricePerUnit * finalItemCount;
+                    MoneyManager.add(player, wholePrice);
+                    player.sendMessage(String.format("Added %.2f USD to your wallet. Your new balance is: " + MoneyManager.getFormatted(player) + " USD!", wholePrice));
                 });
-                event.setCancelled(true);
-            }
 
-            if (item.getType().equals(Material.LIGHT_GRAY_STAINED_GLASS_PANE) || item.getType().equals(Material.NAME_TAG)
-                    || item.getType().equals(Material.LIME_DYE) || (item.getItemMeta().getDisplayName().startsWith("§e") && event.getSlot() == 45)) {
+                openSellInventories.remove(player.getUniqueId());
                 event.setCancelled(true);
                 return;
             }
 
-            if (item.getType().name().endsWith("SHULKER_BOX") || item.getItemMeta() instanceof BundleMeta || item.getType().equals(event.getInventory().getItem(4).getType())) {
-                if (item.getType().name().endsWith("SHULKER_BOX")) {
-                    if (!(item.getItemMeta() instanceof BlockStateMeta meta)) {
-                        event.setCancelled(true);
-                        return;
-                    }
-
-                    if (!(meta.getBlockState() instanceof ShulkerBox box)) {
-                        event.setCancelled(true);
-                        return;
-                    }
-
-                    if (box.getInventory().contains(event.getInventory().getItem(4).getType())) {
-
-                    } else {
-                        event.setCancelled(true);
-                    }
-                } else if (item.getType() == Material.BUNDLE) {
-                    BundleMeta meta = (BundleMeta) item.getItemMeta();
-
-                    boolean contains = meta.getItems().stream().anyMatch(i -> i.getType() == event.getInventory().getItem(4).getType());
-
-                    if (contains) {
-                        return;
-                    } else {
-                        event.setCancelled(true);
-                        return;
-                    }
-                }
-            }else {
+            if (event.getSlot() == 4 || item.getType().equals(Material.LIGHT_GRAY_STAINED_GLASS_PANE) || item.getType().equals(Material.NAME_TAG)) {
                 event.setCancelled(true);
+                return;
             }
-        } else if (event.getInventory().equals(SellItemInventory) && event.getCurrentItem().getItemMeta().getDisplayName().equals("§cClose menu")) {
-            event.getClickedInventory().close();
+
+            if (event.getSlot() == 4) {
+                event.setCancelled(true);
+                return;
+            }
+
+            if (clickedInventory != null && event.getClickedInventory().equals(player.getInventory())) {
+                return;
+            }
+
+            if (clickedInventory != null && event.getClickedInventory().equals(event.getInventory())) {
+                if (event.getClick().isShiftClick() || event.getClick() == ClickType.DOUBLE_CLICK) {
+                    event.setCancelled(true);
+                }
+                Material sellingMaterial = event.getInventory().getItem(4).getType();
+                if (item.getType().equals(sellingMaterial) || item.getType().name().endsWith("SHULKER_BOX") || item.getItemMeta() instanceof BundleMeta) {
+                    if (item.getType().name().endsWith("SHULKER_BOX")) {
+                        if (!(item.getItemMeta() instanceof BlockStateMeta meta && meta.getBlockState() instanceof ShulkerBox box && box.getInventory().contains(sellingMaterial))) {
+                            event.setCancelled(true);
+                        }
+                    } else if (item.getItemMeta() instanceof BundleMeta meta && !meta.getItems().stream().anyMatch(i -> i.getType() == sellingMaterial)) {
+                        event.setCancelled(true);
+                    }
+                    return;
+                } else {
+                    event.setCancelled(true);
+                }
+            }
+
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if (event.getView().getTitle().startsWith("§4Put the items below!")) {
+            openSellInventories.remove(event.getPlayer().getUniqueId());
         }
     }
 
@@ -517,12 +458,21 @@ public class SellItemGui implements Listener {
     public void onInventoryDrag(InventoryDragEvent event) {
         if (event.getInventory().equals(SellItemMenuInventory)) {
             event.setCancelled(true);
+            return;
+        }
+        if (event.getView().getTitle().startsWith("§4Put the items below!")) {
+            for (int slot : blocked) {
+                if (event.getRawSlots().contains(slot)) {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
         }
     }
 
     @EventHandler
     public void onInventoryMoveItem(InventoryMoveItemEvent event) {
-        if (event.getSource().equals(SellItemMenuInventory)) {
+        if (event.getSource().equals(SellItemMenuInventory) || event.getDestination().equals(SellItemMenuInventory)) {
             event.setCancelled(true);
         }
     }

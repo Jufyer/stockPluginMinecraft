@@ -34,7 +34,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
       MainApp.invSetup();
       SellItemGui.setSellItemMenuInventory();
-      SellStockGui.setBuyItemMenuInventory();
+      SellStockGui.setSellStockMenuInventory();
       BuyStockGui.setBuyStockMenuInventory();
       VillagerInvTradingWorld.setVillagerInvTradingWorld();
 
