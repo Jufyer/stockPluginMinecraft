@@ -1,173 +1,124 @@
-# 📦 Stock Plugin – Project Roadmap & Development Board
+# 🌐 Minecraft Stock Plugin
+*A fully dynamic, real-world-powered global economy for your Minecraft server.*
 
-Diese Datei enthält die komplette Roadmap, alle Issues, Features, Fixes und das GitHub-Project-Board-Template für dein Minecraft-Stock-Plugin.
-
----
-# 🏗️ **Projektüberblick**
-Dieses Projekt ist ein Wirtschaftssystem für Minecraft mit Aktien, Handel, GUIs, dynamischen Preisen und vielfältigen Features. Diese Roadmap dient als Grundlage für langfristige Weiterentwicklung.
+Turn your Minecraft world into a living global commodities market powered by **real TradingEconomics price data**.  
+Players trade real-life resources — prices rise, fall and react just like the real world.
 
 ---
-# 🟥 **PHASE 1 — Kritische Fixes**
-Fixe diese Punkte **zuerst**, da sie Performance, Stabilität und Datenintegrität betreffen.
 
-## ✔️ 1.1 – IO Operationen in Async verschieben
-**Ort:** `FetchFromGitRepo`, `FetchFromDataFolder`, Commands, stockLoader
+# ✨ Features
 
-**Task:** Alle File-Lesevorgänge, Preisabfragen und Git-Requests müssen **asynchron** laufen.
+## 📈 Real Live Prices
+The market updates using **live data** from TradingEconomics.  
+Supported categories include:
 
----
-## ✔️ 1.2 – Portfolio & Money persistent speichern
-**Ort:** `PortfolioManager`, `Money`
+- 🪙 **Metals**
+- 🛢️ **Energy**
+- 🌾 **Agriculture**
 
-**Task:** Speicherung in JSON/YAML/SQLite einführen.
-
----
-## ✔️ 1.3 – NullPointer Fixes
-**Ort:** `ASCIIBarChart`, GUIs, ItemMeta, Preisfetcher
-
-**Task:** Überall sichere Checks einsetzen.
+Players can watch markets rise and fall in real time and adapt their trading strategy.
 
 ---
-## ✔️ 1.4 – config.yml implementieren
-**Task:** Alle Hardcoded Werte wie Pfade, Steuern, GUI-Slots, Update-Raten in Config verschieben.
+
+## 💰 Player-Driven Wealth
+Let your players become investors:
+
+- 📦 Buy low
+- 💸 Sell high
+- 📉 React to price crashes
+- 📈 Profit from global spikes
+
+Every market decision feels exciting, risky and rewarding.
 
 ---
-## ✔️ 1.5 – MoneySystem refactoren
-**Task:** MoneyService einführen, atomic updates, persistenz.
+
+## 🧭 Fully GUI-Based
+No commands needed — everything is handled through clean, intuitive menus:
+
+- 📊 Interactive market GUI
+- 💼 Personal portfolio interface
+- 🧾 Order system
+- 🛍️ Commodity browsing
+
+If you can click, you can trade.
 
 ---
-# 🟧 **PHASE 2 — Architektur verbessern**
 
-## ✔️ 2.1 – Service Layer einführen
-- PriceService
-- TradingService
-- PortfolioService
-
-Commands werden "dünn" und delegieren nur.
+## 🌍 Immersive Server Economy
+Mining, farming and trading all become part of one shared global economy.  
+Your server becomes a **dynamic world with real economic activity**.
 
 ---
-## ✔️ 2.2 – PriceCache hinzufügen
-Regelmäßige Updates, Zugriff über Cache statt Files.
+
+# 🚀 Usage
+
+### Only one command:
+
+/stocks
+
+That’s it.  
+No setup. No configuration.  
+Just install the plugin and start trading.
+
+⚠ Prices update every **30 minutes** (this may change in future versions).
 
 ---
-## ✔️ 2.3 – Custom Events
-- StockBuyEvent
-- StockSellEvent
-- PriceUpdateEvent
+
+# 📦 Tradeable Commodities
+
+Below is the full list of commodities available in the plugin, grouped with icons:
+
+| Category | Items |
+|---------|-------|
+| **🪙 Metals** | 🟡 Gold · ⚙️ Iron Ore · 🟠 Copper · 💎 Rhodium · 🟪 Platinum · 🔵 Indium · 🔷 Cobalt · ⚪ Silicon |
+| **🛢️ Energy** | 🔥 Natural Gas · 🛢️ Crude Oil · 🪨 Coal · ☢️ Uranium |
+| **🌾 Agriculture** | 🌾 Wheat · 🌽 Corn · ☕ Coffee · 🍬 Sugar · 🧵 Cotton · 🟫 Palm Oil · 🍊 Orange Juice · 🐄 Live Cattle · 🥛 Milk |
+| **🧪 Chemicals** | 🟡 Sulfur |
 
 ---
-## ✔️ 2.4 – GUI Manager erstellen
-Ein zentrales Eventhandling für alle GUIs.
+
+# 🖼️ Gallery (Screenshots)
+
+> *(Replace the placeholders with real Modrinth images)*
+
+### 📊 Market Menu
+`![Market Screenshot](https://example.com/image1.png)`
+
+### 💼 Portfolio GUI
+`![Portfolio Screenshot](https://example.com/image2.png)`
+
+### 📈 Price Movement
+`![Price Graph](https://example.com/image3.png)`
 
 ---
-# 🟨 **PHASE 3 — Performance Optimierungen**
 
-## ✔️ 3.1 – GUI Inventar Templates
-Items nicht jedes Mal neu erzeugen.
+# 🔗 Real Commodity Prices
 
----
-## ✔️ 3.2 – Chart Caching
-ASCII-Charts für 5 Sekunden zwischenspeichern.
+You can check the real-world prices your server uses here:  
+👉 https://tradingeconomics.com/commodities
 
 ---
-## ✔️ 3.3 – Git Timeout + Fallback
-Timeouts setzen + lokale Dateien als Backup.
+
+# 📥 Installation
+
+1. Download the latest version from the **Files** tab
+2. Place the `.jar` into your server’s `plugins` folder
+3. Restart your server
+4. Done 🎉
 
 ---
-# 🟩 **PHASE 4 — Neue Features**
 
-## ✔️ 4.1 – GUI Preisverlauf Charts
-Anzeige der Preisänderung direkt im Inventar.
+# 🛠 Server Compatibility
 
----
-## ✔️ 4.2 – Price Alerts System
-Spieler können Alarme setzen.
+- **Minecraft:** 1.21.8+
+- **Java:** 17+
+- **Platforms:** Paper / Purpur / Spigot compatible
 
 ---
-## ✔️ 4.3 – Limit Orders
-Buy-Limit, Sell-Limit, Stop-Loss.
+
+# ❤️ Support & Feedback
+
+If you enjoy the plugin, consider leaving a ⭐ on Modrinth!  
+Issues, ideas or improvements are always welcome.
 
 ---
-## ✔️ 4.4 – Börsenöffnungszeiten
-Öffnungszeiten (z. B. 08–20 Uhr) mit Config.
-
----
-## ✔️ 4.5 – Statistiken
-- Volatilität
-- Most-Traded Stock
-- Tagesgewinne
-
----
-# 🟦 **PHASE 5 — High-End Features (Optional)**
-
-## ✔️ 5.1 – NPC Börsenmakler
-Mit Citizens oder Minecraft Villagern.
-
----
-## ✔️ 5.2 – Fonds
-Vordefinierte Stock-Bundles.
-
----
-## ✔️ 5.3 – Spielerbasierte Börse (Order Book)
-P2P Trading zwischen Spielern.
-
----
-## ✔️ 5.4 – Web Dashboard API
-Daten von Live-Preisen über HTTP abrufbar.
-
----
-# 📋 GitHub Project Board Template
-
-## **Board Columns**
-```
-To Do
-In Progress
-Review
-Done
-```
-
-## **Issues zum Kopieren**
-
-### 🔥 Critical Fixes
-- [ ] Convert all IO to async (FetchFromGitRepo, FetchFromDataFolder)
-- [ ] Add persistence for portfolio & money
-- [ ] Add null-safety to all GUIs
-- [ ] Move hardcoded values into config.yml
-- [ ] Refactor Money system
-
----
-### 🛠️ Architecture
-- [ ] Add TradingService, PortfolioService, PriceService
-- [ ] Add PriceCache
-- [ ] Add Custom Events
-- [ ] Add GUI Manager
-
----
-### ⚡ Performance
-- [ ] Add Inventory Templates
-- [ ] Add Chart Cache
-- [ ] Add Git timeout & fallback
-
----
-### 🌟 Features
-- [ ] GUI Charts
-- [ ] Price Alerts
-- [ ] Limit Orders
-- [ ] Market Hours
-- [ ] Statistics System
-
----
-### 🚀 High-End
-- [ ] NPC Broker
-- [ ] Fonds / ETFs
-- [ ] Player Order Book
-- [ ] Web Dashboard API
-
----
-# 🎯 Schluss
-Diese Roadmap enthält alle notwendigen Tasks, um dein Plugin sauber, stabil, schnell und langfristig erweiterbar zu machen.
-
-Wenn du willst, kann ich:
-- passende Code-Dateien vollständig schreiben
-- PRs oder Branch-Struktur vorbereiten
-- einzelne Systeme (z. B. PriceCache) direkt implementieren.
