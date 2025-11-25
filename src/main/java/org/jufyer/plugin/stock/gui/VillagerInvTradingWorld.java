@@ -10,6 +10,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
+
 public class VillagerInvTradingWorld implements Listener {
     public static Inventory VillagerInvTradingWorld = Bukkit.createInventory(null, 9*4, "Trading menu");
     //public static final NamespacedKey BUY_ITEM_KEY = new NamespacedKey(Main.getInstance(), "BUY_ITEM");
@@ -27,29 +29,57 @@ public class VillagerInvTradingWorld implements Listener {
         exitItem.setItemMeta(exitItemMeta);
         VillagerInvTradingWorld.setItem(9*4-1, exitItem);
 
-        ItemStack selectStockItem = new ItemStack(Material.GOLD_INGOT);
+        // SELECT STOCK
+        ItemStack selectStockItem = new ItemStack(Material.PAPER);
         ItemMeta selectStockItemMeta = selectStockItem.getItemMeta();
         selectStockItemMeta.setDisplayName("§rSelect Stock");
+        selectStockItemMeta.setLore(Arrays.asList(
+                "§7Opens the list of all commodities",
+                "§7Choose a resources",
+                "§7View price, history & details"
+        ));
         selectStockItem.setItemMeta(selectStockItemMeta);
         VillagerInvTradingWorld.setItem(10, selectStockItem);
 
-        ItemStack sellItemsItem = new ItemStack(Material.EMERALD);
+
+        // SELL ITEMS
+        ItemStack sellItemsItem = new ItemStack(Material.CHEST);
         ItemMeta sellItemsItemMeta = sellItemsItem.getItemMeta();
         sellItemsItemMeta.setDisplayName("§rSell Items");
+        sellItemsItemMeta.setLore(Arrays.asList(
+                "§7Sell items from your inventory",
+                "§7Receive instant payout",
+                "§7Supports all registered goods"
+        ));
         sellItemsItem.setItemMeta(sellItemsItemMeta);
         VillagerInvTradingWorld.setItem(13, sellItemsItem);
 
+
+        // BUY STOCKS
         ItemStack buyStocksItem = new ItemStack(Material.EMERALD);
         ItemMeta buyStocksItemMeta = buyStocksItem.getItemMeta();
         buyStocksItemMeta.setDisplayName("§rBuy Stocks");
+        buyStocksItemMeta.setLore(Arrays.asList(
+                "§7Invest in resources",
+                "§7Buy shares at the real price",
+                "§7Prices may rise or fall"
+        ));
         buyStocksItem.setItemMeta(buyStocksItemMeta);
         VillagerInvTradingWorld.setItem(16, buyStocksItem);
 
-        ItemStack sellStocksItem = new ItemStack(Material.EMERALD);
+
+        // SELL STOCKS
+        ItemStack sellStocksItem = new ItemStack(Material.GOLD_INGOT);
         ItemMeta sellStocksItemMeta = sellStocksItem.getItemMeta();
         sellStocksItemMeta.setDisplayName("§rSell Stocks");
+        sellStocksItemMeta.setLore(Arrays.asList(
+                "§7Sell your owned shares",
+                "§7Receive profit or loss",
+                "§7Based on the real market price"
+        ));
         sellStocksItem.setItemMeta(sellStocksItemMeta);
-        VillagerInvTradingWorld.setItem(20, sellStocksItem);
+        VillagerInvTradingWorld.setItem(22, sellStocksItem);
+
     }
 
     @EventHandler
