@@ -281,7 +281,7 @@ public class SellStockGui implements Listener {
                 TradeCommodity commodity = TradeCommodity.fromCommodityName(stockName);
 
                 if (commodity != null) {
-                    player.sendMessage("§7Selected stock: §a" + capitalize(stockName));
+                    //player.sendMessage("§7Selected stock: §a" + capitalize(stockName));
                     openSellActionInventory(player, commodity);
                 }
             } else if (displayName.equals("§cClose menu")) {
