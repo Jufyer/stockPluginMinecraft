@@ -2,7 +2,9 @@
 *A fully dynamic, real-world-powered global economy for your Minecraft server.*
 
 Turn your Minecraft world into a living global commodities market powered by **real TradingEconomics price data**.  
-Players trade real-life resources — prices rise, fall and react just like the real world.
+Players trade real-life resources: prices rise, fall and react just like the real world.
+
+If you have any ideas to make this plugin better you can share them with me [`here`](https://github.com/Jufyer/stockPluginMinecraft/discussions).
 
 ---
 
@@ -132,14 +134,6 @@ You can check the real-world prices your server uses here:
 2. Place the `.jar` into your server’s `plugins` folder
 3. Restart your server
 4. Done 🎉
-
----
-
-# Server Compatibility
-
-- **Minecraft:** 1.21.8+
-- **Java:** 17+
-- **Platforms:** Paper / Purpur / Spigot compatible
 
 ---
 
