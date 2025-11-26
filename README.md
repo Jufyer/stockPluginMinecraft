@@ -1,4 +1,4 @@
-# 🌐 Minecraft Stock Plugin
+# Minecraft Stock Plugin
 *A fully dynamic, real-world-powered global economy for your Minecraft server.*
 
 Turn your Minecraft world into a living global commodities market powered by **real TradingEconomics price data**.  
@@ -6,51 +6,50 @@ Players trade real-life resources — prices rise, fall and react just like the 
 
 ---
 
-# ✨ Features
-
-## 📈 Real Live Prices
+# Features
+## Real Live Prices
 The market updates using **live data** from TradingEconomics.  
 Supported categories include:
 
-- 🪙 **Metals**
-- 🛢️ **Energy**
-- 🌾 **Agriculture**
+- **Metals**
+- **Energy**
+- **Agriculture**
 
 Players can watch markets rise and fall in real time and adapt their trading strategy.
 
 ---
 
-## 💰 Player-Driven Wealth
+## Player-Driven Wealth
 Let your players become investors:
 
-- 📦 Buy low
-- 💸 Sell high
-- 📉 React to price crashes
-- 📈 Profit from global spikes
+- Buy low
+- Sell high
+- React to price crashes
+- Profit from global spikes
 
 Every market decision feels exciting, risky and rewarding.
 
 ---
 
-## 🧭 Fully GUI-Based
+## Fully GUI-Based
 No commands needed — everything is handled through clean, intuitive menus:
 
-- 📊 Interactive market GUI
-- 💼 Personal portfolio interface
-- 🧾 Order system
-- 🛍️ Commodity browsing
+- Interactive market GUI
+- Personal portfolio interface
+- Order system
+- Commodity browsing
 
 If you can click, you can trade.
 
 ---
 
-## 🌍 Immersive Server Economy
+## Immersive Server Economy
 Mining, farming and trading all become part of one shared global economy.  
 Your server becomes a **dynamic world with real economic activity**.
 
 ---
 
-# 🚀 Usage
+# Usage
 
 ### Only one command:
 
@@ -64,7 +63,7 @@ Just install the plugin and start trading.
 
 ---
 
-# 📦 Tradeable Commodities
+# Tradeable Commodities
 
 Below is the full list of commodities available in the plugin, grouped with icons:
 
@@ -77,29 +76,57 @@ Below is the full list of commodities available in the plugin, grouped with icon
 
 ---
 
-# 🖼️ Gallery (Screenshots)
+# Gallery
+### Trading Area
+<p align="center"><img src="https://imgur.com/Gu25ezT.png"></p>
 
-> *(Replace the placeholders with real Modrinth images)*
+### Price Movement
+<p align="center"><img src="https://imgur.com/5UYhNLW.png"></p>
 
-### 📊 Market Menu
-`![Market Screenshot](https://example.com/image1.png)`
+### Buy Stocks
+<p align="center"><img src="https://imgur.com/mhzbKLk.png"></p>
 
-### 💼 Portfolio GUI
-`![Portfolio Screenshot](https://example.com/image2.png)`
+### Buy Stock – Buying
+<p align="center"><img src="https://imgur.com/qbuVHT1.png"></p>
 
-### 📈 Price Movement
-`![Price Graph](https://example.com/image3.png)`
+### Buy Stock – Menu
+<p align="center"><img src="https://imgur.com/Unb2Kk4.png"></p>
+
+### Select Stock
+<p align="center"><img src="https://imgur.com/WfKQ8LV.png"></p>
+
+### Sell Items
+<p align="center"><img src="https://imgur.com/n7qWCW1.png"></p>
+
+### Sell Item – Input
+<p align="center"><img src="https://imgur.com/g4IqNXx.png"></p>
+
+### Sell Item – Menu
+<p align="center"><img src="https://imgur.com/6pm11Xi.png"></p>
+
+### Sell Stocks
+<p align="center"><img src="https://imgur.com/C7eWhKH.png"></p>
+
+### Sell Stock – Menu
+<p align="center"><img src="https://imgur.com/xfFoDzc.png"></p>
+
+### Stock Menu
+<p align="center"><img src="https://imgur.com/bjJgmuY.png"></p>
+
+### Stock Selling
+<p align="center"><img src="https://imgur.com/eYY0psV.png"></p>
+
 
 ---
 
-# 🔗 Real Commodity Prices
+# Real Commodity Prices
 
 You can check the real-world prices your server uses here:  
 👉 https://tradingeconomics.com/commodities
 
 ---
 
-# 📥 Installation
+# Installation
 
 1. Download the latest version from the **Files** tab
 2. Place the `.jar` into your server’s `plugins` folder
@@ -108,7 +135,7 @@ You can check the real-world prices your server uses here:
 
 ---
 
-# 🛠 Server Compatibility
+# Server Compatibility
 
 - **Minecraft:** 1.21.8+
 - **Java:** 17+
@@ -116,9 +143,9 @@ You can check the real-world prices your server uses here:
 
 ---
 
-# ❤️ Support & Feedback
+# Support & Feedback
 
-If you enjoy the plugin, consider leaving a ⭐ on Modrinth!  
+If you enjoy the plugin, consider leaving a ❤️ on Modrinth!  
 Issues, ideas or improvements are always welcome.
 
 ---

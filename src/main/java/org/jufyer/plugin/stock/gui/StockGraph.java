@@ -52,6 +52,8 @@ public class StockGraph implements Listener {
 //        return List.of();
 //    }
 
+
+
     public static void displayStockGraph(Player player, String stockName) {
 
         List<StockDataPoint> dataPoints = loadStockData(stockName);
@@ -100,6 +102,9 @@ public class StockGraph implements Listener {
                 view.setScale(MapView.Scale.NORMAL);
                 view.setTrackingPosition(false);
                 view.addRenderer(new StockMapRenderer(sampledData, col, row, mapsPerRow, rows, stockName));
+                view.setTrackingPosition(false);
+                view.setUnlimitedTracking(false);
+                view.setLocked(true);
 
                 ItemStack mapItem = new ItemStack(Material.FILLED_MAP);
                 MapMeta meta = (MapMeta) mapItem.getItemMeta();
@@ -182,12 +187,19 @@ public class StockGraph implements Listener {
     }
 
     public static class StockMapRenderer extends MapRenderer {
+
         private final List<StockDataPoint> dataPoints;
         private final int tileX, tileY;
         private final int tilesWide, tilesHigh;
         private final String stockName;
 
-        public StockMapRenderer(List<StockDataPoint> dataPoints, int tileX, int tileY, int tilesWide, int tilesHigh, String stockName) {
+        private boolean rendered = false; // verhindert erneutes Rendern
+
+        public StockMapRenderer(List<StockDataPoint> dataPoints, int tileX, int tileY,
+                                int tilesWide, int tilesHigh, String stockName) {
+
+            super(true);
+
             this.dataPoints = dataPoints;
             this.tileX = tileX;
             this.tileY = tileY;
@@ -198,6 +210,17 @@ public class StockGraph implements Listener {
 
         @Override
         public void render(MapView view, MapCanvas canvas, Player player) {
+
+            // verhindert Flackern → rendert nur ein einziges Mal
+            if (rendered) return;
+            rendered = true;
+
+            // verhindert Tracking-Updates, die sonst Flackern auslösen
+            view.setTrackingPosition(false);
+            view.setUnlimitedTracking(false);
+            view.setLocked(true);
+
+            // Hintergrund weiß
             for (int x = 0; x < 128; x++) {
                 for (int y = 0; y < 128; y++) {
                     canvas.setPixel(x, y, MapPalette.WHITE);
@@ -220,21 +243,23 @@ public class StockGraph implements Listener {
             int axisX = 30;
             int axisY = totalHeight - 30;
 
+            // Y-Achse
             if (tileX == 0) {
                 for (int y = 0; y < 128; y++) {
                     int globalY = offsetY + y;
                     if (globalY >= 20 && globalY <= axisY) {
-                        canvas.setPixel(axisX, y, MapPalette.WHITE);
+                        canvas.setPixel(axisX, y, MapPalette.GRAY_2);
                     }
                 }
             }
 
+            // X-Achse
             if (offsetY <= axisY && offsetY + 128 > axisY) {
                 int localAxisY = axisY - offsetY;
                 for (int x = 0; x < 128; x++) {
                     int globalX = offsetX + x;
                     if (globalX >= axisX && globalX < totalWidth - 20) {
-                        canvas.setPixel(x, localAxisY, MapPalette.WHITE);
+                        canvas.setPixel(x, localAxisY, MapPalette.GRAY_2);
                     }
                 }
             }
@@ -243,11 +268,9 @@ public class StockGraph implements Listener {
             int graphHeight = axisY - 20;
 
             for (int i = 0; i < dataPoints.size() - 1; i++) {
-                double value1 = dataPoints.get(i).value;
-                double value2 = dataPoints.get(i + 1).value;
 
-                double norm1 = (value1 - minValue) / valueRange;
-                double norm2 = (value2 - minValue) / valueRange;
+                double norm1 = (dataPoints.get(i).value - minValue) / valueRange;
+                double norm2 = (dataPoints.get(i + 1).value - minValue) / valueRange;
 
                 int globalX1 = axisX + (i * graphWidth / dataPoints.size());
                 int globalY1 = axisY - (int) (norm1 * graphHeight);
@@ -260,15 +283,21 @@ public class StockGraph implements Listener {
                     int localX2 = globalX2 - offsetX;
                     int localY2 = globalY2 - offsetY;
 
-                    byte color = (value2 >= value1) ? MapPalette.LIGHT_GREEN : MapPalette.RED;
+                    byte color = (dataPoints.get(i + 1).value >= dataPoints.get(i).value)
+                            ? MapPalette.LIGHT_GREEN
+                            : MapPalette.RED;
+
                     drawBresenhamLine(canvas, localX1, localY1, localX2, localY2, color);
                 }
             }
 
+            // Titel + Max-Wert auf erster Map
             if (tileX == 0 && tileY == 0) {
                 drawMapText(canvas, 2, 5, stockName.toUpperCase());
                 drawMapText(canvas, 2, 15, String.format("%.2f", maxValue));
             }
+
+            // Min-Wert auf der Map mit der X-Achse
             if (tileX == 0 && offsetY <= axisY && offsetY + 128 > axisY) {
                 int localAxisY = axisY - offsetY;
                 drawMapText(canvas, 2, localAxisY - 5, String.format("%.2f", minValue));
@@ -298,14 +327,22 @@ public class StockGraph implements Listener {
             int sx = x1 < x2 ? 1 : -1;
             int sy = y1 < y2 ? 1 : -1;
             int err = dx - dy;
+
             while (true) {
                 if (x1 >= 0 && y1 >= 0 && x1 < 128 && y1 < 128) {
                     canvas.setPixel(x1, y1, color);
                 }
                 if (x1 == x2 && y1 == y2) break;
-                int e2 = 2 * err;
-                if (e2 > -dy) { err -= dy; x1 += sx; }
-                if (e2 < dx) { err += dx; y1 += sy; }
+
+                int e2 = err * 2;
+                if (e2 > -dy) {
+                    err -= dy;
+                    x1 += sx;
+                }
+                if (e2 < dx) {
+                    err += dx;
+                    y1 += sy;
+                }
             }
         }
 
@@ -314,6 +351,8 @@ public class StockGraph implements Listener {
             canvas.drawText(x, y, font, text);
         }
     }
+
+
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
