@@ -71,7 +71,7 @@ bukkitPluginYaml {
   main = "org.jufyer.plugin.stock.Main"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Jufyer")
-  apiVersion = "1.21" // API Version ist meist nur Major.Minor (also 1.21)
+  apiVersion = "1.21"
   commands {
     register("stocks")
   }
