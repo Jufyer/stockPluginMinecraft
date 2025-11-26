@@ -12,7 +12,7 @@ plugins {
 
 group = "org.jufyer.plugin"
 version = "1.0.0-SNAPSHOT"
-description = "Test plugin for paperweight-userdev"
+description = "Turn your Minecraft server into a living, breathing global commodities market powered by real-world price data from TradingEconomics."
 
 java {
   toolchain.languageVersion.set(JavaLanguageVersion.of(21))
@@ -29,7 +29,7 @@ dependencies {
   implementation("org.jsoup:jsoup:1.17.2")
   implementation("org.json:json:20231013")
   implementation("org.htmlunit:htmlunit:4.17.0")
-  implementation("org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r")
+  implementation("org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r")
   implementation("javax.json:javax.json-api:1.1.4")
   implementation("org.glassfish:javax.json:1.1.4")
   implementation("com.google.code.gson:gson:2.10.1")
