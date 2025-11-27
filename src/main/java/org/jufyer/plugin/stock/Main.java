@@ -1,8 +1,10 @@
 package org.jufyer.plugin.stock;
 
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jufyer.plugin.stock.getPrice.FetchFromGitRepo;
 import org.jufyer.plugin.stock.gui.*;
@@ -17,78 +19,118 @@ import java.util.Map;
 import java.util.UUID;
 
 public final class Main extends JavaPlugin implements CommandExecutor {
-  private static Main instance;
-  public static Main getInstance() {
-    return instance;
-  }
 
-  public static Map<UUID, Double> wallet = new HashMap<>();
-  public static Map<UUID, Map<String, Integer>> portfolio = new HashMap<>();
+    private static Main instance;
+    public static Main getInstance() { return instance; }
 
-  @Override
-  public void onEnable() {
-      instance = this;
-      FetchFromGitRepo.update();
+    // Wallet + Portfolio nur benutzt, wenn Vault NICHT aktiv ist
+    public static Map<UUID, Double> wallet = new HashMap<>();
+    public static Map<UUID, Map<String, Integer>> portfolio = new HashMap<>();
 
-      getCommand("stocks").setExecutor(new MainApp());
+    // Vault Economy
+    public static Economy econ = null;
+    public static boolean useVault = false;
 
-      MainApp.invSetup();
-      SellItemGui.setSellItemMenuInventory();
-      SellStockGui.setSellStockMenuInventory();
-      BuyStockGui.setBuyStockMenuInventory();
-      VillagerInvTradingWorld.setVillagerInvTradingWorld();
+    @Override
+    public void onEnable() {
+        instance = this;
 
-      Bukkit.getPluginManager().registerEvents(new MainApp(), this);
-      Bukkit.getPluginManager().registerEvents(new StockGraph(), this);
-      Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
-      Bukkit.getPluginManager().registerEvents(new BuyStockGui(), this);
-      Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
-      Bukkit.getPluginManager().registerEvents(new WorldManager(), this);
-      Bukkit.getPluginManager().registerEvents(new MoneyManager(), this);
-      Bukkit.getPluginManager().registerEvents(new SellStockGui(), this);
+        // Config
+        saveDefaultConfig();
+        useVault = getConfig().getBoolean("use-vault", true);
 
-      for (Player player : Bukkit.getOnlinePlayers()) {
-            loadWallet(player);
+        if (useVault) {
+            if (!setupEconomy()) {
+                getLogger().warning("Vault activated, but no Economy-Plugin found! Using intern Money system.");
+                useVault = false;
+            } else {
+                getLogger().info("Vault Economy successfully activated.");
+            }
+        }
+
+        FetchFromGitRepo.update();
+        getCommand("stocks").setExecutor(new MainApp());
+
+        MainApp.invSetup();
+        SellItemGui.setSellItemMenuInventory();
+        SellStockGui.setSellStockMenuInventory();
+        BuyStockGui.setBuyStockMenuInventory();
+        VillagerInvTradingWorld.setVillagerInvTradingWorld();
+
+        Bukkit.getPluginManager().registerEvents(new MainApp(), this);
+        Bukkit.getPluginManager().registerEvents(new StockGraph(), this);
+        Bukkit.getPluginManager().registerEvents(new SellItemGui(), this);
+        Bukkit.getPluginManager().registerEvents(new BuyStockGui(), this);
+        Bukkit.getPluginManager().registerEvents(new VillagerInvTradingWorld(), this);
+        Bukkit.getPluginManager().registerEvents(new WorldManager(), this);
+        Bukkit.getPluginManager().registerEvents(new MoneyManager(), this);
+        Bukkit.getPluginManager().registerEvents(new SellStockGui(), this);
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            // Wallet nur ohne Vault
+            if (!useVault) {
+                loadWallet(player);
+            }
+
             loadPortfolio(player);
-      }
+        }
 
-      //getCommand("sellItems").setExecutor(new SellItemGui());
-      //getCommand("buy").setExecutor(new BuyItemGui());
-      //getCommand("showPrices").setExecutor(new showPrices());
-      //getCommand("graphui").setExecutor(new graphui());
-      //getCommand("getBlockData").setExecutor(this);
-      //getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
-      //getCommand("buy").setExecutor(new BuyStock());
-      //getCommand("sellItems").setExecutor(new SellItemGui());
-  }
+        //getCommand("sellItems").setExecutor(new SellItemGui());
+        //getCommand("buy").setExecutor(new BuyItemGui());
+        //getCommand("showPrices").setExecutor(new showPrices());
+        //getCommand("graphui").setExecutor(new graphui());
+        //getCommand("getBlockData").setExecutor(this);
+        //getCommand("placeblocks").setExecutor(new BlockPlaceCommand());
+        //getCommand("buy").setExecutor(new BuyStock());
+        //getCommand("sellItems").setExecutor(new SellItemGui());
+    }
 
     @Override
     public void onDisable() {
-        saveAllWallets();
+        if (!useVault) {
+            saveAllWallets();
+        }
+
         saveAllPortfolios();
     }
 
+    // ---------------- VAULT SETUP ----------------
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) return false;
+
+        RegisteredServiceProvider<Economy> rsp =
+                getServer().getServicesManager().getRegistration(Economy.class);
+
+        if (rsp == null) return false;
+
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    // ---------------- WALLET SAVE/LOAD ----------------
+
     public void saveAllWallets() {
-        File dataFolder = new File(getDataFolder(), "playerData\\wallet");
+        File dataFolder = new File(getDataFolder(), "playerData/wallet");
         if (!dataFolder.exists()) dataFolder.mkdirs();
 
         for (UUID uuid : wallet.keySet()) {
-            File walletFile = new File(dataFolder, uuid.toString() + ".txt");
+            File walletFile = new File(dataFolder, uuid + ".txt");
             try (FileWriter writer = new FileWriter(walletFile)) {
                 writer.write(String.valueOf(wallet.get(uuid)));
             } catch (IOException e) {
-                getLogger().severe("Error saving wallet for UUID: " + uuid);
+                getLogger().severe("Error saving wallet for: " + uuid);
                 e.printStackTrace();
             }
         }
-        getLogger().info("Saved all Wallets.");
+        getLogger().info("Saved all wallets.");
     }
 
     public static void loadWallet(Player player) {
-        File dataFolder = new File(Main.getInstance().getDataFolder(), "playerData\\wallet");
+        File dataFolder = new File(getInstance().getDataFolder(), "playerData/wallet");
         if (!dataFolder.exists()) dataFolder.mkdirs();
 
-        File walletFile = new File(dataFolder, player.getUniqueId().toString() + ".txt");
+        File walletFile = new File(dataFolder, player.getUniqueId() + ".txt");
         if (!walletFile.exists()) {
             wallet.put(player.getUniqueId(), 0.0);
             return;
@@ -97,25 +139,27 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         try {
             String content = new String(java.nio.file.Files.readAllBytes(walletFile.toPath()));
             wallet.put(player.getUniqueId(), Double.parseDouble(content));
-        } catch (IOException | NumberFormatException e) {
-            Main.getInstance().getLogger().warning("Error loading wallet by " + player.getName() + ". Setting to 0.");
+        } catch (Exception e) {
+            getInstance().getLogger().warning("Error loading wallet for " + player.getName());
             wallet.put(player.getUniqueId(), 0.0);
         }
     }
+
+    // ---------------- PORTFOLIO SAVE/LOAD ----------------
 
     public void saveAllPortfolios() {
         File dataFolder = new File(getDataFolder(), "playerData/portfolio");
         if (!dataFolder.exists()) dataFolder.mkdirs();
 
         for (UUID uuid : portfolio.keySet()) {
-            File portfolioFile = new File(dataFolder, uuid.toString() + ".txt");
+            File portfolioFile = new File(dataFolder, uuid + ".txt");
             try (FileWriter writer = new FileWriter(portfolioFile)) {
-                Map<String, Integer> playerPortfolio = portfolio.get(uuid);
-                for (Map.Entry<String, Integer> entry : playerPortfolio.entrySet()) {
+                Map<String, Integer> data = portfolio.get(uuid);
+                for (Map.Entry<String, Integer> entry : data.entrySet()) {
                     writer.write(entry.getKey() + ":" + entry.getValue() + "\n");
                 }
             } catch (IOException e) {
-                getLogger().severe("Error saving portfolio for UUID: " + uuid);
+                getLogger().severe("Error saving portfolio for: " + uuid);
                 e.printStackTrace();
             }
         }
@@ -123,10 +167,11 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     }
 
     public static void loadPortfolio(Player player) {
-        File dataFolder = new File(Main.getInstance().getDataFolder(), "playerData/portfolio");
+        File dataFolder = new File(getInstance().getDataFolder(), "playerData/portfolio");
         if (!dataFolder.exists()) dataFolder.mkdirs();
 
-        File portfolioFile = new File(dataFolder, player.getUniqueId().toString() + ".txt");
+        File portfolioFile = new File(dataFolder, player.getUniqueId() + ".txt");
+
         if (!portfolioFile.exists()) {
             portfolio.put(player.getUniqueId(), new HashMap<>());
             return;
@@ -136,15 +181,13 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         try {
             List<String> lines = java.nio.file.Files.readAllLines(portfolioFile.toPath());
             for (String line : lines) {
-                if (line.isEmpty() || !line.contains(":")) continue;
+                if (!line.contains(":")) continue;
                 String[] parts = line.split(":");
-                String stock = parts[0];
-                int amount = Integer.parseInt(parts[1]);
-                playerPortfolio.put(stock, amount);
+                playerPortfolio.put(parts[0], Integer.parseInt(parts[1]));
             }
             portfolio.put(player.getUniqueId(), playerPortfolio);
-        } catch (IOException | NumberFormatException e) {
-            Main.getInstance().getLogger().warning("Error loading portfolio for " + player.getName() + ". Setting empty.");
+        } catch (Exception e) {
+            getInstance().getLogger().warning("Error loading portfolio for " + player.getName());
             portfolio.put(player.getUniqueId(), new HashMap<>());
         }
     }

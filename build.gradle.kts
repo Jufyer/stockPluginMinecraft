@@ -20,6 +20,7 @@ java {
 
 repositories {
   mavenCentral()
+  maven("https://jitpack.io")
   maven("https://repo.papermc.io/repository/maven-public/")
   gradlePluginPortal()
 }
@@ -34,6 +35,8 @@ dependencies {
   implementation("org.glassfish:javax.json:1.1.4")
   implementation("com.google.code.gson:gson:2.10.1")
   implementation("org.jfree:jfreechart:1.5.4")
+
+  compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 
   // Hier die gewünschte 1.21.8
   paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
