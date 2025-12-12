@@ -1,5 +1,6 @@
 package org.jufyer.plugin.stock.moneySystem;
 
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,28 +17,65 @@ public class MoneyManager implements Listener {
         return Math.round(value * 100.0) / 100.0;
     }
 
-    public static boolean add(Player player, Double value) {
+    // ------------------------------
+    // ADD MONEY
+    // ------------------------------
+    public static boolean add(Player player, double value) {
+
+        // Vault?
+        if (Main.useVault && Main.getEconomy() != null) {
+            EconomyResponse r = Main.getEconomy().depositPlayer(player, value);
+            return r.transactionSuccess();
+        }
+
+        // eigenes System
         wallet.putIfAbsent(player.getUniqueId(), 0.0d);
-        wallet.compute(player.getUniqueId(), (k, currentMoney) -> roundTwoDecimals(currentMoney + value));
+        wallet.compute(player.getUniqueId(),
+                (k, currentMoney) -> roundTwoDecimals(currentMoney + value));
         return true;
     }
 
-    public static boolean remove(Player player, Double value) {
+    // ------------------------------
+    // REMOVE MONEY
+    // ------------------------------
+    public static boolean remove(Player player, double value) {
+
+        // Vault?
+        if (Main.useVault && Main.getEconomy() != null) {
+            EconomyResponse r = Main.getEconomy().withdrawPlayer(player, value);
+            return r.transactionSuccess();
+        }
+
+        // eigenes System
         wallet.putIfAbsent(player.getUniqueId(), 0.0d);
         if (wallet.get(player.getUniqueId()) >= value) {
-            wallet.compute(player.getUniqueId(), (k, currentMoney) -> roundTwoDecimals(currentMoney - value));
+            wallet.compute(player.getUniqueId(),
+                    (k, currentMoney) -> roundTwoDecimals(currentMoney - value));
             return true;
-        } else return false;
+        }
+        return false;
     }
 
+    // ------------------------------
+    // GET BALANCE
+    // ------------------------------
     public static double get(Player player) {
+
+        // Vault?
+        if (Main.useVault && Main.getEconomy() != null) {
+            return Main.getEconomy().getBalance(player);
+        }
+
+        // eigenes System
         wallet.putIfAbsent(player.getUniqueId(), 0.0d);
         return roundTwoDecimals(wallet.get(player.getUniqueId()));
     }
 
+    // ------------------------------
+    // GET FORMATTED BALANCE
+    // ------------------------------
     public static String getFormatted(Player player) {
-        wallet.putIfAbsent(player.getUniqueId(), 0.0d);
-        double value = roundTwoDecimals(wallet.get(player.getUniqueId()));
+        double value = get(player); // nutzt automatisch Vault oder Wallet
 
         if (value >= 1_000_000_000_000d) {
             return formatDecimal(value / 1_000_000_000_000d) + " Bio.";
@@ -52,14 +90,17 @@ public class MoneyManager implements Listener {
         }
     }
 
-    private static String formatDecimal(double number) {
+    private static String formatDecimal(double value) {
         DecimalFormat df = new DecimalFormat("#,##0.##");
-        return df.format(number);
+        return df.format(value);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Main.loadWallet(event.getPlayer());
-        Main.loadPortfolio(event.getPlayer());
+        // Nur laden, wenn NICHT Vault benutzt wird
+        if (!Main.useVault) {
+            Main.loadWallet(event.getPlayer());
+            Main.loadPortfolio(event.getPlayer());
+        }
     }
 }

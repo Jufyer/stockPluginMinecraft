@@ -37,7 +37,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
         // Config
         saveDefaultConfig();
-        useVault = getConfig().getBoolean("use-vault", true);
+        useVault = getConfig().getBoolean("use-vault", false);
 
         if (useVault) {
             if (!setupEconomy()) {
@@ -106,6 +106,10 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
         econ = rsp.getProvider();
         return econ != null;
+    }
+
+    public static Economy getEconomy() {
+        return econ;
     }
 
     // ---------------- WALLET SAVE/LOAD ----------------
